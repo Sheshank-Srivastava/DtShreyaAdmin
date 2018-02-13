@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Dt. Shreya Admin</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <!--Array for the items in the spinner for weight in basic information activity-->
+    <string-array name="weight_array">
+        <item>Kg</item>
+        <item>lbs</item>
+    </string-array>
+    <!--Array for the items in the spinner for diseases in basic information activity-->
+    <string-array name="disease_array">
+        <item>Diabetes</item>
+        <item>High Blood Pressure</item>
+        <item>Low Blood Pressure</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
