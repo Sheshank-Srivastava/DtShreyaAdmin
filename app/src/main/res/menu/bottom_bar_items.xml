@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Dashnoard"
+        android:id="@+id/dashboard"
+        android:icon="@drawable/ic_chat"
+        app:showAsAction="always"/>
+    <item
+        android:title="Chat"
+        android:id="@+id/chat"
+        android:icon="@drawable/ic_chat"
+        app:showAsAction="always"/>
+    <item
+        android:title="Appointment"
+        android:id="@+id/appointment"
+        android:icon="@drawable/ic_chat"
+        app:showAsAction="always"/>
+    <item
+        android:title="Clients"
+        android:id="@+id/clients"
+        android:icon="@drawable/ic_chat"
+        app:showAsAction="always"/>
+    <item
+        android:title="Diet Creation"
+        android:id="@+id/dietCreate"
+        android:icon="@drawable/ic_chat"
+        app:showAsAction="always"/>
+</menu>

@@ -17,12 +17,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewPagerAdapter extends FragmentPagerAdapter {
+public class ViewPagerDietViewAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> dayList = new ArrayList<>();
+    private final List<String> dateList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
     Context mCtx;
 
-    public ViewPagerAdapter(FragmentManager manager,Context mCtx) {
+    public ViewPagerDietViewAdapter(FragmentManager manager, Context mCtx) {
         super(manager);
         this.mCtx = mCtx;
     }
@@ -42,13 +44,17 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         mFragmentTitleList.add(title);
     }
 
+    public void addTitles(String day,String date){
+        dayList.add(day);
+        dateList.add(date);
+    }
     public View getTabView(int position) {
         LayoutInflater layoutInflater = LayoutInflater.from(mCtx);
         View tabView = layoutInflater.inflate(R.layout.custom_tab, null, false);
         TextView text1 = (TextView) tabView.findViewById(R.id.text1);
         TextView text2 = (TextView) tabView.findViewById(R.id.text2);
-        text1.setText("MON");
-        text2.setText(position+1+"");
+        text1.setText(dayList.get(position));
+        text2.setText(dateList.get(position));
         return tabView;
     }
     public View getSelectedTabView(int position) {

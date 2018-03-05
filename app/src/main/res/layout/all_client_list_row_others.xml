@@ -19,6 +19,7 @@
         android:layout_width="0dp"
         android:layout_marginLeft="@dimen/layout_small_margin"
         android:layout_height="match_parent"
+        android:id="@+id/bodyLayout"
         android:orientation="vertical"
         android:layout_weight="1">
         <TextView
@@ -41,10 +42,41 @@
             android:paddingLeft="@dimen/small_padding"
             />
     </LinearLayout>
-    <TextView
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:id="@+id/indicator"
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@drawable/customer_image_placeholder"/>
-</LinearLayout>
+        android:gravity="center">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:id="@+id/textLayout"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_tiny"
+            android:text="Create in"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/daysRemaining"
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_tiny"
+            android:text="3 Days"
+            />
+    </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chat"
+            android:id="@+id/dietCreate"
+            android:tint="@color/colorPrimary"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+   </LinearLayout>

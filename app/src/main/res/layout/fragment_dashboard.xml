@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_medium"
+        android:textColor="@color/colorAccent"
+        android:padding="@dimen/small_padding"
+        android:layout_marginStart="@dimen/layout_small_margin"
+        android:layout_marginTop="@dimen/layout_small_margin"
+        android:text="Upcoming Appointmets"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/re"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_small"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/viewAllAppointments"
+        android:paddingLeft="@dimen/small_padding"
+        android:layout_marginLeft="@dimen/layout_small_margin"
+        android:text="View All"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:elevation="20dp"
+        android:padding="@dimen/activity_vertical_margin"
+        android:layout_margin="@dimen/layout_small_margin"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_large"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/small_padding"
+                android:id="@+id/noOfPendingPayments"
+                android:layout_marginLeft="@dimen/fab_margin"
+                android:text="4"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:layout_gravity="center"
+                android:textColor="@color/textColorDark"
+                android:padding="@dimen/small_padding"
+                android:layout_marginLeft="@dimen/fab_margin"
+                android:text="Number Of Pending Payments"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#eee"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginRight="@dimen/fab_margin"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/small_padding"
+                    android:id="@+id/viewAllPayments"
+                    android:text="View All"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:elevation="20dp"
+        android:padding="@dimen/activity_vertical_margin"
+        android:layout_margin="@dimen/layout_small_margin"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_large"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/small_padding"
+                android:id="@+id/noOfUpcomingRenewals"
+                android:layout_marginLeft="@dimen/fab_margin"
+                android:text="4"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/textColorDark"
+                android:padding="@dimen/small_padding"
+                android:layout_marginLeft="@dimen/fab_margin"
+                android:text="Number Of Upcoming Renewals"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#eee">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginRight="@dimen/fab_margin"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/small_padding"
+                    android:id="@+id/viewAllRenewals"
+                    android:text="View All"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

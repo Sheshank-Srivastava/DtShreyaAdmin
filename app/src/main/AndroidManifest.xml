@@ -20,7 +20,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".ClientListActivity" />
-        <activity android:name=".CustomerDetail"></activity>
+        <activity android:name=".CreateDiet" />
+        <activity android:name=".ClientDetailActivity" />
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".ViewDietActivity" />
+        <activity android:name=".ChooseMealActivity"></activity>
     </application>
 
 </manifest>

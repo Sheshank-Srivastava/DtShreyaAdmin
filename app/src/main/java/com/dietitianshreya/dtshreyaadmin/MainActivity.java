@@ -1,12 +1,20 @@
 package com.dietitianshreya.dtshreyaadmin;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,13 +32,13 @@ import com.dietitianshreya.dtshreyaadmin.models.AppointmentsModel;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, DashboardFragment.OnFragmentInteractionListener,
+        BlankFragment.OnFragmentInteractionListener, ChatSelectionFragment.OnFragmentInteractionListener,
+        AppointmentFragment.OnFragmentInteractionListener, AllClientsDetails.OnFragmentInteractionListener{
 
-
-    RecyclerView recyclerView;
-    AppointmentsAdapter appointmentsAdapter;
-    ArrayList<AppointmentsModel> appointmentsList;
-    ImageView clientList,appointmentImg;
+    FragmentManager fragmentManager;
+    Fragment fragment;
+    TabLayout tab_layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,35 +52,124 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        //ImageView definition
-        clientList = (ImageView) findViewById(R.id.clientList);
-        clientList.setOnClickListener(new View.OnClickListener() {
+//        //ImageView definition
+//        clientList = (ImageView) findViewById(R.id.clientList);
+//        clientList.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MainActivity.this,ClientListActivity.class));
+//            }
+//        });
+//        appointmentImg = (ImageView) findViewById(R.id.appointmentImg);
+//        appointmentImg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MainActivity.this,CustomerDetail.class));
+//            }
+//        });
+
+//
+//        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+//                findViewById(R.id.bottom_navigation);
+//
+//        fragmentManager = getSupportFragmentManager();
+//        fragment= new DashboardFragment();
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        transaction.replace(R.id.container,fragment).commit();
+//        bottomNavigationView.setOnNavigationItemSelectedListener(
+//                new BottomNavigationView.OnNavigationItemSelectedListener() {
+//                    @Override
+//                    public boolean onNavigationItemSelected(MenuItem item) {
+//
+//                        switch (item.getItemId()) {
+//                            case R.id.dashboard:
+//                                getSupportActionBar().setTitle("Dashboard");
+//                                fragment = new DashboardFragment();
+//                                break;
+//                            case R.id.chat:
+//                                getSupportActionBar().setTitle("Chat");
+//                                fragment = new ChatSelectionFragment();
+//                                break;
+//                            case R.id.clients:
+//                                getSupportActionBar().setTitle("Clients");
+//                                fragment = new BlankFragment();
+//                                break;
+//                            case R.id.appointment:
+//                                getSupportActionBar().setTitle("Appointment Details");
+//                                fragment = new AppointmentFragment();
+//                                break;
+//                            case R.id.dietCreate:
+//                                getSupportActionBar().setTitle("Diet Creation");
+//                                fragment = new BlankFragment();
+//                                break;
+//                        }
+//                        final FragmentTransaction transaction = fragmentManager.beginTransaction();
+//                        transaction.replace(R.id.container,fragment).commit();
+//                        return true;
+//                    }
+//                });
+
+        tab_layout = (TabLayout) findViewById(R.id.tab_layout);
+
+        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_chat), 0);
+        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_chat), 1);
+        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_chat), 2);
+        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_chat), 3);
+//        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_chat), 4);
+
+        // set icon color pre-selected
+        tab_layout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        fragmentManager = getSupportFragmentManager();
+        fragment= new DashboardFragment();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.container,fragment).commit();
+        tab_layout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+        tab_layout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+        tab_layout.getTabAt(3).getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+        //tab_layout.getTabAt(4).getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+
+        tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,ClientListActivity.class));
+            public void onTabSelected(TabLayout.Tab tab) {
+                tab.getIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+                switch (tab.getPosition()) {
+                    case 0:
+                        getSupportActionBar().setTitle("Dashboard");
+                        fragment = new DashboardFragment();
+                        break;
+                    case 1:
+                        getSupportActionBar().setTitle("Chat");
+                        fragment = new ChatSelectionFragment();
+                        break;
+                    case 2:
+                        getSupportActionBar().setTitle("Client");
+                        fragment = new AllClientsDetails();
+                        break;
+                    case 3:
+                        getSupportActionBar().setTitle("Appointments");
+                        fragment = new AppointmentFragment();
+                        break;
+//                    case 4:
+//                        getSupportActionBar().setTitle("Diet Creation");
+//                        fragment = new DashboardFragment();
+//                        break;
+                }
+
+                final FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.container,fragment).commit();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                Log.d("tag","Im here");
+                tab.getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
-        appointmentImg = (ImageView) findViewById(R.id.appointmentImg);
-        appointmentImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,CustomerDetail.class));
-            }
-        });
-
-        recyclerView = (RecyclerView) findViewById(R.id.re);
-        appointmentsList=new ArrayList<>();
-        appointmentsAdapter = new AppointmentsAdapter(appointmentsList,MainActivity.this);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(appointmentsAdapter);
-        appointmentsList.add(new AppointmentsModel("Mr. Akshit Tyagi","9:30 A.M.","Punjabi Bagh"));
-        appointmentsList.add(new AppointmentsModel("Mr. Paras Garg","11:30 A.M.","Punjabi Bagh"));
-        appointmentsList.add(new AppointmentsModel("Ms. Manya Madan","12:30 P.M.","Skype call"));
-        appointmentsAdapter.notifyDataSetChanged();
-
-
-
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -136,4 +233,8 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }

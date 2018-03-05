@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:id="@+id/month"
+            android:textSize="@dimen/text_tiny"
+            android:textColor="@color/textColorLight"
+            android:text="June 2018"
+            />
         <android.support.design.widget.TabLayout
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:background="@color/colorPrimary"
             app:tabIndicatorColor="@color/textColorLight"
             app:tabMode="fixed"
@@ -22,9 +29,9 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_below="@+id/tablayout"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

@@ -1,5 +1,7 @@
 package com.dietitianshreya.dtshreyaadmin;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +18,8 @@ import android.view.ViewGroup;
  */
 public class BlankFragment extends Fragment {
 
+
+    OnFragmentInteractionListener mListener;
 
     public BlankFragment() {
         // Required empty public constructor
@@ -41,4 +45,30 @@ public class BlankFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof BlankFragment.OnFragmentInteractionListener) {
+            mListener = (BlankFragment.OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
+    }
 }

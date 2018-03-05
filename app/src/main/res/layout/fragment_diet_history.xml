@@ -1,0 +1,37 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dietitianshreya.dtshreyaadmin.DietHistoryFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/datePicker"
+        android:layout_centerHorizontal="true">
+    </DatePicker>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/datePicker"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimaryDark"
+        android:padding="@dimen/medium_padding"
+        android:textColor="@color/textColorLight"
+        android:id="@+id/viewDiet"
+        android:text="View Diet"/>
+    </RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fab"
+        android:layout_gravity="bottom|right"
+        android:padding="@dimen/fab_margin"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_chat"/>
+</android.support.design.widget.CoordinatorLayout>
