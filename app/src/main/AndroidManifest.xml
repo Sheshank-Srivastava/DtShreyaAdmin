@@ -24,7 +24,14 @@
         <activity android:name=".ClientDetailActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".ViewDietActivity" />
-        <activity android:name=".ChooseMealActivity"></activity>
+        <activity android:name=".ChooseMealActivity" />
+        <activity
+            android:name=".DiaryViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CompleteProfileActivity"></activity>
+        <activity android:name=".ClientProfileActivity">
+
+        </activity>
     </application>
 
 </manifest>

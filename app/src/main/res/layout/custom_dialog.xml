@@ -7,6 +7,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/medium_padding"
         android:textSize="@dimen/text_medium"
+        android:id="@+id/text"
         android:text="Enter Quantity"
         android:textColor="@color/textColorDark"
         />
@@ -14,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_medium"
+        android:id="@+id/dot"
         android:textColor="@color/textColorDark"
         android:text=":"/>
 <EditText
