@@ -1,17 +1,22 @@
 package com.dietitianshreya.dtshreyaadmin;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.dietitianshreya.dtshreyaadmin.adapters.DietCreateAdapter;
 import com.dietitianshreya.dtshreyaadmin.adapters.DietPlanAdapter;
@@ -32,6 +37,7 @@ public class DietCreateFragment extends Fragment {
     ArrayList<MealModel> mealList;
     DietCreateAdapter dietPlanAdapter;
 
+
     private OnFragmentInteractionListener mListener;
 
     public DietCreateFragment() {
@@ -42,7 +48,7 @@ public class DietCreateFragment extends Fragment {
         DietCreateFragment fragment = new DietCreateFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,20 +68,31 @@ public class DietCreateFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_diet_view, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
+
         dietList=new ArrayList<>();
         mealList = new ArrayList<>();
         dietPlanAdapter = new DietCreateAdapter(dietList,getActivity());
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(dietPlanAdapter);
+        ArrayList<MealModel> mealListem = new ArrayList<>();
+        dietList.add(new DietPlanModel("Early Morning",mealListem));
         dietList.add(new DietPlanModel("Breakfast",mealList));
+        ArrayList<MealModel> mealListmm = new ArrayList<>();
+        dietList.add(new DietPlanModel("Mid Morning",mealListmm));
         ArrayList<MealModel> mealList1 = new ArrayList<>();
         dietList.add(new DietPlanModel("Lunch",mealList1));
         ArrayList<MealModel> mealList2 = new ArrayList<>();
-        dietList.add(new DietPlanModel("Snack",mealList2));
+        dietList.add(new DietPlanModel("Evening",mealList2));
         ArrayList<MealModel> mealList3 = new ArrayList<>();
         dietList.add(new DietPlanModel("Dinner",mealList3));
+        ArrayList<MealModel> mealListpd = new ArrayList<>();
+        dietList.add(new DietPlanModel("Post Dinner",mealList1));
+        ArrayList<MealModel> mealListsup = new ArrayList<>();
+        dietList.add(new DietPlanModel("Supplements",mealListsup));
         dietPlanAdapter.notifyDataSetChanged();
+
+
 
         return rootView;
     }
@@ -100,9 +117,10 @@ public class DietCreateFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
 //        super.onActivityResult(requestCode,resultCode,data);
-        Log.d("value",data.getStringArrayListExtra("name").size()+"");
-        dietPlanAdapter.onActivityResult(requestCode,resultCode,data);
-
+        if(data != null) {
+            Log.d("value", data.getStringArrayListExtra("name").size() + "");
+            dietPlanAdapter.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override

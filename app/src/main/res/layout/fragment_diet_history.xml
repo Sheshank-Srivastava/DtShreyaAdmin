@@ -4,27 +4,48 @@
     android:layout_height="match_parent"
     tools:context="com.dietitianshreya.dtshreyaadmin.DietHistoryFragment">
 
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+    <!--<DatePicker-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_marginTop="12dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/datePicker"-->
+        <!--android:layout_centerHorizontal="true">-->
+    <!--</DatePicker>-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/datePicker"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:background="@color/colorPrimaryDark"-->
+        <!--android:padding="@dimen/medium_padding"-->
+        <!--android:textColor="@color/textColorLight"-->
+        <!--android:id="@+id/viewDiet"-->
+        <!--android:text="View Diet"/>-->
+    <!--</RelativeLayout>-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <DatePicker
-        android:layout_width="wrap_content"
-        android:layout_marginTop="12dp"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/datePicker"
-        android:layout_centerHorizontal="true">
-    </DatePicker>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/datePicker"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimaryDark"
         android:padding="@dimen/medium_padding"
+        android:textSize="@dimen/text_tiny"
+        android:id="@+id/dateSelection"
         android:textColor="@color/textColorLight"
-        android:id="@+id/viewDiet"
-        android:text="View Diet"/>
+        android:text="12/03/2018"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@color/colorPrimary"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_below="@id/dateSelection"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:id="@+id/re"/>
     </RelativeLayout>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"

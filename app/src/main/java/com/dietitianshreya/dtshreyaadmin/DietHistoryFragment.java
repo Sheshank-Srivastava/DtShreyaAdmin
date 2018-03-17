@@ -1,16 +1,30 @@
 package com.dietitianshreya.dtshreyaadmin;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.dietitianshreya.dtshreyaadmin.adapters.DietPlanAdapter;
+import com.dietitianshreya.dtshreyaadmin.models.DietPlanModel;
+import com.dietitianshreya.dtshreyaadmin.models.MealModel;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class DietHistoryFragment extends Fragment {
@@ -21,6 +35,15 @@ public class DietHistoryFragment extends Fragment {
     DatePicker datePicker;
     Button button;
     FloatingActionButton fab;
+    RecyclerView recyclerView;
+    EditText dietDate;
+    ArrayList<DietPlanModel> dietList;
+    ArrayList<MealModel> mealList;
+    DietPlanAdapter dietPlanAdapter;
+    TextView dateSelection;
+    int month,date,year;
+    Intent intent;
+
     private OnFragmentInteractionListener mListener;
 
     public DietHistoryFragment() {
@@ -40,6 +63,7 @@ public class DietHistoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             clientId = getArguments().getString(ARG_PARAM1);
+            setHasOptionsMenu(true);
         }
     }
 
@@ -48,8 +72,30 @@ public class DietHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_diet_history, container, false);
-        datePicker = (DatePicker) rootView.findViewById(R.id.datePicker);
-        button = (Button) rootView.findViewById(R.id.viewDiet);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
+        dateSelection = (TextView) rootView.findViewById(R.id.dateSelection);
+        dietList=new ArrayList<>();
+        mealList = new ArrayList<>();
+        dietPlanAdapter = new DietPlanAdapter(dietList,getActivity());
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(dietPlanAdapter);
+        mealList.add(new MealModel("Corn Flakes","1 Bowl",false));
+        mealList.add(new MealModel("Cow's Milk","1 Glass",false));
+        dietList.add(new DietPlanModel("Breakfast",mealList));
+
+        ArrayList<MealModel> mealList1 = new ArrayList<>();
+        mealList1.add(new MealModel("Dal","1 bowl",false));
+        mealList1.add(new MealModel("Roti","3 full",false));
+        mealList1.add(new MealModel("Rice","Half bowl",false));
+        dietList.add(new DietPlanModel("Lunch",mealList1));
+
+        ArrayList<MealModel> mealList2 = new ArrayList<>();
+        mealList2.add(new MealModel("Chips","1 packet",false));
+        mealList2.add(new MealModel("Coke","300 ML",false));
+        mealList2.add(new MealModel("Chocolate","20g",false));
+        dietList.add(new DietPlanModel("Snack",mealList2));
+        dietPlanAdapter.notifyDataSetChanged();
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,23 +105,55 @@ public class DietHistoryFragment extends Fragment {
                 startActivity(i);
             }
         });
-        button.setOnClickListener(new View.OnClickListener() {
+        dateSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Date = "";
-                Date += datePicker.getDayOfMonth()+"/";
-                Date += (datePicker.getMonth()+1)+"/";
-                Date += datePicker.getYear();
+                intent = new Intent(getActivity(),ViewDietActivity.class);
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR); // current year
+                int mMonth = c.get(Calendar.MONTH); // current month
+                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                        new DatePickerDialog.OnDateSetListener() {
 
-                Intent i = new Intent(getActivity(),ViewDietActivity.class);
-                i.putExtra("date",Date);
-                i.putExtra("day",datePicker.getDayOfMonth()+"");
-                i.putExtra("month",datePicker.getMonth()+"");
-                i.putExtra("year",datePicker.getYear()+"");
-                i.putExtra("clientId",clientId);
-                getActivity().startActivity(i);
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // set day of month , month and year value in the edit text
+                                month = monthOfYear;
+                                date = dayOfMonth;
+                                String Date = dayOfMonth+"/";
+                                Date += (monthOfYear+1)+"/";
+                                Date += year;
+                                intent.putExtra("date",Date);
+                                intent.putExtra("clientId",clientId);
+                                intent.putExtra("day",date+"");
+                                intent.putExtra("month",month+"");
+                                intent.putExtra("year",year+"");
+                                startActivity(intent);
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
             }
         });
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String Date = "";
+//                Date += datePicker.getDayOfMonth()+"/";
+//                Date += (datePicker.getMonth()+1)+"/";
+//                Date += datePicker.getYear();
+//
+//                Intent i = new Intent(getActivity(),ViewDietActivity.class);
+//                i.putExtra("date",Date);
+//                i.putExtra("day",datePicker.getDayOfMonth()+"");
+//                i.putExtra("month",datePicker.getMonth()+"");
+//                i.putExtra("year",datePicker.getYear()+"");
+//                i.putExtra("clientId",clientId);
+//                getActivity().startActivity(i);
+//            }
+//        });
         return rootView;
     }
     public void onButtonPressed(Uri uri) {
@@ -104,4 +182,10 @@ public class DietHistoryFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
+
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+//        inflater.inflate(R.menu.diet_history_menu,menu);
+//    }
 }

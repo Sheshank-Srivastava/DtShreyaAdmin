@@ -94,6 +94,7 @@ public class ClientDetailActivity extends AppCompatActivity implements DietHisto
                             month = monthOfYear;
                             date = dayOfMonth;
                             ClientDetailActivity.this.year = year;
+                            intent.putExtra("clientId",clientID);
                             intent.putExtra("day",date);
                             intent.putExtra("month",month);
                             intent.putExtra("year",year);

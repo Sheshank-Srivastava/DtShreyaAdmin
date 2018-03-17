@@ -10,4 +10,11 @@
         android:layout_margin="@dimen/layout_very_small_margin"
         android:id="@+id/re"/>
 
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/ic_chat"-->
+        <!--android:layout_gravity="bottom|right"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--android:id="@+id/fab"/>-->
 </LinearLayout>

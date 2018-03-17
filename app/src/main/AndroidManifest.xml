@@ -28,10 +28,13 @@
         <activity
             android:name=".DiaryViewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CompleteProfileActivity"></activity>
-        <activity android:name=".ClientProfileActivity">
-
-        </activity>
+        <activity android:name=".CompleteProfileActivity" />
+        <activity android:name=".ClientProfileActivity" />
+        <activity android:name=".UpcomingAppointmentsActivty" />
+        <activity android:name=".SignupRequestActivity" />
+        <activity android:name=".MealChangeActivity" />
+        <activity android:name=".MealChangeRequestActivty" />
+        <activity android:name=".RescheduleAppointments"></activity>
     </application>
 
 </manifest>

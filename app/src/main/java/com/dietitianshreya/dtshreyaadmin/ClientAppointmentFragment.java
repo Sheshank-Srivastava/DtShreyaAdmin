@@ -3,6 +3,7 @@ package com.dietitianshreya.dtshreyaadmin;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +26,7 @@ public class ClientAppointmentFragment extends Fragment {
     ArrayList<ClientAppointmentModel> appointmentList;
     ClientAppointmentAdapter appointmentAdapter;
     private OnFragmentInteractionListener mListener;
+    FloatingActionButton fab;
 
     public ClientAppointmentFragment() {
         // Required empty public constructor
@@ -53,6 +55,7 @@ public class ClientAppointmentFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_client_appointment, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
+        fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         appointmentList = new ArrayList<>();
         appointmentAdapter = new ClientAppointmentAdapter(appointmentList,getActivity());
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
@@ -63,6 +66,13 @@ public class ClientAppointmentFragment extends Fragment {
         appointmentList.add(new ClientAppointmentModel("02/02/2018","9:30 A.M.","In Person","Complete","Dt. Shreya"));
         appointmentList.add(new ClientAppointmentModel("02/02/2018","9:30 A.M.","In Person","Complete","Dt. Shreya"));
         appointmentAdapter.notifyDataSetChanged();
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Handle Book appointment here
+            }
+        });
         return rootView;
     }
 

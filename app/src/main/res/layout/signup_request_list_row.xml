@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/medium_padding"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/customer_image_placeholder"
+        android:textSize="@dimen/text_very_large"
+        android:textColor="@color/textColorLight"
+        android:text="A"
+        android:id="@+id/placeholder"
+        android:gravity="center"
+        />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_marginLeft="@dimen/layout_small_margin"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textColor="@color/textColorDark"
+            android:textSize="@dimen/text_small"
+            android:text="Akshit Tyagi"
+            android:id="@+id/clientName"
+            android:paddingLeft="@dimen/small_padding"
+            />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/confirm"
+        android:src="@drawable/ic_chat"
+        android:tint="@color/colorPrimary"
+        android:layout_gravity="center"
+        />
+</LinearLayout>

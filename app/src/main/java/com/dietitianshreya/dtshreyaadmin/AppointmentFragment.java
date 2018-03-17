@@ -3,6 +3,7 @@ package com.dietitianshreya.dtshreyaadmin;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,7 @@ public class AppointmentFragment extends Fragment {
     ArrayList<AppointmentHistoryModel> appointmentList;
     ArrayList<AppointmentDetailsModel> appointmentDetailsList;
     AppointmentHistoryAdapter appointmentHistoryAdapter;
+    FloatingActionButton fab;
 
     public AppointmentFragment() {
         // Required empty public constructor
@@ -50,6 +52,7 @@ public class AppointmentFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_appointment, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
+        fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         appointmentList=new ArrayList<>();
         appointmentDetailsList = new ArrayList<>();
         appointmentHistoryAdapter = new AppointmentHistoryAdapter(appointmentList,getActivity());
@@ -69,6 +72,12 @@ public class AppointmentFragment extends Fragment {
 
         appointmentHistoryAdapter.notifyDataSetChanged();
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //handle book appointment here
+            }
+        });
         return rootView;
     }
 
