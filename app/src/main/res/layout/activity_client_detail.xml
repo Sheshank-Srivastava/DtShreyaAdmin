@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         app:tabIndicatorColor="@color/textColorLight"
-        app:tabMode="fixed"
         android:paddingTop="@dimen/small_padding"
+        app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/textColorLight"
         app:tabTextColor="@color/textColorLight" />
 

@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.dietitianshreya.dtshreyaadmin.MealChangeRequestActivty">
+    tools:context="com.dietitianshreya.dtshreyaadmin.ExtensionLeadsActivity">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_margin="@dimen/layout_very_small_margin"
         android:layout_height="match_parent"
-        android:id="@+id/re"/>
+        android:id="@+id/re"
+        android:layout_margin="@dimen/layout_very_small_margin"/>
 </LinearLayout>

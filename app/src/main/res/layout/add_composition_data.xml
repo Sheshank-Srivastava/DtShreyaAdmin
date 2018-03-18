@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.design.widget.TextInputEditText
+        android:layout_width="match_parent"
+        android:hint="Date"
+        android:id="@+id/date"
+        android:textSize="@dimen/text_small"
+        android:padding="@dimen/medium_padding"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:layout_height="wrap_content" />
+    <android.support.design.widget.TextInputEditText
+        android:layout_width="match_parent"
+        android:hint="Weight"
+        android:id="@+id/weight"
+        android:textSize="@dimen/text_small"
+        android:padding="@dimen/medium_padding"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:layout_height="wrap_content" />
+    <android.support.design.widget.TextInputEditText
+        android:layout_width="match_parent"
+        android:hint="Fat"
+        android:id="@+id/fat"
+        android:textSize="@dimen/text_small"
+        android:padding="@dimen/medium_padding"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:layout_height="wrap_content" />
+    <android.support.design.widget.TextInputEditText
+        android:layout_width="match_parent"
+        android:hint="Water"
+        android:id="@+id/water"
+        android:textSize="@dimen/text_small"
+        android:padding="@dimen/medium_padding"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:layout_height="wrap_content" />
+    <android.support.design.widget.TextInputEditText
+        android:layout_width="match_parent"
+        android:hint="Muscle"
+        android:id="@+id/muscle"
+        android:textSize="@dimen/text_small"
+        android:padding="@dimen/medium_padding"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:layout_height="wrap_content" />
+    <android.support.design.widget.TextInputEditText
+        android:layout_width="match_parent"
+        android:hint="Bone"
+        android:id="@+id/bone"
+        android:textSize="@dimen/text_small"
+        android:padding="@dimen/medium_padding"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:layout_height="wrap_content" />
+</LinearLayout>

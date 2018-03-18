@@ -24,16 +24,16 @@ public class MealChangeRequestActivty extends AppCompatActivity {
         clientList = new ArrayList<>();
         mealChangeAdapter = new MealChangeAdapter(clientList,MealChangeRequestActivty.this);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mealChangeAdapter);
         recyclerView.setLayoutManager(manager);
-        clientList.add(new MealChangeModel("Akshit Tyagi","123456","20/03/2018"));
-        clientList.add(new MealChangeModel("Akshit Tyagi","123456","20/03/2018"));
-        clientList.add(new MealChangeModel("Akshit Tyagi","123456","20/03/2018"));
-        clientList.add(new MealChangeModel("Akshit Tyagi","123456","20/03/2018"));
-        clientList.add(new MealChangeModel("Akshit Tyagi","123456","20/03/2018"));
-        clientList.add(new MealChangeModel("Akshit Tyagi","123456","20/03/2018"));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
         mealChangeAdapter.notifyDataSetChanged();
     }
 

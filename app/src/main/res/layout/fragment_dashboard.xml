@@ -65,7 +65,7 @@
                 android:textColor="@color/textColorDark"
                 android:padding="@dimen/small_padding"
                 android:layout_marginLeft="@dimen/fab_margin"
-                android:text="Signup Requests"
+                android:text="Reschedule Requests"
                 />
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_gravity="center"
                     android:padding="@dimen/medium_padding"
-                    android:id="@+id/viewAllSignupRequest"
+                    android:id="@+id/viewAllRescheduleRequest"
                     android:text="View All"/>
             </LinearLayout>
         </LinearLayout>

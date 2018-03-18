@@ -34,7 +34,9 @@
         <activity android:name=".SignupRequestActivity" />
         <activity android:name=".MealChangeActivity" />
         <activity android:name=".MealChangeRequestActivty" />
-        <activity android:name=".RescheduleAppointments"></activity>
+        <activity android:name=".RescheduleAppointments" />
+        <activity android:name=".ExtensionLeadsActivity" />
+        <activity android:name=".LastMonthUsers"></activity>
     </application>
 
 </manifest>

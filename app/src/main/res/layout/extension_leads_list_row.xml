@@ -46,7 +46,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_very_small"
                         android:layout_gravity="center"
-                        android:text="Appointment On"/>
+                        android:text="Client Id"/>
                    <TextView
                        android:layout_width="0dp"
                        android:layout_weight="0.2"
@@ -59,10 +59,10 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:id="@+id/previousDateTime"
+                        android:id="@+id/clientId"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_very_small"
-                        android:text="10/06/2018 - 9:30 P.M."/>
+                        android:text="123456"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -78,7 +78,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_very_small"
                         android:layout_gravity="center"
-                        android:text="Requested"/>
+                        android:text="Joined On"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="0.2"
@@ -91,10 +91,74 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:id="@+id/requestedDateTime"
+                        android:id="@+id/joinedOn"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_very_small"
-                        android:text="10/06/2018 - 9:30 P.M."/>
+                        android:text="10/02/2018"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:paddingLeft="@dimen/small_padding"
+                        android:paddingBottom="@dimen/small_padding"
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_very_small"
+                        android:layout_gravity="center"
+                        android:text="Days Passed"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_very_small"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text=":"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:id="@+id/daysPassed"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_very_small"
+                        android:text="4 days"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:paddingLeft="@dimen/small_padding"
+                        android:paddingBottom="@dimen/small_padding"
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_very_small"
+                        android:layout_gravity="center"
+                        android:text="Plan"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_very_small"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text=":"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:id="@+id/plan"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_very_small"
+                        android:text="4 Months"/>
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
@@ -111,7 +175,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_marginLeft="@dimen/layout_small_margin"
-                        android:id="@+id/decline"
+                        android:id="@+id/remove"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                     <ImageView
@@ -128,12 +192,12 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_small"
                         android:layout_gravity="center"
-                        android:text="Decline"/>
+                        android:text="Remove"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:id="@+id/accept"
+                        android:id="@+id/extend"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                         <ImageView
@@ -150,7 +214,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/text_small"
                             android:layout_gravity="center"
-                            android:text="Accept"/>
+                            android:text="Extend"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"

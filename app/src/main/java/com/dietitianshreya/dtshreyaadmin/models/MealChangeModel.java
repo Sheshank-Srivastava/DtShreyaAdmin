@@ -5,12 +5,16 @@ package com.dietitianshreya.dtshreyaadmin.models;
  */
 
 public class MealChangeModel {
-    private String clientName,clientId,date;
+    private String clientName,clientId,previousMeal,requestedMeal,mealType,status,mealTime;
 
-    public MealChangeModel(String clientName, String clientId, String date) {
+    public MealChangeModel(String clientName, String clientId, String previousMeal, String requestedMeal, String mealType, String status, String mealTime) {
         this.clientName = clientName;
         this.clientId = clientId;
-        this.date = date;
+        this.previousMeal = previousMeal;
+        this.requestedMeal = requestedMeal;
+        this.mealType = mealType;
+        this.status = status;
+        this.mealTime = mealTime;
     }
 
     public String getClientName() {
@@ -29,11 +33,43 @@ public class MealChangeModel {
         this.clientId = clientId;
     }
 
-    public String getDate() {
-        return date;
+    public String getPreviousMeal() {
+        return previousMeal;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setPreviousMeal(String previousMeal) {
+        this.previousMeal = previousMeal;
+    }
+
+    public String getRequestedMeal() {
+        return requestedMeal;
+    }
+
+    public void setRequestedMeal(String requestedMeal) {
+        this.requestedMeal = requestedMeal;
+    }
+
+    public String getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(String mealType) {
+        this.mealType = mealType;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getMealTime() {
+        return mealTime;
+    }
+
+    public void setMealTime(String mealTime) {
+        this.mealTime = mealTime;
     }
 }

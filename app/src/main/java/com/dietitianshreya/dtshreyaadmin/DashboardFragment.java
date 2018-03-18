@@ -24,7 +24,7 @@ public class DashboardFragment extends Fragment {
     RecyclerView recyclerView;
     AppointmentsAdapter appointmentsAdapter;
     ArrayList<AppointmentsModel> appointmentsList;
-    TextView viewAllAppointments,viewAllMealChangeRequest;
+    TextView viewAllAppointments,viewAllMealChangeRequest,viewAllRescheduleRequest,viewAllExtensionLeads,viewAllFinalMonthUsers;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -51,6 +51,9 @@ public class DashboardFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
         viewAllAppointments = (TextView) rootView.findViewById(R.id.viewAllAppointments);
         viewAllMealChangeRequest = (TextView) rootView.findViewById(R.id.viewAllMealChangeRequest);
+        viewAllRescheduleRequest = (TextView) rootView.findViewById(R.id.viewAllRescheduleRequest);
+        viewAllExtensionLeads = (TextView) rootView.findViewById(R.id.viewAllExtensionLeads);
+        viewAllFinalMonthUsers = (TextView) rootView.findViewById(R.id.viewAllFinalMonthUsers);
         appointmentsList=new ArrayList<>();
         appointmentsAdapter = new AppointmentsAdapter(appointmentsList,getActivity());
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -70,6 +73,24 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(),MealChangeRequestActivty.class));
+            }
+        });
+        viewAllRescheduleRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),RescheduleAppointments.class));
+            }
+        });
+        viewAllExtensionLeads.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),ExtensionLeadsActivity.class));
+            }
+        });
+        viewAllFinalMonthUsers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),LastMonthUsers.class));
             }
         });
         return rootView;

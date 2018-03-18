@@ -13,59 +13,60 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dietitianshreya.dtshreyaadmin.ChatActivity;
-import com.dietitianshreya.dtshreyaadmin.ClientDetailActivity;
-import com.dietitianshreya.dtshreyaadmin.CreateDiet;
-import com.dietitianshreya.dtshreyaadmin.MealChangeActivity;
 import com.dietitianshreya.dtshreyaadmin.R;
-import com.dietitianshreya.dtshreyaadmin.models.AllClientListOthersModel;
-import com.dietitianshreya.dtshreyaadmin.models.MealChangeModel;
+import com.dietitianshreya.dtshreyaadmin.models.MealModel;
+import com.dietitianshreya.dtshreyaadmin.models.RescheduleAppointmentModel;
 
 import java.util.ArrayList;
 
 
-public class MealChangeAdapter extends RecyclerView.Adapter<MealChangeAdapter.MyViewHolder> {
+public class RescheduleAppointmentAdaper extends RecyclerView.Adapter<RescheduleAppointmentAdaper.MyViewHolder> {
 
-    private ArrayList<MealChangeModel> clientList;
+    private ArrayList<RescheduleAppointmentModel> appointmentList;
     private Context mCtx;
 
-    public MealChangeAdapter(ArrayList<MealChangeModel> clientList, Context mCtx) {
-        this.clientList = clientList;
+
+    public RescheduleAppointmentAdaper(ArrayList<RescheduleAppointmentModel> appointmentList, Context mCtx) {
+        this.appointmentList = appointmentList;
         this.mCtx = mCtx;
     }
+
+
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView clientName,previousMeal,requestedMeal,mealType;
+        public TextView clientName,previousDateTime,requestedDateTime;
         LinearLayout accept,decline;
         LinearLayout chat;
         public MyViewHolder(View view) {
             super(view);
-            previousMeal = (TextView)  view.findViewById(R.id.previousMeal);
             clientName = (TextView)  view.findViewById(R.id.clientName);
-            requestedMeal = (TextView)  view.findViewById(R.id.requestedMeal);
-            mealType = (TextView)  view.findViewById(R.id.mealType);
-            accept = (LinearLayout) view.findViewById(R.id.accept);
-            decline = (LinearLayout) view.findViewById(R.id.decline);
+            previousDateTime = (TextView)  view.findViewById(R.id.previousDateTime);
+            requestedDateTime = (TextView)  view.findViewById(R.id.requestedDateTime);
+            accept = (LinearLayout)  view.findViewById(R.id.accept);
+            decline = (LinearLayout)  view.findViewById(R.id.decline);
             chat = (LinearLayout) view.findViewById(R.id.chat);
         }
     }
 
+
     @Override
-    public MealChangeAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RescheduleAppointmentAdaper.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.meal_change_list_row, parent, false);
-        return new MealChangeAdapter.MyViewHolder(itemView);
+                .inflate(R.layout.reschedule_appointment_list_row, parent, false);
+
+        return new RescheduleAppointmentAdaper.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(MealChangeAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(RescheduleAppointmentAdaper.MyViewHolder holder, int position) {
 
-        final MealChangeModel client = clientList.get(position);
-        holder.clientName.setText(client.getClientName());
-        holder.previousMeal.setText(client.getPreviousMeal());
-        holder.mealType.setText(client.getMealType()+" "+client.getMealTime());
-        holder.requestedMeal.setText(client.getRequestedMeal());
+        final RescheduleAppointmentModel appointment = appointmentList.get(position);
+        holder.clientName.setText(appointment.getClientName());
+        holder.previousDateTime.setText(appointment.getAppointmentOn());
+        holder.requestedDateTime.setText(appointment.getRequestedOn());
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +83,7 @@ public class MealChangeAdapter extends RecyclerView.Adapter<MealChangeAdapter.My
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(mCtx, ChatActivity.class);
-                i.putExtra("clientId",client.getClientId());
+                i.putExtra("clientId",appointment.getClientId());
                 mCtx.startActivity(i);
             }
         });
@@ -91,7 +92,7 @@ public class MealChangeAdapter extends RecyclerView.Adapter<MealChangeAdapter.My
     @Override
     public int getItemCount()
     {
-        return clientList.size();
+        return appointmentList.size();
     }
 
 

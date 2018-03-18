@@ -16,7 +16,8 @@ import com.dietitianshreya.dtshreyaadmin.adapters.ClientAppointmentAdapter;
 import java.util.Calendar;
 
 public class ClientDetailActivity extends AppCompatActivity implements DietHistoryFragment.OnFragmentInteractionListener,
-        ClinicalNotesFragment.OnFragmentInteractionListener, ClientAppointmentFragment.OnFragmentInteractionListener{
+        ClinicalNotesFragment.OnFragmentInteractionListener, ClientAppointmentFragment.OnFragmentInteractionListener,
+        BodyCompositionFragment.OnFragmentInteractionListener{
 
     ViewPager viewPager;
     TabLayout tabLayout;
@@ -36,7 +37,6 @@ public class ClientDetailActivity extends AppCompatActivity implements DietHisto
         tabLayout.setupWithViewPager(viewPager);
         //Initializing viewPager
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setOffscreenPageLimit(7);
         setupViewPager(viewPager);
 
 //Initializing the tablayout
@@ -50,9 +50,11 @@ public class ClientDetailActivity extends AppCompatActivity implements DietHisto
         ClinicalNotesFragment clinicalNotesFragment= ClinicalNotesFragment.newInstance(clientID);
         ClientAppointmentFragment appointment = ClientAppointmentFragment.newInstance(clientID);
         DietHistoryFragment dietHistoryFragment= DietHistoryFragment.newInstance(clientID);
+        BodyCompositionFragment bodyCompositionFragment = BodyCompositionFragment.newInstance(clientID);
         adapter.addFragment(clinicalNotesFragment,"Clinical Notes");
         adapter.addFragment(appointment,"Appointments");
         adapter.addFragment(dietHistoryFragment,"Diet History");
+        adapter.addFragment(bodyCompositionFragment,"Composition Data");
         viewPager.setAdapter(adapter);
 
     }
