@@ -21,4 +21,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="barGrapButtons">
+        <item name="android:textColor">@color/overlay_dark_50</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:gravity">center|center_horizontal</item>
+        <item name="android:clickable">true</item>
+        <item name="android:padding">@dimen/spacing_medium</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:layout_marginLeft">1dp</item>
+    </style>
+
 </resources>

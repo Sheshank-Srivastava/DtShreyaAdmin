@@ -3,6 +3,7 @@ package com.dietitianshreya.dtshreyaadmin;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,7 +28,7 @@ public class AppointmentFragment extends Fragment {
     ArrayList<AppointmentDetailsModel> appointmentDetailsList;
     AppointmentHistoryAdapter appointmentHistoryAdapter;
     FloatingActionButton fab;
-
+CoordinatorLayout coordinatorLayout;
     public AppointmentFragment() {
         // Required empty public constructor
     }
@@ -50,9 +51,11 @@ public class AppointmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_appointment, container, false);
+        View rootView =  inflater.inflate(R.layout.fragment_appointment,null);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        coordinatorLayout = rootView.findViewById(R.id.appointment_coordinator);
+        coordinatorLayout.setLayoutParams(new CoordinatorLayout.LayoutParams(CoordinatorLayout.LayoutParams.MATCH_PARENT,CoordinatorLayout.LayoutParams.MATCH_PARENT));
         appointmentList=new ArrayList<>();
         appointmentDetailsList = new ArrayList<>();
         appointmentHistoryAdapter = new AppointmentHistoryAdapter(appointmentList,getActivity());
@@ -71,6 +74,7 @@ public class AppointmentFragment extends Fragment {
         appointmentList.add(new AppointmentHistoryModel("11/02/2018",appointmentDetailsList1));
 
         appointmentHistoryAdapter.notifyDataSetChanged();
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Dt. Shreya Admin</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="Early">Early Morning</string>
+    <string name="Mid">Mid Morning</string>
+    <string name="lunch">Lunch</string>
+    <string name="eve">Evening</string>
+    <string name="dinner">Dinner</string>
+    <string name="postDinner">Post Dinner</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
