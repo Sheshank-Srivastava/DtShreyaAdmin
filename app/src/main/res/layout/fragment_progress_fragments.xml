@@ -211,7 +211,6 @@
                    android:layout_height="@dimen/badge_height"
                    android:alpha="0.3"
                    android:layout_marginLeft="@dimen/layout_medium_margin"
-                   android:layout_toLeftOf="@id/badgeText5"
                    android:src="@drawable/fav" />
            </LinearLayout>
             <TextView
