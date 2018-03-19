@@ -110,7 +110,12 @@ public class DietCreateAdapter extends RecyclerView.Adapter<DietCreateAdapter.My
             @Override
             public void onClick(View view) {
 
-                ((Activity)mCtx).startActivityForResult(new Intent(mCtx, ChooseMealActivity.class),position);
+                Intent i = new Intent(mCtx, ChooseMealActivity.class);
+                ArrayList<String> diseases= new ArrayList<String>();
+                diseases.add("diabetes");
+                diseases.add("blood pressure");
+                i.putStringArrayListExtra("diseases",diseases);
+                ((Activity)mCtx).startActivityForResult(i,position);
 
             }
         });

@@ -24,15 +24,17 @@ import java.util.ArrayList;
 public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.MyViewHolder> {
 
     private ArrayList<ChooseMealModel> mealList;
+    private ArrayList<String> diseases;
     private Context mCtx;
     private ArrayList<ChooseMealModel> choosenList;
     EditText quant;
 
 
-    public ChooseMealAdapter(ArrayList<ChooseMealModel> mealList, Context mCtx) {
+    public ChooseMealAdapter(ArrayList<ChooseMealModel> mealList, Context mCtx, ArrayList<String> diseases) {
         this.mealList = mealList;
         this.mCtx = mCtx;
         choosenList = new ArrayList<>();
+        this.diseases = diseases;
     }
 
 
@@ -67,35 +69,47 @@ public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.My
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(mCtx,"You Clicked "+meal.getMealHead(),Toast.LENGTH_SHORT).show();
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(mCtx);
-                // Get the layout inflater
-                LayoutInflater linf = LayoutInflater.from(mCtx);
-                final View inflator = linf.inflate(R.layout.custom_dialog, null);
-                // Inflate and set the layout for the dialog
-                // Pass null as the parent view because its going in the dialog layout
-
-                // Setting Dialog Title
-                //alertDialog.setTitle("Confirm Save...");
-
-                // Setting Dialog Message
-                alertDialog.setMessage("Update the quantity");
-                // Setting Icon to Dialog
-                //alertDialog.setIcon(R.drawable.saveicon);
-                alertDialog.setView(inflator);
-                quant = (EditText) inflator.findViewById(R.id.quant);
-                alertDialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if(!(TextUtils.isEmpty(quant.getText().toString().trim()))){
-                            choosenList.add(new ChooseMealModel(meal.getMealName(),quant.getText().toString().trim()));
-                            meal.setMealQuant(quant.getText().toString().trim());
-                            //set right image
-                            holder.img.setImageResource(R.drawable.ic_chat);
-                        }
+//                //Toast.makeText(mCtx,"You Clicked "+meal.getMealHead(),Toast.LENGTH_SHORT).show();
+//                AlertDialog.Builder alertDialog = new AlertDialog.Builder(mCtx);
+//                // Get the layout inflater
+//                LayoutInflater linf = LayoutInflater.from(mCtx);
+//                final View inflator = linf.inflate(R.layout.custom_dialog, null);
+//                // Inflate and set the layout for the dialog
+//                // Pass null as the parent view because its going in the dialog layout
+//
+//                // Setting Dialog Title
+//                //alertDialog.setTitle("Confirm Save...");
+//
+//                // Setting Dialog Message
+//                alertDialog.setMessage("Update the quantity");
+//                // Setting Icon to Dialog
+//                //alertDialog.setIcon(R.drawable.saveicon);
+//                alertDialog.setView(inflator);
+//                quant = (EditText) inflator.findViewById(R.id.quant);
+//                alertDialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        if(!(TextUtils.isEmpty(quant.getText().toString().trim()))){
+                int flag=0;
+                String dis="";
+                for(int i=0;i<diseases.size();i++){
+                    if(meal.getExempted().contains(diseases.get(i))){
+                        flag++;
+                        dis = diseases.get(i);
                     }
-                });
-                alertDialog.show();
+                }
+                if(flag==0) {
+                    choosenList.add(new ChooseMealModel(meal.getMealName(),"", new ArrayList<String>()));
+                    meal.setMealQuant("");
+                    //set right image
+                    holder.img.setImageResource(R.drawable.ic_chat);
+                }else{
+                    Toast.makeText(mCtx,"Person suffers from "+dis,Toast.LENGTH_SHORT).show();
+                }
+//                        }
+//                    }
+//                });
+//                alertDialog.show();
             }
         });
 
