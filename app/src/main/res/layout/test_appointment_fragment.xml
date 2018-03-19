@@ -1,0 +1,56 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/linear_container"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+android:id="@+id/segment_table"
+        android:layout_weight="6"
+        android:padding="@dimen/spacing_large"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_small"
+            android:background="@color/overlay_dark_50"
+            android:padding="@dimen/spacing_small">
+
+            <TextView
+                android:id="@+id/seg_one"
+                style="@style/barGrapButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:background="@color/overlay_dark_10"
+                android:text="SegmentOne"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/seg_two"
+                style="@style/barGrapButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SegmentTwo" />
+
+
+        </TableRow>
+    </TableLayout>
+
+
+   <FrameLayout
+        android:layout_weight="1"
+       android:layout_width="match_parent"
+       android:id="@+id/frame_appointments"
+       android:layout_height="match_parent"/>
+
+
+
+    </LinearLayout>

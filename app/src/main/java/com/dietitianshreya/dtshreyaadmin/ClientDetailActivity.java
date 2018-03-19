@@ -48,13 +48,15 @@ public class ClientDetailActivity extends AppCompatActivity implements DietHisto
         adapter = new ViewPagerAdapter(getSupportFragmentManager(),this);
 
         ClinicalNotesFragment clinicalNotesFragment= ClinicalNotesFragment.newInstance(clientID);
+       ProgressFragment  progressFragment= new ProgressFragment();
         ClientAppointmentFragment appointment = ClientAppointmentFragment.newInstance(clientID);
         DietHistoryFragment dietHistoryFragment= DietHistoryFragment.newInstance(clientID);
         BodyCompositionFragment bodyCompositionFragment = BodyCompositionFragment.newInstance(clientID);
-        adapter.addFragment(clinicalNotesFragment,"Clinical Notes");
-        adapter.addFragment(appointment,"Appointments");
-        adapter.addFragment(dietHistoryFragment,"Diet History");
-        adapter.addFragment(bodyCompositionFragment,"Composition Data");
+        adapter.addFragment(clinicalNotesFragment,"Notes");
+        adapter.addFragment(appointment,"Appoitments");
+        adapter.addFragment(dietHistoryFragment,"Diet Log");
+        adapter.addFragment(bodyCompositionFragment,"BCA");
+        adapter.addFragment(progressFragment,"Progress");
         viewPager.setAdapter(adapter);
 
     }

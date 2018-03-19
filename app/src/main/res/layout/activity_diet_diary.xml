@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dietitianshreya.dtshreyaadmin.DietDiary">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="@dimen/spacing_medium"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dietitianshreya.dtshreyaadmin.DietDiary">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:orientation="horizontal">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="horizontal"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="@color/yellow_800"
+        android:src="@drawable/ic_sun"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:textColor="@color/colorPrimary"
+        android:text="Wake Up Time : 7AM  "/>
+
+</LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/blue_500"
+                android:src="@drawable/ic_moon"/>
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textColor="@color/colorPrimary"
+            android:text="Sleep Time : 10PM  "/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_exercise"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="Todays's Weight : 70kg  "/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+
+            >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/blue_500"
+            android:src="@drawable/ic_water"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/colorPrimary"
+            android:text="Water Intake : 7 Glasses "/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+
+            >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/green_500"
+            android:src="@drawable/ic_green_tea"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimary"
+            android:text="Green tea : 2 Cup  "/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+
+            >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/brown_500"
+            android:src="@drawable/ic_poop"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimary"
+            android:text="Pooped: 2 times "/>
+        </LinearLayout>
+    </LinearLayout>
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/spacing_large"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/spacing_medium"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_medium"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_medium"
+        android:text="@string/Early"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="@dimen/spacing_small"
+            android:background="@color/overlay_dark_20"
+            />
+
+
+<TextView
+    android:layout_marginTop="@dimen/spacing_medium"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="@dimen/text_small"
+    android:text="Corn Flakes + Milk"
+    android:id="@+id/early_id"
+    android:background="@android:color/transparent"
+    />
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/spacing_medium"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_medium"
+                android:text="@string/breakfast"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/spacing_small"
+                android:background="@color/overlay_dark_20"
+                />
+
+
+            <TextView
+                android:layout_marginTop="@dimen/spacing_medium"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:text="Corn Flakes + Milk"
+                android:id="@+id/break_id"
+                android:background="@android:color/transparent"
+                />
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/spacing_medium"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_medium"
+                android:text="@string/Mid"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/spacing_small"
+                android:background="@color/overlay_dark_20"
+                />
+
+
+            <TextView
+                android:layout_marginTop="@dimen/spacing_medium"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:text="Corn Flakes + Milk"
+                android:id="@+id/mid_id"
+                android:background="@android:color/transparent"
+                />
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/spacing_medium"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_medium"
+                android:text="@string/lunch"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/spacing_small"
+                android:background="@color/overlay_dark_20"
+                />
+
+
+            <TextView
+                android:layout_marginTop="@dimen/spacing_medium"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:text="Corn Flakes + Milk"
+                android:id="@+id/lunch_id"
+                android:background="@android:color/transparent"
+                />
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/spacing_medium"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_medium"
+                android:text="@string/eve"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/spacing_small"
+                android:background="@color/overlay_dark_20"
+                />
+
+
+            <TextView
+                android:layout_marginTop="@dimen/spacing_medium"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:text="Corn Flakes + Milk"
+                android:id="@+id/eve_id"
+                android:background="@android:color/transparent"
+                />
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/spacing_medium"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_medium"
+                android:text="@string/dinner"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/spacing_small"
+                android:background="@color/overlay_dark_20"
+                />
+
+
+            <TextView
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:id="@+id/dinner_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:text="Corn Flakes + Milk"
+                android:background="@android:color/transparent"
+                />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/spacing_medium"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_medium"
+                android:text="@string/postDinner"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/spacing_small"
+                android:background="@color/overlay_dark_20"
+                />
+
+
+            <TextView
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:textSize="@dimen/text_small"
+                android:text="Corn Flakes + Milk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/post_id"
+                android:background="@android:color/transparent"
+                />
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/spacing_medium"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_medium"
+                android:text="Supplements"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/spacing_small"
+                android:background="@color/overlay_dark_20"
+                />
+
+
+            <TextView
+                android:layout_marginTop="@dimen/spacing_medium"
+
+                android:layout_width="match_parent"
+                android:id="@+id/supplements_id"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:text="Corn Flakes + Milk"
+                android:background="@android:color/transparent"
+                />
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>
+</ScrollView>
