@@ -23,26 +23,35 @@ public class ChooseMealActivity extends AppCompatActivity {
     Button add;
     ArrayList<ChooseMealModel> mealList;
     ChooseMealAdapter mealAdapter;
+    ArrayList<String> diseases;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_meal);
+        Bundle extra = getIntent().getExtras();
+        diseases = new ArrayList<>();
+        diseases = extra.getStringArrayList("diseases");
         recyclerView = (RecyclerView) findViewById(R.id.re);
         mealList=new ArrayList<>();
-        mealAdapter = new ChooseMealAdapter(mealList,ChooseMealActivity.this);
+        mealAdapter = new ChooseMealAdapter(mealList,ChooseMealActivity.this,diseases);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(ChooseMealActivity.this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(ChooseMealActivity.this, LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mealAdapter);
-        mealList.add(new ChooseMealModel("Poha","0"));
-        mealList.add(new ChooseMealModel("Rice","0"));
-        mealList.add(new ChooseMealModel("Dahi","0"));
-        mealList.add(new ChooseMealModel("Dal","0"));
-        mealList.add(new ChooseMealModel("Pepsi","0"));
-        mealList.add(new ChooseMealModel("Juice","0"));
-        mealList.add(new ChooseMealModel("Ice Cream","0"));
-        mealList.add(new ChooseMealModel("Milk","0"));
+        ArrayList<String> ex = new ArrayList<>();
+        ex.add("diabetes");
+        ex.add("blood pressure");
+        ArrayList<String> ex1 = new ArrayList<>();
+        mealList.add(new ChooseMealModel("Poha","0",ex1));
+        mealList.add(new ChooseMealModel("Rice","0",ex));
+        mealList.add(new ChooseMealModel("Dahi","0",ex1));
+        mealList.add(new ChooseMealModel("Dal","0",ex1));
+
+        mealList.add(new ChooseMealModel("Pepsi","0",ex));
+        mealList.add(new ChooseMealModel("Juice","0",ex));
+        mealList.add(new ChooseMealModel("Ice Cream","0",ex));
+        mealList.add(new ChooseMealModel("Milk","0",ex1));
         mealAdapter.notifyDataSetChanged();
         add = (Button) findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
