@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:padding="@dimen/small_padding"
             android:id="@+id/icBasic"
-            android:src="@drawable/ic_chat"
+            android:src="@drawable/ic_down"
             android:tint="@color/colorPrimary"/>
     </LinearLayout>
     <LinearLayout
@@ -101,7 +101,7 @@
             android:id="@+id/call_img"
             android:layout_height="match_parent"
             android:tint="@color/colorPrimary"
-            android:src="@drawable/ic_chat"/>
+            android:src="@drawable/ic_phone"/>
     </LinearLayout>
 
     <LinearLayout
@@ -139,7 +139,7 @@
             android:id="@+id/email_img"
             android:layout_height="match_parent"
             android:tint="@color/colorPrimary"
-            android:src="@drawable/ic_chat"/>
+            android:src="@drawable/ic_email"/>
     </LinearLayout>
 
     <LinearLayout
@@ -380,7 +380,7 @@
                 android:layout_height="match_parent"
                 android:padding="@dimen/small_padding"
                 android:id="@+id/icMedical"
-                android:src="@drawable/ic_chat"
+                android:src="@drawable/ic_down"
                 android:tint="@color/colorPrimary"/>
         </LinearLayout>
         </LinearLayout>
@@ -1112,7 +1112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="@dimen/small_padding"
-            android:src="@drawable/ic_chat"
+            android:src="@drawable/ic_down"
             android:id="@+id/icFood"
             android:tint="@color/colorPrimary"/>
     </LinearLayout>

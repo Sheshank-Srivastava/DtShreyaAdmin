@@ -54,5 +54,6 @@
         android:layout_gravity="bottom|right"
         android:padding="@dimen/fab_margin"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_chat"/>
+        android:tint="@color/textColorLight"
+        android:src="@drawable/ic_food"/>
 </android.support.design.widget.CoordinatorLayout>

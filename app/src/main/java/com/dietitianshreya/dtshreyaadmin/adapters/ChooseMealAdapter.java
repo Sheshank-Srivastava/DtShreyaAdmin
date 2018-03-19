@@ -102,7 +102,7 @@ public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.My
                     choosenList.add(new ChooseMealModel(meal.getMealName(),"", new ArrayList<String>()));
                     meal.setMealQuant("");
                     //set right image
-                    holder.img.setImageResource(R.drawable.ic_chat);
+                    holder.img.setImageResource(R.drawable.ic_tick);
                 }else{
                     Toast.makeText(mCtx,"Person suffers from "+dis,Toast.LENGTH_SHORT).show();
                 }

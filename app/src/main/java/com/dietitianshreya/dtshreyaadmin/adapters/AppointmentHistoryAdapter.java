@@ -66,13 +66,13 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         final AppointmentHistoryModel header = appointmentHistoryList.get(position);
         holder.childLayout.setVisibility(View.GONE);
         holder.recyclerView.setVisibility(View.GONE);
-        holder.groupIndicator.setImageResource(R.drawable.ic_chat);
+        holder.groupIndicator.setImageResource(R.drawable.ic_down);
         holder.date.setText(header.getDate());
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(holder.childLayout.getVisibility()==View.GONE) {
-                    holder.groupIndicator.setImageResource(R.drawable.ic_chat);
+                    holder.groupIndicator.setImageResource(R.drawable.ic_up);
                     holder.childLayout.setVisibility(View.VISIBLE);
                     holder.recyclerView.setVisibility(View.VISIBLE);
                     AppointmentDetailsAdapter detailsAdapter = new AppointmentDetailsAdapter(header.getAppointmentDetailsList(),mCtx);
@@ -84,7 +84,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
                     detailsAdapter.notifyDataSetChanged();
                 }
                 else {
-                    holder.groupIndicator.setImageResource(R.drawable.ic_chat);
+                    holder.groupIndicator.setImageResource(R.drawable.ic_down);
                     holder.childLayout.setVisibility(View.GONE);
                     holder.recyclerView.setVisibility(View.GONE);
                 }

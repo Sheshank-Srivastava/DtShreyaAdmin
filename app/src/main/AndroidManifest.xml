@@ -35,6 +35,7 @@
         <activity android:name=".MealChangeActivity" />
         <activity android:name=".MealChangeRequestActivty" />
         <activity android:name=".RescheduleAppointments" />
+        <activity android:name=".ExtensionLeadsActivity"/>
         <activity android:name=".TestBooking"></activity>
         <activity android:name=".DietDiary">
 

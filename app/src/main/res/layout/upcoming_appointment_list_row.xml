@@ -39,7 +39,7 @@
                     android:tint="@color/textColorLight"
                     android:layout_centerInParent="true"
                     android:id="@+id/appointmentTypeImage"
-                    android:src="@drawable/ic_chat"
+                    android:src="@drawable/ic_person_fill"
                      />
 
             </RelativeLayout>

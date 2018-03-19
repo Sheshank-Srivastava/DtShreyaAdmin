@@ -77,13 +77,13 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.MyViewHolder> 
         holder.recyclerView.setLayoutManager(mLayoutManager);
         holder.recyclerView.setAdapter(detailsAdapter);
         detailsAdapter.notifyDataSetChanged();
-        holder.groupIndicator.setImageResource(R.drawable.ic_chat);
+        holder.groupIndicator.setImageResource(R.drawable.ic_down);
         holder.date.setText(header.getDate());
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(holder.childLayout.getVisibility()==View.GONE) {
-                    holder.groupIndicator.setImageResource(R.drawable.ic_chat);
+                    holder.groupIndicator.setImageResource(R.drawable.ic_up);
                     holder.childLayout.setVisibility(View.VISIBLE);
                     holder.recyclerView.setVisibility(View.VISIBLE);
                     TestDetailsAdapter detailsAdapter = new TestDetailsAdapter(header.getTestDetailsList(),mCtx);
@@ -95,7 +95,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.MyViewHolder> 
                     detailsAdapter.notifyDataSetChanged();
                 }
                 else {
-                    holder.groupIndicator.setImageResource(R.drawable.ic_chat);
+                    holder.groupIndicator.setImageResource(R.drawable.ic_down);
                     holder.childLayout.setVisibility(View.GONE);
                     holder.recyclerView.setVisibility(View.GONE);
                 }

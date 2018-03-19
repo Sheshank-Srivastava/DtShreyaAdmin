@@ -119,7 +119,7 @@
                         android:layout_weight="0.2"
                         android:layout_height="match_parent"
                         android:tint="@color/red_700"
-                        android:src="@drawable/ic_chat"/>
+                        android:src="@drawable/ic_close"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="0.8"
@@ -141,7 +141,7 @@
                             android:layout_weight="0.2"
                             android:layout_height="match_parent"
                             android:tint="@color/green_500"
-                            android:src="@drawable/ic_chat"/>
+                            android:src="@drawable/ic_tick"/>
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="0.8"
@@ -164,7 +164,7 @@
                             android:layout_weight="0.2"
                             android:layout_height="match_parent"
                             android:tint="@color/colorPrimary"
-                            android:src="@drawable/ic_chat"/>
+                            android:src="@drawable/ic_chat_line"/>
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="0.8"

@@ -210,8 +210,6 @@
                    android:layout_width="wrap_content"
                    android:layout_height="@dimen/badge_height"
                    android:alpha="0.3"
-                   android:layout_marginLeft="@dimen/layout_medium_margin"
-                   android:layout_toLeftOf="@id/badgeText5"
                    android:src="@drawable/fav" />
            </LinearLayout>
             <TextView
@@ -219,7 +217,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_small"
                 android:layout_below="@+id/fav_badge"
-
                 android:id="@+id/badgeText5"
                 android:layout_centerHorizontal="true"
                 android:padding="@dimen/medium_padding"

@@ -64,8 +64,10 @@ public class ClientAppointmentAdapter extends RecyclerView.Adapter<ClientAppoint
         holder.client.setText(appointment.getDietitian());
         if(appointment.getType().equalsIgnoreCase("in person")){
             //Change TypeImage
+            holder.typeImage.setImageResource(R.drawable.ic_person_fill);
         }else{
             //Change TypeImage
+            holder.typeImage.setImageResource(R.drawable.ic_video);
         }
     }
 

@@ -65,10 +65,10 @@ public class DietPlanAdapter extends RecyclerView.Adapter<DietPlanAdapter.MyView
         if(position!=0) {
             holder.DietChild.setVisibility(View.GONE);
             holder.recyclerView.setVisibility(View.GONE);
-            holder.groupIndicator.setImageResource(R.drawable.ic_chat);
+            holder.groupIndicator.setImageResource(R.drawable.ic_down);
         }
         else{
-            holder.groupIndicator.setImageResource(R.drawable.ic_chat);
+            holder.groupIndicator.setImageResource(R.drawable.ic_up);
             holder.DietChild.setVisibility(View.VISIBLE);
             holder.recyclerView.setVisibility(View.VISIBLE);
             MealAdapter mealAdapter = new MealAdapter(diet.getMealList(),mCtx);
@@ -84,7 +84,7 @@ public class DietPlanAdapter extends RecyclerView.Adapter<DietPlanAdapter.MyView
             @Override
             public void onClick(View view) {
                 if(holder.DietChild.getVisibility()==View.GONE) {
-                    holder.groupIndicator.setImageResource(R.drawable.ic_chat);
+                    holder.groupIndicator.setImageResource(R.drawable.ic_up);
                     holder.DietChild.setVisibility(View.VISIBLE);
                     holder.recyclerView.setVisibility(View.VISIBLE);
                     MealAdapter mealAdapter = new MealAdapter(diet.getMealList(),mCtx);
@@ -96,7 +96,7 @@ public class DietPlanAdapter extends RecyclerView.Adapter<DietPlanAdapter.MyView
                     mealAdapter.notifyDataSetChanged();
                 }
                 else {
-                    holder.groupIndicator.setImageResource(R.drawable.ic_chat);
+                    holder.groupIndicator.setImageResource(R.drawable.ic_down);
                     holder.DietChild.setVisibility(View.GONE);
                     holder.recyclerView.setVisibility(View.GONE);
                 }

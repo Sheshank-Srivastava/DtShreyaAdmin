@@ -71,7 +71,7 @@
             android:id="@+id/call_img"
             android:layout_height="match_parent"
             android:tint="@color/colorPrimary"
-            android:src="@drawable/ic_chat"/>
+            android:src="@drawable/ic_phone"/>
     </LinearLayout>
 
     <LinearLayout
@@ -108,7 +108,7 @@
             android:id="@+id/email_img"
             android:layout_height="match_parent"
             android:tint="@color/colorPrimary"
-            android:src="@drawable/ic_chat"/>
+            android:src="@drawable/ic_email"/>
     </LinearLayout>
 
     <LinearLayout
@@ -327,5 +327,6 @@
         android:padding="@dimen/fab_margin"
         android:layout_margin="@dimen/fab_margin"
         android:layout_gravity="bottom|right"
-        android:src="@drawable/ic_chat"/>
+        android:tint="@color/textColorLight"
+        android:src="@drawable/ic_chat_line"/>
 </android.support.design.widget.CoordinatorLayout>
