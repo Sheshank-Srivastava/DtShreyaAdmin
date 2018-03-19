@@ -36,6 +36,7 @@
         <activity android:name=".MealChangeRequestActivty" />
         <activity android:name=".RescheduleAppointments" />
         <activity android:name=".TestBooking" />
+        <activity android:name=".ExtensionLeadsActivity"/>
         <activity android:name=".DietDiary">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
