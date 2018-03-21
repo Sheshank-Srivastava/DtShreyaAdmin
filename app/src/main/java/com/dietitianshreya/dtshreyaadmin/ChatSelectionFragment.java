@@ -61,6 +61,7 @@ public class ChatSelectionFragment extends Fragment {
         clientList.add(new ClientListModel("Balkeerat","Id : 345rde3"));
         clientList.add(new ClientListModel("Manya ","Id : 345rde3"));
         clientListAdapter.notifyDataSetChanged();
+
         return rootView;
     }
 

@@ -62,11 +62,17 @@ public class ClinicalNotesFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
         notes = new ArrayList<>();
         clinicalNotesAdapter = new ClinicalNotesAdapter(notes,getContext());
-        notes.add("Allergic to arbi");
-        notes.add("Allergic to arbi");
-        notes.add("Allergic to arbi");
-        notes.add("Allergic to arbi");
-        notes.add("Allergic to arbi");
+
+
+        notes.add("You can have regular milk tea twice a day");
+
+
+
+
+        notes.add("You can swap the diet as per your convinience");
+        notes.add("Try to avoid OIL");
+        notes.add("Curd Lassi atc can be yaken only when written in the diet");
+        notes.add("Please avoid Table Salt. Try having oregano");
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));

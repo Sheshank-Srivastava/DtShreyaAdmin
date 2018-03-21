@@ -36,15 +36,14 @@
         <activity android:name=".MealChangeRequestActivty" />
         <activity android:name=".RescheduleAppointments" />
         <activity android:name=".TestBooking" />
-        <activity android:name=".ExtensionLeadsActivity"/>
+        <activity android:name=".ExtensionLeadsActivity" />
+        <activity android:name=".LastMonthUsers" />
         <activity android:name=".DietDiary">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".OverallProgress"></activity>
+        <activity android:name=".OverallProgress" />
+        <activity android:name=".BookAppointment" />
+        <activity android:name=".BookTest"></activity>
     </application>
 
 </manifest>

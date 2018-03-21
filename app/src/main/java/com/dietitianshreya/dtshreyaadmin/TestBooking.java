@@ -1,5 +1,6 @@
 package com.dietitianshreya.dtshreyaadmin;
 
+import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -68,7 +69,9 @@ public class TestBooking extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //handle book appointment here
+
+                Intent intent = new Intent(TestBooking.this,BookTest.class);
+                startActivity(intent);
             }
         });
 
