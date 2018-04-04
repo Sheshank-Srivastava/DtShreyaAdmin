@@ -20,17 +20,34 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_very_small"
-                android:textColor="@color/textColorDark"
-                android:padding="@dimen/small_padding"
-                android:id="@+id/title"
+                android:paddingTop="@dimen/small_padding"
                 android:layout_marginLeft="@dimen/fab_margin"
-                android:text="Mr. Akshit Tyagi"/>
+                android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/textColorDark"
+                        android:textSize="@dimen/text_small"
+                        android:text="Akshit Tyagi"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/title"
+                        android:paddingLeft="@dimen/small_padding"
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textSize="@dimen/text_tiny"
+                        android:text="3 days left"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/daysLeft"
+                        android:paddingLeft="@dimen/small_padding"
+                        />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

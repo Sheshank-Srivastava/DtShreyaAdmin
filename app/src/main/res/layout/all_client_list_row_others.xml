@@ -22,16 +22,30 @@
         android:id="@+id/bodyLayout"
         android:orientation="vertical"
         android:layout_weight="1">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:textColor="@color/textColorDark"
             android:textSize="@dimen/text_small"
             android:text="Akshit Tyagi"
             android:id="@+id/clientName"
             android:paddingLeft="@dimen/small_padding"
             />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/text_tiny"
+                android:text="3 days left"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:id="@+id/daysLeft"
+                android:paddingLeft="@dimen/small_padding"
+                />
+        </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"

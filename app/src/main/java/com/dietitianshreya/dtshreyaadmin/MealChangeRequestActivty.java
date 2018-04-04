@@ -26,14 +26,14 @@ public class MealChangeRequestActivty extends AppCompatActivity {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setAdapter(mealChangeAdapter);
         recyclerView.setLayoutManager(manager);
-        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
-        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
-        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
-        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
-        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
-        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
-        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
-        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M."));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M.","4 days left"));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M.","4 days left"));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M.","4 days left"));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M.","4 days left"));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M.","4 days left"));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M.","4 days left"));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M.","4 days left"));
+        clientList.add(new MealChangeModel("Akshit Tyagi","12345","poha","corn flakes","Breakfast","awaited","10 A.M.","4 days left"));
         mealChangeAdapter.notifyDataSetChanged();
     }
 

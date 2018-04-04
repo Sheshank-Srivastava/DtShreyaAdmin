@@ -27,6 +27,7 @@ public class DietCreateAdapter extends RecyclerView.Adapter<DietCreateAdapter.My
 
     private ArrayList<DietPlanModel> dietPlanList;
     private Context mCtx;
+    int defaultPos =0;
 
 
     public DietCreateAdapter(ArrayList<DietPlanModel> dietPlanList, Context mCtx) {
@@ -65,7 +66,7 @@ public class DietCreateAdapter extends RecyclerView.Adapter<DietCreateAdapter.My
     public void onBindViewHolder(final DietCreateAdapter.MyViewHolder holder, final int position) {
 
         final DietPlanModel diet = dietPlanList.get(position);
-        if(position!=0) {
+        if(position!=defaultPos) {
             holder.DietChild.setVisibility(View.GONE);
             holder.recyclerView.setVisibility(View.GONE);
 //            holder.groupIndicator.setImageResource(R.drawable.ic_chat);
@@ -129,6 +130,7 @@ public class DietCreateAdapter extends RecyclerView.Adapter<DietCreateAdapter.My
 
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         if(resultCode==RESULT_OK) {
+            defaultPos=requestCode;
             final DietPlanModel diet = dietPlanList.get(requestCode);
             ArrayList<MealModel> mealList = diet.getMealList();
             ArrayList<String> name = data.getStringArrayListExtra("name");

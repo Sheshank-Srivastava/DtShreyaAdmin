@@ -6,13 +6,14 @@ package com.dietitianshreya.dtshreyaadmin.models;
 
 
 public class TestDetailModel {
-    private String time,test,type,client;
+    private String time,test,type,client,daysLeft;
 
-    public TestDetailModel(String time, String test, String type, String client) {
+    public TestDetailModel(String time, String test, String type, String client,String daysLeft) {
         this.time = time;
         this.test = test;
         this.type = type;
         this.client = client;
+        this.daysLeft = daysLeft;
     }
 
     public String getTime() {
@@ -45,5 +46,13 @@ public class TestDetailModel {
 
     public void setClient(String client) {
         this.client = client;
+    }
+
+    public String getDaysLeft() {
+        return daysLeft;
+    }
+
+    public void setDaysLeft(String daysLeft) {
+        this.daysLeft = daysLeft;
     }
 }

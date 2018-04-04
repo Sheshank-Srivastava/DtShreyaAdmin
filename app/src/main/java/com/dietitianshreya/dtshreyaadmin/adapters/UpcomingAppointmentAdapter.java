@@ -2,6 +2,7 @@ package com.dietitianshreya.dtshreyaadmin.adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -11,9 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dietitianshreya.dtshreyaadmin.ClientDetailActivity;
 import com.dietitianshreya.dtshreyaadmin.R;
 import com.dietitianshreya.dtshreyaadmin.models.AppointmentDetailsModel;
 
@@ -37,8 +40,9 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView time,type,client;
+        public TextView time,type,client,daysLeft;
         public ImageView typeImage,status;
+        public LinearLayout profileLayout;
 
         public MyViewHolder(View view) {
             super(view);
@@ -47,6 +51,8 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
             client = (TextView) view.findViewById(R.id.client);
             status = (ImageView) view.findViewById(R.id.optionsMenu);
             typeImage = (ImageView) view.findViewById(R.id.appointmentTypeImage);
+            daysLeft = (TextView) view.findViewById(R.id.daysLeft);
+            profileLayout = (LinearLayout) view.findViewById(R.id.profileLayout);
         }
     }
 
@@ -65,6 +71,7 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
         final AppointmentDetailsModel appointment = appointmentDetailsList.get(position);
         holder.time.setText(appointment.getTime());
         holder.type.setText(appointment.getType());
+        holder.daysLeft.setText(appointment.getDaysLeft());
         holder.status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +95,14 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
         }else{
             //Change TypeImage
         }
+        holder.profileLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mCtx, ClientDetailActivity.class);
+                i.putExtra("clientID",appointment.getClientID());
+                mCtx.startActivity(i);
+            }
+        });
     }
 
     @Override

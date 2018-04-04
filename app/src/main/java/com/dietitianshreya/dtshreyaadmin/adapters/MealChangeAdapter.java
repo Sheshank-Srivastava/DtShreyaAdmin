@@ -36,9 +36,9 @@ public class MealChangeAdapter extends RecyclerView.Adapter<MealChangeAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView clientName,previousMeal,requestedMeal,mealType;
+        public TextView clientName,previousMeal,requestedMeal,mealType,daysLeft;
         LinearLayout accept,decline;
-        LinearLayout chat;
+        LinearLayout chat,profileLayout;
         public MyViewHolder(View view) {
             super(view);
             previousMeal = (TextView)  view.findViewById(R.id.previousMeal);
@@ -48,6 +48,8 @@ public class MealChangeAdapter extends RecyclerView.Adapter<MealChangeAdapter.My
             accept = (LinearLayout) view.findViewById(R.id.accept);
             decline = (LinearLayout) view.findViewById(R.id.decline);
             chat = (LinearLayout) view.findViewById(R.id.chat);
+            daysLeft = (TextView) view.findViewById(R.id.daysLeft);
+            profileLayout = (LinearLayout) view.findViewById(R.id.profileLayout);
         }
     }
 
@@ -63,6 +65,7 @@ public class MealChangeAdapter extends RecyclerView.Adapter<MealChangeAdapter.My
 
         final MealChangeModel client = clientList.get(position);
         holder.clientName.setText(client.getClientName());
+        holder.daysLeft.setText(client.getDaysLeft());
         holder.previousMeal.setText(client.getPreviousMeal());
         holder.mealType.setText(client.getMealType()+" "+client.getMealTime());
         holder.requestedMeal.setText(client.getRequestedMeal());
@@ -83,6 +86,14 @@ public class MealChangeAdapter extends RecyclerView.Adapter<MealChangeAdapter.My
             public void onClick(View view) {
                 Intent i = new Intent(mCtx, ChatActivity.class);
                 i.putExtra("clientId",client.getClientId());
+                mCtx.startActivity(i);
+            }
+        });
+        holder.profileLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mCtx, ClientDetailActivity.class);
+                i.putExtra("clientID",client.getClientId());
                 mCtx.startActivity(i);
             }
         });

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dietitianshreya.dtshreyaadmin.ChatActivity;
+import com.dietitianshreya.dtshreyaadmin.ClientDetailActivity;
 import com.dietitianshreya.dtshreyaadmin.R;
 import com.dietitianshreya.dtshreyaadmin.models.ExtensionLeadsModel;
 import com.dietitianshreya.dtshreyaadmin.models.RescheduleAppointmentModel;
@@ -36,19 +37,21 @@ public class ExtensionLeadsAdaper extends RecyclerView.Adapter<ExtensionLeadsAda
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView clientName,clientId,joinedOn,daysPassed,plan;
+        public TextView clientName,phone,joinedOn,daysPassed,plan,daysLeft;
         LinearLayout extend,remove;
-        LinearLayout chat;
+        LinearLayout chat,profileLayout;
         public MyViewHolder(View view) {
             super(view);
             clientName = (TextView)  view.findViewById(R.id.clientName);
-            clientId = (TextView)  view.findViewById(R.id.clientId);
+            phone = (TextView)  view.findViewById(R.id.phone);
             joinedOn = (TextView)  view.findViewById(R.id.joinedOn);
             daysPassed = (TextView)  view.findViewById(R.id.daysPassed);
             plan = (TextView)  view.findViewById(R.id.plan);
             extend = (LinearLayout)  view.findViewById(R.id.extend);
             remove = (LinearLayout)  view.findViewById(R.id.remove);
             chat = (LinearLayout) view.findViewById(R.id.chat);
+            daysLeft = (TextView) view.findViewById(R.id.daysLeft);
+            profileLayout = (LinearLayout) view.findViewById(R.id.profileLayout);
         }
     }
 
@@ -66,7 +69,8 @@ public class ExtensionLeadsAdaper extends RecyclerView.Adapter<ExtensionLeadsAda
 
         final ExtensionLeadsModel lead = leadsList.get(position);
         holder.clientName.setText(lead.getClientName());
-        holder.clientId.setText(lead.getClientId());
+        holder.daysLeft.setText(lead.getDaysLeft());
+        holder.phone.setText(lead.getPhone());
         holder.joinedOn.setText(lead.getJoinedOn());
         holder.daysPassed.setText(lead.getDaysPassed());
         holder.plan.setText(lead.getPlan());
@@ -89,6 +93,14 @@ public class ExtensionLeadsAdaper extends RecyclerView.Adapter<ExtensionLeadsAda
             public void onClick(View view) {
                 Intent i = new Intent(mCtx, ChatActivity.class);
                 i.putExtra("clientId",lead.getClientId());
+                mCtx.startActivity(i);
+            }
+        });
+        holder.profileLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mCtx, ClientDetailActivity.class);
+                i.putExtra("clientID",lead.getClientId());
                 mCtx.startActivity(i);
             }
         });

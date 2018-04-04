@@ -5,14 +5,15 @@ package com.dietitianshreya.dtshreyaadmin.models;
  */
 
 public class RescheduleAppointmentModel {
-    private String clientName,clientId,appointmentOn,requestedOn,status;
+    private String clientName,clientId,appointmentOn,requestedOn,id,daysLeft;
 
-    public RescheduleAppointmentModel(String clientName, String clientId, String appointmentOn, String requestedOn, String status) {
+    public RescheduleAppointmentModel(String clientName, String clientId, String appointmentOn, String requestedOn, String id,String daysLeft) {
         this.clientName = clientName;
         this.clientId = clientId;
         this.appointmentOn = appointmentOn;
         this.requestedOn = requestedOn;
-        this.status = status;
+        this.id = id;
+        this.daysLeft = daysLeft;
     }
 
     public String getClientName() {
@@ -47,11 +48,19 @@ public class RescheduleAppointmentModel {
         this.requestedOn = requestedOn;
     }
 
-    public String getStatus() {
-        return status;
+    public String getId() {
+        return id;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDaysLeft() {
+        return daysLeft;
+    }
+
+    public void setDaysLeft(String daysLeft) {
+        this.daysLeft = daysLeft;
     }
 }

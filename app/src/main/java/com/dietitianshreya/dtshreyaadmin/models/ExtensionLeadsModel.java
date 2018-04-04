@@ -6,15 +6,16 @@ package com.dietitianshreya.dtshreyaadmin.models;
 
 public class ExtensionLeadsModel {
 
-    private String clientName,clientId,joinedOn,daysPassed,plan,status;
+    private String clientName,clientId,joinedOn,daysPassed,plan,phone,daysLeft;
 
-    public ExtensionLeadsModel(String clientName, String clientId, String joinedOn, String daysPassed, String plan, String status) {
+    public ExtensionLeadsModel(String clientName, String clientId, String joinedOn, String daysPassed, String plan, String phone,String daysLeft) {
         this.clientName = clientName;
         this.clientId = clientId;
         this.joinedOn = joinedOn;
         this.daysPassed = daysPassed;
         this.plan = plan;
-        this.status = status;
+        this.phone = phone;
+        this.daysLeft = daysLeft;
     }
 
     public String getClientName() {
@@ -57,11 +58,19 @@ public class ExtensionLeadsModel {
         this.plan = plan;
     }
 
-    public String getStatus() {
-        return status;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getDaysLeft() {
+        return daysLeft;
+    }
+
+    public void setDaysLeft(String daysLeft) {
+        this.daysLeft = daysLeft;
     }
 }

@@ -1,10 +1,18 @@
 package com.dietitianshreya.dtshreyaadmin;
 
+import android.Manifest;
+import android.content.ComponentName;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -31,6 +39,8 @@ import com.dietitianshreya.dtshreyaadmin.models.AppointmentsModel;
 
 import java.util.ArrayList;
 
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DashboardFragment.OnFragmentInteractionListener,
         BlankFragment.OnFragmentInteractionListener, ChatSelectionFragment.OnFragmentInteractionListener,
@@ -39,6 +49,8 @@ public class MainActivity extends AppCompatActivity
     FragmentManager fragmentManager;
     Fragment fragment;
     TabLayout tab_layout;
+    private int BEFORE_TAG,RESULT_LOAD=1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +64,8 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        long id = intentToWhatsapp(this);
+       // sendIntent(id);
 //        //ImageView definition
 //        clientList = (ImageView) findViewById(R.id.clientList);
 //        clientList.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +189,18 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    private void sendIntent(long id) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+
+// the _ids you save goes here at the end of /data/12562
+        intent.setDataAndType(Uri.parse("content://com.android.contacts/data/"+id),
+                "vnd.android.cursor.item/vnd.com.whatsapp.voip.call");
+        intent.setPackage("com.whatsapp");
+
+        startActivity(intent);
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -235,7 +261,101 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+//
+//    public void initiateSkypeUri(Context myContext, String mySkypeUri) {
+//
+//        // Make sure the Skype for Android client is installed.
+//        if (!isSkypeClientInstalled(myContext)) {
+//            goToMarket(myContext);
+//            return;
+//        }
+//
+//        // Create the Intent from our Skype URI.
+//        Uri skypeUri = Uri.parse(mySkypeUri);
+//        Intent myIntent = new Intent(Intent.ACTION_VIEW, skypeUri);
+//
+//        // Restrict the Intent to being handled by the Skype for Android client only.
+//        myIntent.setComponent(new ComponentName("com.skype.raider", "com.skype.raider.Main"));
+//        myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//        // Initiate the Intent. It should never fail because you've already established the
+//        // presence of its handler (although there is an extremely minute window where that
+//        // handler can go away).
+//        myContext.startActivity(myIntent);
+//
+//        return;
+//    }
+//    public boolean isSkypeClientInstalled(Context myContext) {
+//        PackageManager myPackageMgr = myContext.getPackageManager();
+//        try {
+//            myPackageMgr.getPackageInfo("com.skype.raider", PackageManager.GET_ACTIVITIES);
+//        }
+//        catch (PackageManager.NameNotFoundException e) {
+//            return (false);
+//        }
+//        return (true);
+//    }
+//    public void goToMarket(Context myContext) {
+//        Uri marketUri = Uri.parse("market://details?id=com.skype.raider");
+//        Intent myIntent = new Intent(Intent.ACTION_VIEW, marketUri);
+//        myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        myContext.startActivity(myIntent);
+//
+//        return;
+//    }
+    private long intentToWhatsapp(Context context){
+        long id=0;
+        String[] galleryPermissions = {Manifest.permission.READ_CONTACTS,Manifest.permission.WRITE_CONTACTS};
+        BEFORE_TAG=1;
+        if (EasyPermissions.hasPermissions(this, galleryPermissions)) {
 
+//            ContentResolver resolver = context.getContentResolver();
+//            Cursor cursor = resolver.query(
+//                    ContactsContract.Data.CONTENT_URI,
+//                    null, null, null,
+//                    ContactsContract.Contacts.DISPLAY_NAME);
+//
+////Now read data from cursor like
+//
+//            while (cursor.moveToNext()) {
+//                long _id = cursor.getLong(cursor.getColumnIndex(ContactsContract.Data._ID));
+//                String displayName = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
+//                String mimeType = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.MIMETYPE));
+//
+//                Log.d("Data", _id+ " "+ displayName + " " + mimeType );
+//
+//            }
+
+        } else {
+            EasyPermissions.requestPermissions(this, "Access for storage",
+                    101, galleryPermissions);
+        }
+
+        if (EasyPermissions.hasPermissions(this, galleryPermissions)) {
+
+            ContentResolver resolver = context.getContentResolver();
+            Cursor cursor = resolver.query(
+                    ContactsContract.Data.CONTENT_URI,
+                    null, null, null,
+                    ContactsContract.Contacts.DISPLAY_NAME);
+
+//Now read data from cursor like
+
+            while (cursor.moveToNext()) {
+                long _id = cursor.getLong(cursor.getColumnIndex(ContactsContract.Data._ID));
+                String displayName = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
+                String mimeType = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.MIMETYPE));
+
+                Log.d("Data", _id+ " "+ displayName + " " + mimeType );
+                if(displayName.equalsIgnoreCase("Manya madan mecinies")&&mimeType.equals("vnd.android.cursor.item/vnd.com.whatsapp.video.call"))
+                id = _id;
+                //132791 mummy vnd.android.cursor.item/vnd.com.whatsapp.video.call
+            }
+
+        }
+
+        return id;
+    }
     @Override
     public void onFragmentInteraction(Uri uri) {
 

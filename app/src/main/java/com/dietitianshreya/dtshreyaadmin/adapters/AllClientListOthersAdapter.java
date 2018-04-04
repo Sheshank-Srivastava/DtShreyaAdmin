@@ -32,7 +32,7 @@ public class AllClientListOthersAdapter extends RecyclerView.Adapter<AllClientLi
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView placeholder,clientName,clientId,daysRemaining;
+        public TextView placeholder,clientName,clientId,daysRemaining,daysLeft;
         public LinearLayout body;
         public LinearLayout textLayout;
         public ImageView createDiet;
@@ -45,6 +45,7 @@ public class AllClientListOthersAdapter extends RecyclerView.Adapter<AllClientLi
             body = (LinearLayout) view.findViewById(R.id.bodyLayout);
             textLayout = (LinearLayout) view.findViewById(R.id.textLayout);
             createDiet = (ImageView) view.findViewById(R.id.dietCreate);
+            daysLeft = (TextView) view.findViewById(R.id.daysLeft);
         }
     }
 
@@ -62,6 +63,7 @@ public class AllClientListOthersAdapter extends RecyclerView.Adapter<AllClientLi
         final AllClientListOthersModel client = clientList.get(position);
         //holder.placeholder.setText(client.getClientName());
         holder.clientName.setText(client.getClientName());
+        holder.daysLeft.setText(client.getDaysLeft());
         holder.clientId.setText(client.getClientId());
         char placeholdertext = client.getClientName().charAt(0);
         holder.placeholder.setText(placeholdertext+"");

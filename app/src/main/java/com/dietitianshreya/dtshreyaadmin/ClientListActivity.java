@@ -31,10 +31,10 @@ public class ClientListActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(ClientListActivity.this, LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(clientListAdapter);
-        clientList.add(new ClientListModel("Akshit Tyagi","Id : 345rde3"));
-        clientList.add(new ClientListModel("Paras Garg","Id : 345rde3"));
-        clientList.add(new ClientListModel("Balkeerat","Id : 345rde3"));
-        clientList.add(new ClientListModel("Manya ","Id : 345rde3"));
+        clientList.add(new ClientListModel("Akshit Tyagi","Id : 345rde3","4 days left"));
+        clientList.add(new ClientListModel("Paras Garg","Id : 345rde3","4 days left"));
+        clientList.add(new ClientListModel("Balkeerat","Id : 345rde3","4 days left"));
+        clientList.add(new ClientListModel("Manya ","Id : 345rde3","4 days left"));
         clientListAdapter.notifyDataSetChanged();
     }
 }

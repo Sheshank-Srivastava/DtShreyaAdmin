@@ -36,7 +36,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView title,time,place;
+        public TextView title,time,place,daysLeft;
         public ImageView optionsMenu;
         public MyViewHolder(View view) {
             super(view);
@@ -44,6 +44,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
             time = (TextView)  view.findViewById(R.id.time);
             place = (TextView)  view.findViewById(R.id.place);
             optionsMenu= (ImageView) view.findViewById(R.id.optionsMenu);
+            daysLeft = (TextView) view.findViewById(R.id.daysLeft);
         }
     }
 
@@ -62,6 +63,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
         final AppointmentsModel appointment = appointmentList.get(position);
         holder.title.setText(appointment.getTitle());
         holder.time.setText(appointment.getTime());
+        holder.daysLeft.setText(appointment.getDaysLeft());
         holder.place.setText(appointment.getPlace());
         holder.optionsMenu.setOnClickListener(new View.OnClickListener() {
             @Override

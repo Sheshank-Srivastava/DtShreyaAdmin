@@ -6,15 +6,16 @@ package com.dietitianshreya.dtshreyaadmin.models;
 
 public class LastMonthUsersModel {
 
-    private String clientName,clientId,startedOn,kgLost,plan,status;
+    private String clientName,clientId,startedOn,kgLost,plan,status,daysLeft;
 
-    public LastMonthUsersModel(String clientName, String clientId, String startedOn, String kgLost, String plan, String status) {
+    public LastMonthUsersModel(String clientName, String clientId, String startedOn, String kgLost, String plan, String status,String daysLeft) {
         this.clientName = clientName;
         this.clientId = clientId;
         this.startedOn = startedOn;
         this.kgLost = kgLost;
         this.plan = plan;
         this.status = status;
+        this.daysLeft = daysLeft;
     }
 
     public String getClientName() {
@@ -63,5 +64,13 @@ public class LastMonthUsersModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDaysLeft() {
+        return daysLeft;
+    }
+
+    public void setDaysLeft(String daysLeft) {
+        this.daysLeft = daysLeft;
     }
 }
