@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dietitianshreya.dtshreyaadmin.ChatActivity;
+import com.dietitianshreya.dtshreyaadmin.ClientDetailActivity;
 import com.dietitianshreya.dtshreyaadmin.LastMonthUsers;
 import com.dietitianshreya.dtshreyaadmin.R;
 import com.dietitianshreya.dtshreyaadmin.models.ExtensionLeadsModel;
@@ -37,9 +38,9 @@ public class LastMonthUsersAdapter extends RecyclerView.Adapter<LastMonthUsersAd
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView clientName,clientId,startedOn,kgsLost,plan;
+        public TextView clientName,clientId,startedOn,kgsLost,plan,daysLeft;
         LinearLayout sendMail;
-        LinearLayout chat;
+        LinearLayout chat,profileLayout;
         public MyViewHolder(View view) {
             super(view);
             clientName = (TextView)  view.findViewById(R.id.clientName);
@@ -49,6 +50,8 @@ public class LastMonthUsersAdapter extends RecyclerView.Adapter<LastMonthUsersAd
             plan = (TextView)  view.findViewById(R.id.plan);
             sendMail = (LinearLayout)  view.findViewById(R.id.sendMail);
             chat = (LinearLayout) view.findViewById(R.id.chat);
+            daysLeft = (TextView) view.findViewById(R.id.daysLeft);
+            profileLayout = (LinearLayout) view.findViewById(R.id.profileLayout);
         }
     }
 
@@ -66,6 +69,7 @@ public class LastMonthUsersAdapter extends RecyclerView.Adapter<LastMonthUsersAd
 
         final LastMonthUsersModel client = clientList.get(position);
         holder.clientName.setText(client.getClientName());
+        holder.daysLeft.setText(client.getDaysLeft());
         holder.clientId.setText(client.getClientId());
         holder.startedOn.setText(client.getStartedOn());
         holder.kgsLost.setText(client.getKgLost());
@@ -82,6 +86,14 @@ public class LastMonthUsersAdapter extends RecyclerView.Adapter<LastMonthUsersAd
             public void onClick(View view) {
                 Intent i = new Intent(mCtx, ChatActivity.class);
                 i.putExtra("clientId",client.getClientId());
+                mCtx.startActivity(i);
+            }
+        });
+        holder.profileLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mCtx, ClientDetailActivity.class);
+                i.putExtra("clientID",client.getClientId());
                 mCtx.startActivity(i);
             }
         });

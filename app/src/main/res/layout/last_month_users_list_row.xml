@@ -17,13 +17,17 @@
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/profileLayout">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_small"
                         android:textColor="@color/textColorDark"
@@ -31,6 +35,13 @@
                         android:id="@+id/clientName"
                         android:layout_marginLeft="@dimen/fab_margin"
                         android:text="Mr. Akshit Tyagi"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_tiny"
+                        android:padding="@dimen/small_padding"
+                        android:id="@+id/daysLeft"
+                        android:text="4 days left"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -159,6 +170,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_very_small"
                         android:text="5Kg"/>
+                </LinearLayout>
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"

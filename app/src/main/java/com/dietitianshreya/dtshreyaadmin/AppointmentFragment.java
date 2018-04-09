@@ -63,15 +63,15 @@ CoordinatorLayout coordinatorLayout;
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(appointmentHistoryAdapter);
-        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","Completed","Akshit Tyagi"));
-        appointmentDetailsList.add(new AppointmentDetailsModel("10:30 A.M.","In Person","Completed","Akshit Tyagi"));
-        appointmentDetailsList.add(new AppointmentDetailsModel("11:30 A.M.","In Person","Completed","Akshit Tyagi"));
+        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","Completed","Akshit Tyagi","4 days left","12345"));
+        appointmentDetailsList.add(new AppointmentDetailsModel("10:30 A.M.","In Person","Completed","Akshit Tyagi","4 days left","12345"));
+        appointmentDetailsList.add(new AppointmentDetailsModel("11:30 A.M.","In Person","Completed","Akshit Tyagi","4 days left","12345"));
         appointmentList.add(new AppointmentHistoryModel("10/02/2018",appointmentDetailsList));
 
         ArrayList<AppointmentDetailsModel> appointmentDetailsList1 = new ArrayList<>();
-        appointmentDetailsList1.add(new AppointmentDetailsModel("9:30 A.M.","In Person","Completed","Akshit Tyagi"));
-        appointmentDetailsList1.add(new AppointmentDetailsModel("9:30 A.M.","In Person","Completed","Akshit Tyagi"));
-        appointmentDetailsList1.add(new AppointmentDetailsModel("9:30 A.M.","In Person","Completed","Akshit Tyagi"));
+        appointmentDetailsList1.add(new AppointmentDetailsModel("9:30 A.M.","In Person","Completed","Akshit Tyagi","4 days left","12345"));
+        appointmentDetailsList1.add(new AppointmentDetailsModel("9:30 A.M.","In Person","Completed","Akshit Tyagi","4 days left","12345"));
+        appointmentDetailsList1.add(new AppointmentDetailsModel("9:30 A.M.","In Person","Completed","Akshit Tyagi","4 days left","12345"));
         appointmentList.add(new AppointmentHistoryModel("11/02/2018",appointmentDetailsList1));
 
         appointmentHistoryAdapter.notifyDataSetChanged();

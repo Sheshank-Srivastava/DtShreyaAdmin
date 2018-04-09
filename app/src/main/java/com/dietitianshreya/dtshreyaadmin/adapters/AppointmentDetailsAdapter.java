@@ -32,7 +32,7 @@ public class AppointmentDetailsAdapter extends RecyclerView.Adapter<AppointmentD
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView time,type,client,status;
+        public TextView time,type,client,status,daysLeft;
         public ImageView typeImage;
         public MyViewHolder(View view) {
             super(view);
@@ -41,6 +41,7 @@ public class AppointmentDetailsAdapter extends RecyclerView.Adapter<AppointmentD
             client = (TextView) view.findViewById(R.id.client);
             status = (TextView) view.findViewById(R.id.appointmentStatus);
             typeImage = (ImageView) view.findViewById(R.id.appointmentTypeImage);
+            daysLeft = (TextView) view.findViewById(R.id.daysLeft);
         }
     }
 
@@ -58,6 +59,7 @@ public class AppointmentDetailsAdapter extends RecyclerView.Adapter<AppointmentD
 
         final AppointmentDetailsModel appointment = appointmentDetailsList.get(position);
         holder.time.setText(appointment.getTime());
+        holder.daysLeft.setText(appointment.getDaysLeft());
         holder.type.setText(appointment.getType());
         holder.status.setText(appointment.getStatus());
         holder.client.setText(appointment.getClient());

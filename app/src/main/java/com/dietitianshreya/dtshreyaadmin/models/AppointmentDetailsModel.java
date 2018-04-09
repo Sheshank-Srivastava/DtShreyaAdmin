@@ -5,13 +5,15 @@ package com.dietitianshreya.dtshreyaadmin.models;
  */
 
 public class AppointmentDetailsModel {
-    private String time,type,status,client;
+    private String time,type,status,client,daysLeft,id;
 
-    public AppointmentDetailsModel(String time, String type, String status, String client) {
+    public AppointmentDetailsModel(String time, String type, String status, String client,String daysLeft,String id) {
         this.time = time;
         this.type = type;
         this.status = status;
         this.client = client;
+        this.daysLeft =daysLeft;
+        this.id = id;
     }
 
     public String getTime() {
@@ -44,5 +46,21 @@ public class AppointmentDetailsModel {
 
     public void setClient(String client) {
         this.client = client;
+    }
+
+    public String getDaysLeft() {
+        return daysLeft;
+    }
+
+    public void setDaysLeft(String daysLeft) {
+        this.daysLeft = daysLeft;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

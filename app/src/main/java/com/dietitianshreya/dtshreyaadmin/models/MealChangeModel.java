@@ -5,9 +5,9 @@ package com.dietitianshreya.dtshreyaadmin.models;
  */
 
 public class MealChangeModel {
-    private String clientName,clientId,previousMeal,requestedMeal,mealType,status,mealTime;
+    private String clientName,clientId,previousMeal,requestedMeal,mealType,status,mealTime,daysLeft;
 
-    public MealChangeModel(String clientName, String clientId, String previousMeal, String requestedMeal, String mealType, String status, String mealTime) {
+    public MealChangeModel(String clientName, String clientId, String previousMeal, String requestedMeal, String mealType, String status, String mealTime,String daysLeft) {
         this.clientName = clientName;
         this.clientId = clientId;
         this.previousMeal = previousMeal;
@@ -15,6 +15,7 @@ public class MealChangeModel {
         this.mealType = mealType;
         this.status = status;
         this.mealTime = mealTime;
+        this.daysLeft = daysLeft;
     }
 
     public String getClientName() {
@@ -71,5 +72,13 @@ public class MealChangeModel {
 
     public void setMealTime(String mealTime) {
         this.mealTime = mealTime;
+    }
+
+    public String getDaysLeft() {
+        return daysLeft;
+    }
+
+    public void setDaysLeft(String daysLeft) {
+        this.daysLeft = daysLeft;
     }
 }

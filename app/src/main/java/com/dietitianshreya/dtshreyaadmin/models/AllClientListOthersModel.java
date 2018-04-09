@@ -5,12 +5,14 @@ package com.dietitianshreya.dtshreyaadmin.models;
  */
 
 public class AllClientListOthersModel {
-    private String clientName,clientId,days;
+    private String clientName,clientId,days,daysLeft;
 
-    public AllClientListOthersModel(String clientName, String clientId, String days) {
+    public AllClientListOthersModel(String clientName, String clientId, String days, String daysLeft) {
         this.clientName = clientName;
         this.clientId = clientId;
         this.days = days;
+        this.daysLeft = daysLeft;
+
     }
 
     public String getClientName() {
@@ -35,5 +37,13 @@ public class AllClientListOthersModel {
 
     public void setDays(String days) {
         this.days = days;
+    }
+
+    public String getDaysLeft() {
+        return daysLeft;
+    }
+
+    public void setDaysLeft(String daysLeft) {
+        this.daysLeft = daysLeft;
     }
 }

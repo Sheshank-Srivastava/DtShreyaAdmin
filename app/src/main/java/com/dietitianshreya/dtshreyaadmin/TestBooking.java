@@ -52,15 +52,15 @@ public class TestBooking extends AppCompatActivity {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(testAdapter);
-        testDetailsList.add(new TestDetailModel("9:30 A.M.","Kidney Function Test","Empty Stomach","Akshit Tyagi"));
-        testDetailsList.add(new TestDetailModel("10:30 A.M.","Renal Profile","With Pressure","Manya"));
-        testDetailsList.add(new TestDetailModel("11:30 A.M.","Lipid Profile","after 2 days","Paras Garg"));
+        testDetailsList.add(new TestDetailModel("9:30 A.M.","Kidney Function Test","Empty Stomach","Akshit Tyagi","4 days left"));
+        testDetailsList.add(new TestDetailModel("10:30 A.M.","Renal Profile","With Pressure","Manya","4 days left"));
+        testDetailsList.add(new TestDetailModel("11:30 A.M.","Lipid Profile","after 2 days","Paras Garg","4 days left"));
         testList.add(new TestHistoryModel("10/02/2018",testDetailsList));
 
         ArrayList<TestDetailModel> testDetailsList1 = new ArrayList<>();
-        testDetailsList1.add(new TestDetailModel("9:30 A.M.","HBA1c","immidiately","Paras"));
-        testDetailsList1.add(new TestDetailModel("9:30 A.M.","Vitamin D3","within 4 days","Balkeerat"));
-        testDetailsList1.add(new TestDetailModel("9:30 A.M.","Thyroid Profile","Empty Stomach","Manya"));
+        testDetailsList1.add(new TestDetailModel("9:30 A.M.","HBA1c","immidiately","Paras","4 days left"));
+        testDetailsList1.add(new TestDetailModel("9:30 A.M.","Vitamin D3","within 4 days","Balkeerat","4 days left"));
+        testDetailsList1.add(new TestDetailModel("9:30 A.M.","Thyroid Profile","Empty Stomach","Manya","4 days left"));
         testList.add(new TestHistoryModel("11/02/2018",testDetailsList1));
 
         testAdapter.notifyDataSetChanged();

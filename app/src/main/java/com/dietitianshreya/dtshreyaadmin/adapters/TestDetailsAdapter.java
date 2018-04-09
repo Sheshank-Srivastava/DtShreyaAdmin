@@ -34,7 +34,7 @@ public class TestDetailsAdapter extends RecyclerView.Adapter<TestDetailsAdapter.
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView time,type,client,testName;
+        public TextView time,type,client,testName,daysLeft;
         public ImageView typeImage;
         public MyViewHolder(View view) {
             super(view);
@@ -43,6 +43,7 @@ public class TestDetailsAdapter extends RecyclerView.Adapter<TestDetailsAdapter.
             client = (TextView) view.findViewById(R.id.client);
              testName= (TextView) view.findViewById(R.id.testName);
             typeImage = (ImageView) view.findViewById(R.id.appointmentTypeImage);
+            daysLeft = (TextView) view.findViewById(R.id.daysLeft);
         }
     }
 
@@ -60,6 +61,7 @@ public class TestDetailsAdapter extends RecyclerView.Adapter<TestDetailsAdapter.
 
         final TestDetailModel test = testDetailsList.get(position);
         holder.time.setText(test.getTime());
+        holder.daysLeft.setText(test.getDaysLeft());
         holder.type.setText(test.getType());
         holder.testName.setText(test.getTest());
         holder.client.setText(test.getClient());

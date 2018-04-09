@@ -37,12 +37,13 @@ public class ClientListAdapter extends RecyclerView.Adapter<ClientListAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView placeholder,clientName,clientId;
+        public TextView placeholder,clientName,clientId,daysLeft;
         public MyViewHolder(View view) {
             super(view);
             placeholder = (TextView)  view.findViewById(R.id.placeholder);
             clientName = (TextView)  view.findViewById(R.id.clientName);
             clientId = (TextView)  view.findViewById(R.id.clientId);
+            daysLeft = (TextView) view.findViewById(R.id.daysLeft);
         }
     }
 
@@ -60,6 +61,7 @@ public class ClientListAdapter extends RecyclerView.Adapter<ClientListAdapter.My
 
         final ClientListModel client = clientList.get(position);
         //holder.placeholder.setText(client.getClientName());
+        holder.daysLeft.setText(client.getDaysLeft());
         holder.clientName.setText(client.getClientName());
         holder.clientId.setText(client.getClientId());
         char placeholdertext = client.getClientName().charAt(0);
