@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         >
+        <EditText
+            android:layout_width="match_parent"
+            android:hint="Date"
+            android:id="@+id/date"
+            android:focusable="false"
+            android:textSize="@dimen/text_small"
+            android:padding="@dimen/medium_padding"
+            android:layout_margin="@dimen/layout_very_small_margin"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:hint="Time"
+            android:id="@+id/time"
+            android:focusable="false"
+            android:textSize="@dimen/text_small"
+            android:padding="@dimen/medium_padding"
+            android:layout_margin="@dimen/layout_very_small_margin"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>

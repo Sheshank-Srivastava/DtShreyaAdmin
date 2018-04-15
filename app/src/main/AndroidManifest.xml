@@ -49,6 +49,7 @@
         </activity>
         <activity android:name=".LastMonthUsers"/>
         <activity android:name=".OverallProgress"></activity>
+        <activity android:name=".BookAppointment"></activity>
     </application>
 
 </manifest>

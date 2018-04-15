@@ -79,7 +79,10 @@ public class AllClientListOthersAdapter extends RecyclerView.Adapter<AllClientLi
                     mCtx.startActivity(i);
                 }
             });
-        }else {
+        } else if (client.getDays().equals("na")) {
+            holder.textLayout.setVisibility(View.GONE);
+            holder.createDiet.setVisibility(View.GONE);
+        } else {
             holder.textLayout.setVisibility(View.VISIBLE);
             holder.daysRemaining.setText(client.getDays() + " Days");
             holder.createDiet.setVisibility(View.GONE);

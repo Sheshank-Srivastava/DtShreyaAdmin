@@ -91,7 +91,7 @@ public class UpcomingAppointmentsActivty extends AppCompatActivity {
                                         username = ob.getString("username");
                                         daysleft = ob.getString("daysleft");
                                         //change the url for upcoming appointments, add days left with every client name
-                                        appointmentDetailsList.add(new AppointmentDetailsModel(newtime,type,status,username,daysleft,id));
+                                        appointmentDetailsList.add(new AppointmentDetailsModel(newtime,type,status,username,daysleft+ " days left",id));
                                     }
                                     appointmentAdapter.notifyDataSetChanged();
                                 }else{
