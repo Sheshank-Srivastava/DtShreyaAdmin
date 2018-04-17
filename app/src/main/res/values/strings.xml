@@ -23,6 +23,10 @@
         <item>High Blood Pressure</item>
         <item>Low Blood Pressure</item>
     </string-array>
+    <string-array name="appointmentTypes">
+        <item>In Person</item>
+        <item>Video</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -75,6 +75,7 @@ public class DashboardFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(appointmentsAdapter);
+        fetchData();
 //        appointmentsList.add(new AppointmentsModel("Mr. Akshit Tyagi","9:30 A.M.","Punjabi Bagh","4 days left"));
 //        appointmentsList.add(new AppointmentsModel("Mr. Paras Garg","11:30 A.M.","Punjabi Bagh","4 days left"));
 //        appointmentsList.add(new AppointmentsModel("Ms. Manya Madan","12:30 P.M.","Skype call","4 days left"));
@@ -127,8 +128,12 @@ public class DashboardFragment extends Fragment {
                             JSONObject result = new JSONObject(response);
                             if(result.getInt("res")==1) {
                                 JSONArray ar = result.getJSONArray("response");
+                                int count = result.getInt("count");
+                                if(count >3){
+                                    count=3;
+                                }
                                 if (ar.length() != 0){
-                                    for (int i = 0; i < ar.length(); i++) {
+                                    for (int i = 0; i < count; i++) {
                                         JSONObject ob = ar.getJSONObject(i);
                                         String type,time,daysleft,status,id,userid,username;
                                         type = ob.getString("type");
@@ -140,12 +145,11 @@ public class DashboardFragment extends Fragment {
                                             ampm="P.M.";
                                         }
                                         String newtime = hour + ":" + time.split(":")[1]+" "+ampm;
-                                        status = ob.getString("status");
                                         id = String.valueOf(ob.getInt("id"));
                                         username = ob.getString("username");
                                         daysleft = ob.getString("daysleft");
                                         //change the url for upcoming appointments, add days left with every client name
-                                        appointmentsList.add(new AppointmentsModel(username,newtime,type,daysleft,id));
+                                        appointmentsList.add(new AppointmentsModel(username,newtime,type,daysleft+" days left",id));
                                     }
                                     appointmentsAdapter.notifyDataSetChanged();
                                 }else{

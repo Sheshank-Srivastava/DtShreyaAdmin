@@ -63,7 +63,7 @@ public class AppointmentDetailsAdapter extends RecyclerView.Adapter<AppointmentD
         holder.type.setText(appointment.getType());
         holder.status.setText(appointment.getStatus());
         holder.client.setText(appointment.getClient());
-        if(appointment.getType().equalsIgnoreCase("in person")){
+        if(appointment.getType().equalsIgnoreCase("in person")||appointment.getType().equalsIgnoreCase("walk-in")){
             //Change TypeImage
             holder.typeImage.setImageResource(R.drawable.ic_person_fill);
         }else{
