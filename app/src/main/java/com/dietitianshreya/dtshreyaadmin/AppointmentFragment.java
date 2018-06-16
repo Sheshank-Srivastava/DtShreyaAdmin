@@ -3,6 +3,7 @@ package com.dietitianshreya.dtshreyaadmin;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -24,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dietitianshreya.dtshreyaadmin.Utils.VariablesModels;
 import com.dietitianshreya.dtshreyaadmin.adapters.AppointmentHistoryAdapter;
 import com.dietitianshreya.dtshreyaadmin.models.AppointmentDetailsModel;
 import com.dietitianshreya.dtshreyaadmin.models.AppointmentHistoryModel;
@@ -37,6 +39,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.dietitianshreya.dtshreyaadmin.Login.MyPREFERENCES;
+
 
 public class AppointmentFragment extends Fragment {
 
@@ -46,6 +50,7 @@ public class AppointmentFragment extends Fragment {
     ArrayList<AppointmentDetailsModel> appointmentDetailsList;
     AppointmentHistoryAdapter appointmentHistoryAdapter;
     FloatingActionButton fab;
+    String userid;
 CoordinatorLayout coordinatorLayout;
     public AppointmentFragment() {
         // Required empty public constructor
@@ -71,6 +76,9 @@ CoordinatorLayout coordinatorLayout;
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_appointment,null);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
+
+        SharedPreferences sharedpreferences1 = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         coordinatorLayout = rootView.findViewById(R.id.appointment_coordinator);
         coordinatorLayout.setLayoutParams(new CoordinatorLayout.LayoutParams(CoordinatorLayout.LayoutParams.MATCH_PARENT,CoordinatorLayout.LayoutParams.MATCH_PARENT));
@@ -114,11 +122,11 @@ CoordinatorLayout coordinatorLayout;
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d("user",response);
 
                         try {
                             progressDialog.dismiss();
                             JSONObject result = new JSONObject(response);
-                            Log.d("REs",response);
                             if(result.getInt("res")==1) {
                                 JSONObject res = result.getJSONObject("response");
                                 int count = result.getInt("count");
@@ -141,9 +149,9 @@ CoordinatorLayout coordinatorLayout;
                                             String newtime = hour + ":" + time.split(":")[1] + " " + ampm;
                                             id = String.valueOf(ob.getInt("id"));
                                             status = ob.getString("status");
-                                            username = ob.getString("username");
+                                            username = ob.getString(VariablesModels.user_name);
                                             daysleft = ob.getString("daysleft");
-                                            userid = String.valueOf(ob.getInt("userid"));
+                                            userid = String.valueOf(ob.getInt(VariablesModels.userId));
                                             Date = ob.getString("date");
                                             //change the url for upcoming appointments, add days left with every client name
                                             appointmentDetailsList1.add(new AppointmentDetailsModel(newtime,type,status,username,daysleft + " days left",id));
@@ -176,7 +184,7 @@ CoordinatorLayout coordinatorLayout;
             @Override
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("dietitianId","1");
+                params.put("dietitianId",userid);
                 return params;
             }
 

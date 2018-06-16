@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
@@ -34,12 +35,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.dietitianshreya.dtshreyaadmin.adapters.AppointmentsAdapter;
 import com.dietitianshreya.dtshreyaadmin.models.AppointmentsModel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import pub.devrel.easypermissions.EasyPermissions;
+
+import static com.dietitianshreya.dtshreyaadmin.Login.MyPREFERENCES;
+import static com.dietitianshreya.dtshreyaadmin.Utils.MyFirebaseInstanceIdService.SharedPrefToken;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DashboardFragment.OnFragmentInteractionListener,
@@ -50,7 +66,7 @@ public class MainActivity extends AppCompatActivity
     Fragment fragment;
     TabLayout tab_layout;
     private int BEFORE_TAG,RESULT_LOAD=1;
-
+    String userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +79,16 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
+        SharedPreferences sharedpreferences = getSharedPreferences(SharedPrefToken, Context.MODE_PRIVATE);
+        String token = sharedpreferences.getString("token","zero");
+        int change = sharedpreferences.getInt("change",0);
+        SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
+        if(change==1) {
+            if (!token.equals("zero")) {
+                sendR(token, userid);
+            }
+        }
         long id = intentToWhatsapp(this);
        // sendIntent(id);
 //        //ImageView definition
@@ -132,20 +157,20 @@ public class MainActivity extends AppCompatActivity
 //        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_chat), 4);
 
         // set icon color pre-selected
-        tab_layout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+     //   tab_layout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         fragmentManager = getSupportFragmentManager();
         fragment= new DashboardFragment();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.container,fragment).commit();
-        tab_layout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
-        tab_layout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
-        tab_layout.getTabAt(3).getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+       // tab_layout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+        //tab_layout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+       // tab_layout.getTabAt(3).getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
         //tab_layout.getTabAt(4).getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
 
         tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                tab.getIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+               // tab.getIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
                 switch (tab.getPosition()) {
                     case 0:
                         getSupportActionBar().setTitle("Dashboard");
@@ -176,7 +201,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 Log.d("tag","Im here");
-                tab.getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+              //  tab.getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
             }
 
             @Override
@@ -362,4 +387,66 @@ public class MainActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+    public void sendR(final String token,final String userid) {
+
+        String url = "https://shreyaapi.herokuapp.com/savetoken/";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        JSONObject result=new JSONObject();
+                        try {
+                            result = new JSONObject(response);
+                            if(result.getInt("res")==1){
+                                Log.d("res",response);
+
+                                Log.d("Token","Saved");
+                                SharedPreferences sharedpreferences = getSharedPreferences(SharedPrefToken, Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedpreferences.edit();
+                                editor.putInt("change",0);
+                                editor.commit();
+                            }
+                            else{
+                                Log.d("Token","Not Saved");
+//                                Toast.makeText(getApplicationContext(),result.getString("msg"),Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+//                        Toast.makeText(getApplicationContext(),"Something went wrong!\nCheck your Internet connection and try again..", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(MedicineData.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("userId",userid);
+                params.put("token",token);
+                params.put("dietitian","1");
+
+                return params;
+            }
+
+        };
+
+        int MY_SOCKET_TIMEOUT_MS = 50000;
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+    }
+
 }

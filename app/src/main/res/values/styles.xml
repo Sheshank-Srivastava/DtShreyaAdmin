@@ -13,8 +13,8 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="Toolbar.Light" parent="@style/AppTheme">
-        <item name="colorControlNormal">@color/grey_60</item>
-        <item name="android:textColorPrimary">@color/grey_60</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -29,6 +29,20 @@
         <item name="android:padding">@dimen/spacing_medium</item>
         <item name="android:background">@android:color/white</item>
         <item name="android:layout_marginLeft">1dp</item>
+    </style>
+
+    <style name="AppThemeFullScreenImage" parent="Theme.Design.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="FullScreen.TextAppearance.Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="FullScreen.TextAppearance.Title.Inverse" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
 </resources>

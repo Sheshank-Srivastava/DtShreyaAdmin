@@ -92,7 +92,7 @@ public class AllClientListOthersAdapter extends RecyclerView.Adapter<AllClientLi
             public void onClick(View view) {
                 //send intent to customer details class
                 Intent i = new Intent(mCtx, ClientDetailActivity.class);
-                i.putExtra("clientId",client.getClientId());
+                i.putExtra("client",client.getClientId());
                 mCtx.startActivity(i);
             }
         });

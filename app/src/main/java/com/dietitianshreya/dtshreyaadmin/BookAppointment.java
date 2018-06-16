@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.DialogFragment;
@@ -37,6 +39,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dietitianshreya.dtshreyaadmin.Utils.VariablesModels;
 import com.dietitianshreya.dtshreyaadmin.adapters.AllClientListOthersAdapter;
 import com.dietitianshreya.dtshreyaadmin.models.AllClientListOthersModel;
 import com.dietitianshreya.dtshreyaadmin.models.AllClientsCompoundModel;
@@ -52,7 +55,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BookAppointment extends AppCompatActivity {
+import static com.dietitianshreya.dtshreyaadmin.Login.MyPREFERENCES;
+
+public class  BookAppointment extends AppCompatActivity {
 
     EditText appointmentTime,appointmentDate,clientEdit;
     public String Date,type="In Person";
@@ -63,6 +68,7 @@ public class BookAppointment extends AppCompatActivity {
     ArrayList<AllClientListOthersModel> allclients;
     AllClientListOthersAdapter clientAdapter;
     String time24format,id="none";
+    String userid;
     int searchFlag = 0;
 
     @Override
@@ -73,6 +79,9 @@ public class BookAppointment extends AppCompatActivity {
         appointmentTime=(EditText) findViewById(R.id.appointmentTimeEdit);
         appointmentDate = (EditText) findViewById(R.id.appointmentDateEdit);
         clientEdit = (EditText) findViewById(R.id.clientEdit);
+
+        SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
         allclients = new ArrayList<>();
         sendR();
         clientEdit.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +108,12 @@ public class BookAppointment extends AppCompatActivity {
                                                   int monthOfYear, int dayOfMonth) {
                                 // set day of month , month and year value in the edit text
                                 int month = monthOfYear+1;
-                                Date = dayOfMonth+"-"+month+"-"+year;
+                                String smonth = month+"";
+                                if(month<10)
+                                {
+                                    smonth = "0"+smonth;
+                                }
+                                Date = dayOfMonth+"-"+smonth+"-"+year;
                                 appointmentDate.setText(Date);
 
                             }
@@ -171,6 +185,7 @@ public class BookAppointment extends AppCompatActivity {
                 if(TextUtils.isEmpty(appointmentDate.getText().toString())||TextUtils.isEmpty(appointmentTime.getText().toString().trim())||TextUtils.isEmpty(clientEdit.getText().toString().trim())){
                     Toast.makeText(getApplicationContext(),"Empty fields not allowed!",Toast.LENGTH_SHORT).show();
                 }else{
+
                     bookappointment(Date,time24format,type,id);
                 }
             }
@@ -195,12 +210,12 @@ public class BookAppointment extends AppCompatActivity {
                                 if (ar.length() != 0){
                                     for (int i = 0; i < ar.length(); i++) {
                                         JSONObject ob = ar.getJSONObject(i);
-                                        String name,id,daysleft,createIn;
+                                        String name,daysleft,createIn;
                                         int creatinInt;
-                                        name = ob.getString("name");
-                                        id = String.valueOf(ob.getInt("id"));
+                                        name = ob.getString(VariablesModels.user_name);
+                                        id = String.valueOf(ob.getInt(VariablesModels.userId));
                                         daysleft = ob.getInt("daysleft")+" days left";
-                                        creatinInt = ob.getInt("createIn");
+                                       // creatinInt = ob.getInt("createIn");
                                             allclients.add(new AllClientListOthersModel(name,id,"na",daysleft));
 
                                     }
@@ -231,7 +246,7 @@ public class BookAppointment extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("dietitianId","1");
+                params.put("dietitianId",userid);
                 return params;
             }
 
@@ -288,8 +303,8 @@ public class BookAppointment extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("userid",id);
-                params.put("dietitianid","1");
+                params.put("userId",id);
+                params.put(VariablesModels.dietitianId,userid);
                 params.put("clinicid","3");
                 params.put("date",date);
                 params.put("time",time);

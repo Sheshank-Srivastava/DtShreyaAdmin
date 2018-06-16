@@ -3,11 +3,13 @@ package com.dietitianshreya.dtshreyaadmin;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dietitianshreya.dtshreyaadmin.Utils.VariablesModels;
 import com.dietitianshreya.dtshreyaadmin.adapters.AppointmentsAdapter;
 import com.dietitianshreya.dtshreyaadmin.models.AppointmentDetailsModel;
 import com.dietitianshreya.dtshreyaadmin.models.AppointmentsModel;
@@ -33,6 +36,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.dietitianshreya.dtshreyaadmin.Login.MyPREFERENCES;
+
 
 public class DashboardFragment extends Fragment {
 
@@ -41,7 +46,8 @@ public class DashboardFragment extends Fragment {
     AppointmentsAdapter appointmentsAdapter;
     ArrayList<AppointmentsModel> appointmentsList;
     TextView viewAllAppointments,viewAllMealChangeRequest,viewAllRescheduleRequest,viewAllExtensionLeads,viewAllFinalMonthUsers;
-
+    TextView noOfRequest,noOfExtension,noOfFinalMonth,noOfMealChange;
+    String userid;
     public DashboardFragment() {
         // Required empty public constructor
     }
@@ -70,16 +76,20 @@ public class DashboardFragment extends Fragment {
         viewAllRescheduleRequest = (TextView) rootView.findViewById(R.id.viewAllRescheduleRequest);
         viewAllExtensionLeads = (TextView) rootView.findViewById(R.id.viewAllExtensionLeads);
         viewAllFinalMonthUsers = (TextView) rootView.findViewById(R.id.viewAllFinalMonthUsers);
+        noOfRequest = rootView.findViewById(R.id.noOfSignupRequest);
+        noOfExtension = rootView.findViewById(R.id.noOfExtensionLeads);
+        noOfFinalMonth=rootView.findViewById(R.id.noOfFinalMonthUsers);
+        noOfMealChange=rootView.findViewById(R.id.noOfMealChangeRequests);
+        SharedPreferences sharedpreferences1 = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
         appointmentsList=new ArrayList<>();
         appointmentsAdapter = new AppointmentsAdapter(appointmentsList,getActivity());
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(appointmentsAdapter);
+
         fetchData();
-//        appointmentsList.add(new AppointmentsModel("Mr. Akshit Tyagi","9:30 A.M.","Punjabi Bagh","4 days left"));
-//        appointmentsList.add(new AppointmentsModel("Mr. Paras Garg","11:30 A.M.","Punjabi Bagh","4 days left"));
-//        appointmentsList.add(new AppointmentsModel("Ms. Manya Madan","12:30 P.M.","Skype call","4 days left"));
-//        appointmentsAdapter.notifyDataSetChanged();
+
         viewAllAppointments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,12 +132,19 @@ public class DashboardFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         try {
                             progressDialog.dismiss();
+                            Log.d("dashboard",response);
                             JSONObject result = new JSONObject(response);
                             if(result.getInt("res")==1) {
                                 JSONArray ar = result.getJSONArray("response");
+                                JSONArray statusArray= result.getJSONArray("stats");
+                                int finalmonth= new Integer(statusArray.get(2)+"");
+                                noOfRequest.setText(statusArray.get(0)+"");
+                                noOfExtension.setText(statusArray.get(3)+"");
+                                noOfFinalMonth.setText(finalmonth+"");
+                                noOfMealChange.setText(statusArray.get(1)+"");
+
                                 int count = result.getInt("count");
                                 if(count >3){
                                     count=3;
@@ -145,11 +162,12 @@ public class DashboardFragment extends Fragment {
                                             ampm="P.M.";
                                         }
                                         String newtime = hour + ":" + time.split(":")[1]+" "+ampm;
-                                        id = String.valueOf(ob.getInt("id"));
-                                        username = ob.getString("username");
+                                        id = String.valueOf(ob.getInt(VariablesModels.userId));
+                                        String appId = ob.getInt("appointmentId")+"";
+                                        username = ob.getString(VariablesModels.user_name);
                                         daysleft = ob.getString("daysleft");
                                         //change the url for upcoming appointments, add days left with every client name
-                                        appointmentsList.add(new AppointmentsModel(username,newtime,type,daysleft+" days left",id));
+                                        appointmentsList.add(new AppointmentsModel(username,newtime,type,daysleft+" days left",appId));
                                     }
                                     appointmentsAdapter.notifyDataSetChanged();
                                 }else{
@@ -177,7 +195,7 @@ public class DashboardFragment extends Fragment {
             @Override
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("dietitianId","1");
+                params.put("dietitianId",userid);
                 return params;
             }
 

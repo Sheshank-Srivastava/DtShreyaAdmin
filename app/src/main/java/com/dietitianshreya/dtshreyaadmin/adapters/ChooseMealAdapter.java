@@ -6,35 +6,44 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dietitianshreya.dtshreyaadmin.BookTest;
 import com.dietitianshreya.dtshreyaadmin.R;
+import com.dietitianshreya.dtshreyaadmin.models.AllClientListOthersModel;
 import com.dietitianshreya.dtshreyaadmin.models.ChooseMealModel;
 import com.dietitianshreya.dtshreyaadmin.models.MealModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.MyViewHolder> {
+public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.MyViewHolder>  {
 
     private ArrayList<ChooseMealModel> mealList;
     private ArrayList<String> diseases;
     private Context mCtx;
     private ArrayList<ChooseMealModel> choosenList;
+    private ArrayList<ChooseMealModel> filteredmealList;
     EditText quant;
+    int searchFlag =0;
 
 
-    public ChooseMealAdapter(ArrayList<ChooseMealModel> mealList, Context mCtx, ArrayList<String> diseases) {
+    public ChooseMealAdapter(ArrayList<ChooseMealModel> mealList, Context mCtx) {
         this.mealList = mealList;
         this.mCtx = mCtx;
         choosenList = new ArrayList<>();
-        this.diseases = diseases;
+        this.filteredmealList = mealList;
+
     }
 
 
@@ -45,6 +54,8 @@ public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.My
 
         public TextView name;
         public ImageView img;
+        public Boolean kvp;
+
         public MyViewHolder(View view) {
             super(view);
             name = (TextView)  view.findViewById(R.id.name);
@@ -66,46 +77,25 @@ public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.My
 
         final ChooseMealModel meal = mealList.get(position);
         holder.name.setText(meal.getMealName());
+        holder.img.setTag("add");
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                //Toast.makeText(mCtx,"You Clicked "+meal.getMealHead(),Toast.LENGTH_SHORT).show();
-//                AlertDialog.Builder alertDialog = new AlertDialog.Builder(mCtx);
-//                // Get the layout inflater
-//                LayoutInflater linf = LayoutInflater.from(mCtx);
-//                final View inflator = linf.inflate(R.layout.custom_dialog, null);
-//                // Inflate and set the layout for the dialog
-//                // Pass null as the parent view because its going in the dialog layout
 //
-//                // Setting Dialog Title
-//                //alertDialog.setTitle("Confirm Save...");
-//
-//                // Setting Dialog Message
-//                alertDialog.setMessage("Update the quantity");
-//                // Setting Icon to Dialog
-//                //alertDialog.setIcon(R.drawable.saveicon);
-//                alertDialog.setView(inflator);
-//                quant = (EditText) inflator.findViewById(R.id.quant);
-//                alertDialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        if(!(TextUtils.isEmpty(quant.getText().toString().trim()))){
-                int flag=0;
-                String dis="";
-                for(int i=0;i<diseases.size();i++){
-                    if(meal.getExempted().contains(diseases.get(i))){
-                        flag++;
-                        dis = diseases.get(i);
-                    }
-                }
-                if(flag==0) {
-                    choosenList.add(new ChooseMealModel(meal.getMealName(),"", new ArrayList<String>()));
-                    meal.setMealQuant("");
-                    //set right image
-                    holder.img.setImageResource(R.drawable.ic_tick);
-                }else{
-                    Toast.makeText(mCtx,"Person suffers from "+dis,Toast.LENGTH_SHORT).show();
-                }
+    if(holder.img.getTag().equals("add") ) {
+
+    Log.d("lol","i am here");
+    if (meal.getExempted() == 0) {
+        choosenList.add(new ChooseMealModel(meal.getMealName(), "", 0));
+        Log.d("manya",meal.getMealName()+ choosenList.size());
+        meal.setMealQuant("");
+        //set right image
+        holder.img.setImageResource(R.drawable.ic_tick);
+        holder.img.setTag("tick");
+    } else {
+        Toast.makeText(mCtx, "This food is exempted according to medical history", Toast.LENGTH_SHORT).show();
+    }
+}
 //                        }
 //                    }
 //                });
@@ -118,7 +108,7 @@ public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.My
     @Override
     public int getItemCount()
     {
-        return mealList.size();
+        return filteredmealList.size();
     }
 
     public ArrayList<ChooseMealModel> getMealList(){
@@ -126,4 +116,5 @@ public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.My
     }
 
 
-}
+
+    }

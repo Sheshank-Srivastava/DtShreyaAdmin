@@ -16,11 +16,13 @@ import android.support.annotation.DrawableRes;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.widget.NestedScrollView;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -31,6 +33,8 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Tools {
 
@@ -63,39 +67,7 @@ public class Tools {
         }
     }
 
-    public static void displayImageOriginal(Context ctx, ImageView img, @DrawableRes int drawable) {
-        try {
-            Glide.with(ctx).load(drawable)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .into(img);
-        } catch (Exception e) {
-        }
-    }
 
-    public static void displayImageRound(final Context ctx, final ImageView img, @DrawableRes int drawable) {
-        try {
-            Glide.with(ctx).load(drawable).asBitmap().centerCrop().into(new BitmapImageViewTarget(img) {
-                @Override
-                protected void setResource(Bitmap resource) {
-                    RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(ctx.getResources(), resource);
-                    circularBitmapDrawable.setCircular(true);
-                    img.setImageDrawable(circularBitmapDrawable);
-                }
-            });
-        } catch (Exception e) {
-        }
-    }
-
-    public static void displayImageOriginal(Context ctx, ImageView img, String url) {
-        try {
-            Glide.with(ctx).load(url)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .into(img);
-        } catch (Exception e) {
-        }
-    }
 
     public static String getFormattedDateSimple(Long dateTime) {
         SimpleDateFormat newFormat = new SimpleDateFormat("MMMM dd, yyyy");
@@ -229,6 +201,28 @@ public class Tools {
         }
 
         return titleCase.toString();
+    }
+
+
+    public static boolean validateNormalText(EditText ed){
+        if(TextUtils.isEmpty(ed.getText().toString().trim())){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public static boolean validatePhone(EditText ed){
+        if(TextUtils.isEmpty(ed.getText().toString().trim())){
+            return false;
+        }
+        else{
+            Pattern p = Pattern.compile("\\+91\\d{10}");
+            Matcher m = p.matcher(ed.getText().toString().trim());
+            boolean b = m.matches();
+            return b;
+        }
     }
 
 }

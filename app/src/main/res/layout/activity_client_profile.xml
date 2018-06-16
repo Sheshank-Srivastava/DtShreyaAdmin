@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:padding="@dimen/small_padding"
             android:id="@+id/icBasic"
-            android:src="@drawable/ic_down"
+            app:srcCompat="@drawable/ic_down"
             android:tint="@color/colorPrimary"/>
     </LinearLayout>
     <LinearLayout
@@ -101,7 +101,7 @@
             android:id="@+id/call_img"
             android:layout_height="match_parent"
             android:tint="@color/colorPrimary"
-            android:src="@drawable/ic_phone"/>
+            app:srcCompat="@drawable/ic_phone"/>
     </LinearLayout>
 
     <LinearLayout
@@ -139,7 +139,7 @@
             android:id="@+id/email_img"
             android:layout_height="match_parent"
             android:tint="@color/colorPrimary"
-            android:src="@drawable/ic_email"/>
+            app:srcCompat="@drawable/ic_email"/>
     </LinearLayout>
 
     <LinearLayout
@@ -185,7 +185,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_very_small"
             android:textColor="@color/textColorDark"
-            android:text="Age"/>
+            android:text="Referred By"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="0.2"
@@ -197,7 +197,7 @@
         <EditText
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:id="@+id/clientAge"
+            android:id="@+id/clientReferred"
             android:background="@color/textColorLight"
             android:textColor="@color/textColorDark"
             android:textSize="@dimen/text_very_small"
@@ -278,7 +278,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_very_small"
             android:textColor="@color/textColorDark"
-            android:text="Disease"/>
+            android:text="DOB"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="0.2"
@@ -290,7 +290,7 @@
         <EditText
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:id="@+id/clientDisease"
+            android:id="@+id/clientdob"
             android:background="@color/textColorLight"
             android:textColor="@color/textColorDark"
             android:textSize="@dimen/text_very_small"
@@ -309,7 +309,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_very_small"
             android:textColor="@color/textColorDark"
-            android:text="Plan"/>
+            android:text="Anniversary"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="0.2"
@@ -321,7 +321,7 @@
         <EditText
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:id="@+id/clientPlan"
+            android:id="@+id/clientAnn"
             android:background="@color/textColorLight"
             android:textColor="@color/textColorDark"
             android:textSize="@dimen/text_very_small"
@@ -339,7 +339,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_very_small"
             android:textColor="@color/textColorDark"
-            android:text="End Date"/>
+            android:text="Whatsapp"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="0.2"
@@ -357,6 +357,101 @@
             android:textSize="@dimen/text_very_small"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_padding"
+            android:layout_margin="@dimen/layout_very_small_margin"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_very_small"
+                android:textColor="@color/textColorDark"
+                android:text="Address"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:text=":"
+                android:gravity="center"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:id="@+id/clientAddress"
+                android:background="@color/textColorLight"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_padding"
+            android:layout_margin="@dimen/layout_very_small_margin"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_very_small"
+                android:textColor="@color/textColorDark"
+                android:text="Occupation"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:text=":"
+                android:gravity="center"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:id="@+id/clientOccupation"
+                android:background="@color/textColorLight"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_padding"
+            android:layout_margin="@dimen/layout_very_small_margin"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_very_small"
+                android:textColor="@color/textColorDark"
+                android:text="Weight Manage"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:text=":"
+                android:gravity="center"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:id="@+id/clientweightmanage"
+                android:background="@color/textColorLight"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -380,7 +475,7 @@
                 android:layout_height="match_parent"
                 android:padding="@dimen/small_padding"
                 android:id="@+id/icMedical"
-                android:src="@drawable/ic_down"
+                app:srcCompat="@drawable/ic_down"
                 android:tint="@color/colorPrimary"/>
         </LinearLayout>
         </LinearLayout>
@@ -397,148 +492,9 @@
             android:layout_margin="@dimen/layout_very_small_margin"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:text="Blood Pressure"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:text=":"
-                android:gravity="center"/>
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:id="@+id/bp"
-                android:layout_marginRight="@dimen/layout_very_small_margin"
-                android:layout_marginLeft="@dimen/layout_very_small_margin"
-                android:hint=""
-                android:layout_gravity="center"
-                android:background="@color/textColorLight"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:layout_height="wrap_content" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:padding="@dimen/small_padding"
-            android:layout_margin="@dimen/layout_very_small_margin"
-            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:text="Irregular Periods"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:text=":"
-                android:gravity="center"/>
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:id="@+id/forFemale"
-                android:layout_marginRight="@dimen/layout_very_small_margin"
-                android:layout_marginLeft="@dimen/layout_very_small_margin"
-                android:hint=""
-                android:layout_gravity="center"
-                android:background="@color/textColorLight"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:padding="@dimen/small_padding"
-            android:layout_margin="@dimen/layout_very_small_margin"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:text="Diabetes"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:text=":"
-                android:gravity="center"/>
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:id="@+id/diabetes"
-                android:layout_marginRight="@dimen/layout_very_small_margin"
-                android:layout_marginLeft="@dimen/layout_very_small_margin"
-                android:hint=""
-                android:layout_gravity="center"
-                android:background="@color/textColorLight"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:padding="@dimen/small_padding"
-            android:layout_margin="@dimen/layout_very_small_margin"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:text="Hypothyroidism"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:text=":"
-                android:gravity="center"/>
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:id="@+id/hypothyroidism"
-                android:layout_marginRight="@dimen/layout_very_small_margin"
-                android:layout_marginLeft="@dimen/layout_very_small_margin"
-                android:hint=""
-                android:layout_gravity="center"
-                android:background="@color/textColorLight"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
@@ -909,43 +865,7 @@
                 android:textSize="@dimen/text_very_small"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:padding="@dimen/small_padding"
-            android:layout_margin="@dimen/layout_very_small_margin"
-            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:text="Lactation/Pregnancy Month"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:text=":"
-                android:gravity="center"/>
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:id="@+id/lactation"
-                android:layout_marginRight="@dimen/layout_very_small_margin"
-                android:layout_marginLeft="@dimen/layout_very_small_margin"
-                android:hint=""
-                android:layout_gravity="center"
-                android:background="@color/textColorLight"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
@@ -994,7 +914,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8"
-                android:text="Any Other Diseases"
+                android:text="Add Diseases"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/text_very_small" />
 
@@ -1015,7 +935,6 @@
                 android:layout_marginLeft="@dimen/layout_very_small_margin"
                 android:hint=""
                 android:layout_gravity="center"
-                android:background="@color/textColorLight"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/text_very_small"
                 android:layout_height="wrap_content" />
@@ -1027,35 +946,6 @@
             android:layout_margin="@dimen/layout_very_small_margin"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:text="Weight Management Technique Followed"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:text=":"
-                android:gravity="center"/>
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:id="@+id/weightManagement"
-                android:layout_marginRight="@dimen/layout_very_small_margin"
-                android:layout_marginLeft="@dimen/layout_very_small_margin"
-                android:hint=""
-                android:layout_gravity="center"
-                android:background="@color/textColorLight"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -1112,7 +1002,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="@dimen/small_padding"
-            android:src="@drawable/ic_down"
+            app:srcCompat="@drawable/ic_down"
             android:id="@+id/icFood"
             android:tint="@color/colorPrimary"/>
     </LinearLayout>

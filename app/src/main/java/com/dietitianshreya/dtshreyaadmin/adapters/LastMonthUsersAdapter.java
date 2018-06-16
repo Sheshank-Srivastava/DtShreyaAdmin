@@ -15,6 +15,7 @@ import com.dietitianshreya.dtshreyaadmin.ChatActivity;
 import com.dietitianshreya.dtshreyaadmin.ClientDetailActivity;
 import com.dietitianshreya.dtshreyaadmin.LastMonthUsers;
 import com.dietitianshreya.dtshreyaadmin.R;
+import com.dietitianshreya.dtshreyaadmin.Utils.VariablesModels;
 import com.dietitianshreya.dtshreyaadmin.models.ExtensionLeadsModel;
 import com.dietitianshreya.dtshreyaadmin.models.LastMonthUsersModel;
 
@@ -93,7 +94,7 @@ public class LastMonthUsersAdapter extends RecyclerView.Adapter<LastMonthUsersAd
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(mCtx, ClientDetailActivity.class);
-                i.putExtra("clientID",client.getClientId());
+                i.putExtra("client",client.getClientId());
                 mCtx.startActivity(i);
             }
         });

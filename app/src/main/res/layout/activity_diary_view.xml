@@ -36,7 +36,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:id="@+id/wakeupTime"
                     android:textColor="@color/colorPrimary"
                     android:text="Wake Up Time : 7AM  "/>
 
@@ -60,7 +60,7 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:id="@+id/sleepTime"
                     android:textColor="@color/colorPrimary"
                     android:text="Sleep Time : 10PM  "/>
 
@@ -90,6 +90,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/todaysweight"
                     android:textColor="@color/colorPrimary"
                     android:text="Todays's Weight : 70kg  "/>
 
@@ -112,6 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginLeft="5dp"
+                    android:id="@+id/waterIntake"
                     android:textColor="@color/colorPrimary"
                     android:text="Water Intake : 7 Glasses "/>
 
@@ -143,6 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
+                    android:id="@+id/greenTea"
                     android:textColor="@color/colorPrimary"
                     android:text="Green tea : 2 Cup  "/>
 
@@ -165,6 +168,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/pooped"
                     android:textColor="@color/colorPrimary"
                     android:text="Pooped: 2 times "/>
             </LinearLayout>

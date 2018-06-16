@@ -90,6 +90,8 @@
         android:layout_width="match_parent"
         android:elevation="20dp"
         android:padding="@dimen/activity_vertical_margin"
+        android:visibility="gone"
+
         android:layout_marginLeft="@dimen/layout_small_margin"
         android:layout_marginRight="@dimen/layout_small_margin"
         android:layout_height="wrap_content">

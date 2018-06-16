@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <item android:id="@+id/template"
+        android:title="Template"
+        android:icon="@drawable/ic_diary"
+        app:showAsAction="always"/>
     <item android:id="@+id/notes"
         android:title="Add notes"
         android:icon="@drawable/ic_note"
@@ -10,4 +13,5 @@
         android:title="Save"
         android:icon="@drawable/ic_tick"
         app:showAsAction="always"/>
+
 </menu>

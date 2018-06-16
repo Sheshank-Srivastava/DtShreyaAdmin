@@ -1,0 +1,121 @@
+{
+  "project_info": {
+    "project_number": "414509150710",
+    "firebase_url": "https://dtshreya-766ef.firebaseio.com",
+    "project_id": "dtshreya-766ef",
+    "storage_bucket": "dtshreya-766ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414509150710:android:59b762b19cf6e5a2",
+        "android_client_info": {
+          "package_name": "com.dietitianshreya.dtshreya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414509150710-dk2njlu188jmioa42etgpvbv4kbort1f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dietitianshreya.dtshreya",
+            "certificate_hash": "9b801420af8cbcbc72a335f32a814123ec1c4aec"
+          }
+        },
+        {
+          "client_id": "414509150710-sttllslth8ojaeeej5m63g2ht3om7g24.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "414509150710-sttllslth8ojaeeej5m63g2ht3om7g24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCOLz3Kdpm68bwqHgNRj9ueOZ41jvzxg8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414509150710-sttllslth8ojaeeej5m63g2ht3om7g24.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "414509150710-mg39pu6per2k514a87q095mvf17j40sm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dummy.Meditician"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414509150710:android:15db352eea373513",
+        "android_client_info": {
+          "package_name": "com.dietitianshreya.dtshreyaadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414509150710-2hdhrcd2o0uvnt6f8neb9iaat537kcih.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dietitianshreya.dtshreyaadmin",
+            "certificate_hash": "99f45fb451b6adc5b23cea119a9dbbe36ed040c3"
+          }
+        },
+        {
+          "client_id": "414509150710-sttllslth8ojaeeej5m63g2ht3om7g24.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "414509150710-sttllslth8ojaeeej5m63g2ht3om7g24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCOLz3Kdpm68bwqHgNRj9ueOZ41jvzxg8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414509150710-sttllslth8ojaeeej5m63g2ht3om7g24.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "414509150710-mg39pu6per2k514a87q095mvf17j40sm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dummy.Meditician"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

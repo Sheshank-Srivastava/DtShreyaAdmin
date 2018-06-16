@@ -28,11 +28,13 @@ public class DietCreateAdapter extends RecyclerView.Adapter<DietCreateAdapter.My
     private ArrayList<DietPlanModel> dietPlanList;
     private Context mCtx;
     int defaultPos =0;
+    String clientId;
 
 
-    public DietCreateAdapter(ArrayList<DietPlanModel> dietPlanList, Context mCtx) {
+    public DietCreateAdapter(ArrayList<DietPlanModel> dietPlanList, Context mCtx,String clientId) {
         this.dietPlanList = dietPlanList;
         this.mCtx = mCtx;
+        this.clientId = clientId;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -116,6 +118,7 @@ public class DietCreateAdapter extends RecyclerView.Adapter<DietCreateAdapter.My
                 diseases.add("diabetes");
                 diseases.add("blood pressure");
                 i.putStringArrayListExtra("diseases",diseases);
+                i.putExtra("ClientId",clientId);
                 ((Activity)mCtx).startActivityForResult(i,position);
 
             }

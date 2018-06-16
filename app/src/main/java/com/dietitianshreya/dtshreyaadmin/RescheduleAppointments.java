@@ -1,11 +1,14 @@
 package com.dietitianshreya.dtshreyaadmin;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dietitianshreya.dtshreyaadmin.Utils.VariablesModels;
 import com.dietitianshreya.dtshreyaadmin.adapters.RescheduleAppointmentAdaper;
 import com.dietitianshreya.dtshreyaadmin.models.CompositionModel;
 import com.dietitianshreya.dtshreyaadmin.models.RescheduleAppointmentModel;
@@ -28,43 +32,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.dietitianshreya.dtshreyaadmin.Login.MyPREFERENCES;
+
 public class RescheduleAppointments extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ArrayList<RescheduleAppointmentModel> appointmentList;
     RescheduleAppointmentAdaper appointmentAdaper;
+    String userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reschedule_appointments);
         recyclerView = (RecyclerView) findViewById(R.id.re);
         appointmentList = new ArrayList<>();
-        appointmentAdaper = new RescheduleAppointmentAdaper(appointmentList,RescheduleAppointments.this);
+        SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
+        appointmentAdaper = new RescheduleAppointmentAdaper(appointmentList, RescheduleAppointments.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setAdapter(appointmentAdaper);
         recyclerView.setLayoutManager(layoutManager);
         fetchData();
-//        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
-//            @Override
-//            public void onClick(View view, int position) throws NoSuchFieldException, IllegalAccessException {
-//                RescheduleAppointmentModel appointment = appointmentList.get(position);
-//                Intent i = new Intent(RescheduleAppointments.this,ClientDetailActivity.class);
-//                i.putExtra("clientID",appointment.getClientId());
-//                startActivity(i);
-//            }
-//
-//            @Override
-//            public void onLongClick(View view, int position) {
-//
-//            }
-//        }));
-//        appointmentList.add(new RescheduleAppointmentModel("Akshit Tyagi","1234567","10/06/2018 - 9:30 A.M.","10/06/2018 - 9:30 A.M.","awaited","4 days left"));
-//        appointmentList.add(new RescheduleAppointmentModel("Akshit Tyagi","1234567","10/06/2018 - 9:30 A.M.","10/06/2018 - 9:30 A.M.","awaited","4 days left"));
-//        appointmentList.add(new RescheduleAppointmentModel("Akshit Tyagi","1234567","10/06/2018 - 9:30 A.M.","10/06/2018 - 9:30 A.M.","awaited","4 days left"));
-//        appointmentList.add(new RescheduleAppointmentModel("Akshit Tyagi","1234567","10/06/2018 - 9:30 A.M.","10/06/2018 - 9:30 A.M.","awaited","4 days left"));
-//        appointmentList.add(new RescheduleAppointmentModel("Akshit Tyagi","1234567","10/06/2018 - 9:30 A.M.","10/06/2018 - 9:30 A.M.","awaited","4 days left"));
-//        appointmentList.add(new RescheduleAppointmentModel("Akshit Tyagi","1234567","10/06/2018 - 9:30 A.M.","10/06/2018 - 9:30 A.M.","awaited","4 days left"));
-//        appointmentAdaper.notifyDataSetChanged();
+
     }
 
     public void fetchData() {
@@ -76,22 +65,24 @@ public class RescheduleAppointments extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d("response",response);
 
                         try {
                             progressDialog.dismiss();
                             JSONObject result = new JSONObject(response);
+
                             if(result.getInt("res")==1) {
                                 JSONArray ar = result.getJSONArray("response");
                                 if (ar.length() != 0){
                                     for (int i = 0; i < ar.length(); i++) {
                                         JSONObject ob = ar.getJSONObject(i);
                                         String date,requested,id,daysleft,clientId,name;
-                                        date = ob.getString("date");
-                                        name = ob.getString("name");
+                                        date = ob.getString(VariablesModels.date);
+                                        name = ob.getString(VariablesModels.user_name);
                                         requested = ob.getString("requestedtime");
-                                        id = ob.getString("id");
+                                        id = ob.getString(VariablesModels.appointmentId);
                                         daysleft = ob.getString("daysleft");
-                                        clientId = ob.getString("clientId");
+                                        clientId = ob.getString(VariablesModels.userId);
                                         appointmentList.add(new RescheduleAppointmentModel(name,clientId,date,requested,id,daysleft));
                                     }
                                     appointmentAdaper.notifyDataSetChanged();
@@ -120,7 +111,7 @@ public class RescheduleAppointments extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("dietitianId","1");
+                params.put("dietitianId",userid);
                 return params;
             }
 

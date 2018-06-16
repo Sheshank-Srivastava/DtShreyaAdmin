@@ -23,6 +23,7 @@
     android:layout_weight="1"
     android:padding="@dimen/medium_padding"
     android:textSize="@dimen/text_medium"
+    android:textColor="@android:color/black"
     android:hint="Enter Quantity"
     android:id="@+id/quant"
     android:layout_height="wrap_content" />

@@ -3,6 +3,7 @@ package com.dietitianshreya.dtshreyaadmin;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dietitianshreya.dtshreyaadmin.Utils.VariablesModels;
 import com.dietitianshreya.dtshreyaadmin.adapters.CompositionAdapter;
 import com.dietitianshreya.dtshreyaadmin.models.AllClientListOthersModel;
 import com.dietitianshreya.dtshreyaadmin.models.AllClientsCompoundModel;
@@ -43,6 +45,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import static com.dietitianshreya.dtshreyaadmin.Login.MyPREFERENCES;
+
 
 public class BodyCompositionFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -55,6 +59,7 @@ public class BodyCompositionFragment extends Fragment {
     ArrayList<CompositionModel> compositionList;
     CompositionAdapter compositionAdapter;
     EditText date,fat,water,muscle,bone,weight;
+    String userid;
 
     public BodyCompositionFragment() {
         // Required empty public constructor
@@ -72,8 +77,7 @@ public class BodyCompositionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            clientId = getArguments().getString(ARG_PARAM1);
-
+            clientId = getArguments().getString(VariablesModels.userId);
         }
     }
 
@@ -85,11 +89,17 @@ public class BodyCompositionFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         compositionList = new ArrayList<>();
+        compositionList=getArguments().getParcelableArrayList("bca");
+
         compositionAdapter = new CompositionAdapter(compositionList,getContext());
         recyclerView.setAdapter(compositionAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+
+        SharedPreferences sharedpreferences1 = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
         fetchBCAData();
+
 //        compositionList.add(new CompositionModel("10/02/2018","80 kg","20","50","30","70"));
 //        compositionList.add(new CompositionModel("10/02/2018","80 kg","20","50","30","70"));
 //        compositionList.add(new CompositionModel("10/02/2018","80 kg","20","50","30","70"));
@@ -207,8 +217,8 @@ public class BodyCompositionFragment extends Fragment {
             @Override
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                    params.put("dietitianId","1");
-                    params.put("clientId","17");
+                    params.put(VariablesModels.dietitianId,userid);
+                    params.put(VariablesModels.userId,clientId+"");
                     params.put("clinicId","3");
                     params.put("date",date);
                     params.put("weight",weight);
@@ -247,7 +257,7 @@ public class BodyCompositionFragment extends Fragment {
                             progressDialog.dismiss();
                             JSONObject result = new JSONObject(response);
                             if(result.getInt("res")==1) {
-                                JSONArray ar = result.getJSONArray("data");
+                                JSONArray ar = result.getJSONArray(VariablesModels.response);
                                 if (ar.length() != 0){
                                     for (int i = 0; i < ar.length(); i++) {
                                         JSONObject ob = ar.getJSONObject(i);
@@ -286,7 +296,7 @@ public class BodyCompositionFragment extends Fragment {
             @Override
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("clientId","17");
+                params.put(VariablesModels.userId,clientId);
                 return params;
             }
 

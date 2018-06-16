@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer-array name="sample_images">
+        <item>@drawable/image_24</item>
+        <item>@drawable/image_2</item>
+        <item>@drawable/image_7</item>
+
+    </integer-array>
+
+
+
+</resources>

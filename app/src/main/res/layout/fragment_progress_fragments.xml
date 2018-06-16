@@ -44,7 +44,7 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:alpha="0.3"
+
                 android:src="@drawable/senior"
                 android:layout_height="@dimen/image_height"
 
@@ -54,14 +54,14 @@
                 android:layout_weight="1"
                 android:layout_height="@dimen/image_height"
                 android:src="@drawable/pro"
-                android:alpha="0.3"
+
                 android:id="@+id/rank3"/>
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="@dimen/image_height"
                 android:src="@drawable/beast"
-                android:alpha="0.3"
+
 
                 android:id="@+id/rank4"/>
         </LinearLayout>
@@ -88,6 +88,7 @@
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 android:text="1"
+                android:id="@+id/badgesEarned"
                 />
         </LinearLayout>
 
@@ -130,7 +131,7 @@
                     android:layout_height="@dimen/badge_height"
                     android:layout_gravity="center"
                     android:src="@drawable/enthu"
-                    android:alpha="0.3"
+
                     android:padding="@dimen/small_padding"
                     android:id="@+id/badge2"/>
                 <TextView
@@ -139,7 +140,7 @@
                     android:textSize="@dimen/text_small"
                     android:gravity="center"
                     android:id="@+id/badgeText2"
-                    android:textColor="@color/pink_100"
+                    android:textColor="@color/colorPrimary"
                     android:text="Enthusiastic"/>
             </LinearLayout>
         </LinearLayout>
@@ -159,7 +160,6 @@
                     android:layout_height="@dimen/badge_height"
                     android:layout_gravity="center"
                     android:src="@drawable/disciplined"
-                    android:alpha="0.3"
                     android:padding="@dimen/small_padding"
                     android:id="@+id/badge3"/>
                 <TextView
@@ -168,7 +168,7 @@
                     android:textSize="@dimen/text_small"
                     android:gravity="center"
                     android:id="@+id/badgeText3"
-                    android:textColor="@color/pink_100"
+                    android:textColor="@color/colorPrimary"
                     android:text="Disciplined"/>
             </LinearLayout>
             <LinearLayout
@@ -180,7 +180,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/badge_height"
                     android:layout_gravity="center"
-                    android:alpha="0.3"
                     android:src="@drawable/awesome"
                     android:padding="@dimen/small_padding"
                     android:id="@+id/badge4"/>
@@ -190,7 +189,7 @@
                     android:textSize="@dimen/text_small"
                     android:gravity="center"
                     android:id="@+id/badgeText4"
-                    android:textColor="@color/pink_100"
+                    android:textColor="@color/colorPrimary"
                     android:text="Going Awesome"/>
             </LinearLayout>
         </LinearLayout>
@@ -209,7 +208,6 @@
                    android:id="@+id/badge5"
                    android:layout_width="wrap_content"
                    android:layout_height="@dimen/badge_height"
-                   android:alpha="0.3"
                    android:layout_marginLeft="@dimen/layout_medium_margin"
                    android:src="@drawable/fav" />
            </LinearLayout>
@@ -222,7 +220,7 @@
                 android:id="@+id/badgeText5"
                 android:layout_centerHorizontal="true"
                 android:padding="@dimen/medium_padding"
-                android:textColor="@color/pink_100"
+                android:textColor="@color/colorPrimary"
                 android:text="Dietitian's Favorite"
                 />
         </RelativeLayout>

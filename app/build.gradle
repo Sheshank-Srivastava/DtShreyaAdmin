@@ -1,6 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+
     compileSdkVersion 26
     buildToolsVersion "27.0.3"
     defaultConfig {
@@ -17,24 +22,75 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+
+    }
+
+}
+
+
+repositories {
+    // ...
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support:design:26.+'
-    compile 'pub.devrel:easypermissions:0.2.1'
-    compile 'com.roughike:bottom-bar:2.0'
-    compile 'com.android.volley:volley:1.0.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.android.support:cardview-v7:26.+'
-    compile 'com.android.support:recyclerview-v7:26.+'
+    // circle image view
+    implementation 'com.android.support:appcompat-v7:26.+'
+    implementation 'com.android.support:design:26.+'
+    implementation 'com.roughike:bottom-bar:2.0'
+    implementation 'com.android.support:cardview-v7:26.+'
+    implementation 'com.android.support:recyclerview-v7:26.+'
+    implementation 'com.squareup.picasso:picasso:2.5.0'
+    implementation 'com.android.volley:volley:1.0.0'
+    implementation 'com.wdullaer:materialdatetimepicker:3.5.1'
+    implementation 'pub.devrel:easypermissions:0.2.1'
+    implementation 'com.github.pchmn:MaterialChipsInput:1.0.5'
+    implementation 'com.jjoe64:graphview:4.2.1'
+    implementation 'com.github.CardinalNow:Android-CircleProgressIndicator:v0.2'
+    implementation 'com.mikhaellopez:circularimageview:3.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:support-v4:26.+'
+    implementation 'com.firebase:firebase-client-android:2.5.2'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
 
-    compile 'com.mikhaellopez:circularimageview:3.0.2'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:support-v4:26.+'
-    testCompile 'junit:junit:4.12'
+    //CHAT UI
+    implementation 'me.himanshusoni.chatmessageview:chat-message-view:1.0.3'
+    implementation 'com.github.hani-momanii:SuperNova-Emoji:1.1'
+
+
+    // AUTH
+    //noinspection GradleCompatible
+    implementation 'com.google.firebase:firebase-auth:15.1.0'
+    implementation 'com.google.firebase:firebase-messaging:15.0.2'
+
+    //DATABASE FIREBASE,UI
+    implementation 'com.google.firebase:firebase-database:15.0.1'
+    implementation 'com.firebaseui:firebase-ui-database:0.4.1'
+
+    //STORAGE FIREBASE
+    implementation 'com.google.firebase:firebase-storage:15.0.2'
+    testImplementation 'junit:junit:4.12'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.3.0'
+
 }
+
+apply plugin: 'com.google.gms.google-services'

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/layout_big_margin"
+            >
+            <EditText
+                android:id="@+id/input_edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_small_margin"
+                android:padding="@dimen/medium_padding"
+                android:background="@drawable/background"
+                android:inputType="textEmailAddress"
+                android:fontFamily="sans-serif"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:hint="Email" />
+
+            <EditText
+                android:id="@+id/input_edit_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium_padding"
+                android:inputType="textPassword"
+                android:fontFamily="sans-serif"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:layout_margin="@dimen/layout_small_margin"
+                android:background="@drawable/background"
+                android:hint="Password" />
+
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/loginBtn"
+                android:fontFamily="sans-serif"
+                android:background="@drawable/buttons_background"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/layout_small_margin"
+                android:textColor="@color/textColorLight"
+                android:text="Login"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
+
+

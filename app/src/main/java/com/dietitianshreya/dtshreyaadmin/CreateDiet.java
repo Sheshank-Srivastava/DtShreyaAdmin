@@ -1,9 +1,12 @@
 package com.dietitianshreya.dtshreyaadmin;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -15,10 +18,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,6 +36,7 @@ public class CreateDiet extends AppCompatActivity implements DietCreateFragment.
     TextView monthTxt;
     String clientId;
     ArrayList<String> dates;
+    ArrayList<String> dates1;
     EditText editText;
     int position=0;
 
@@ -40,6 +45,7 @@ public class CreateDiet extends AppCompatActivity implements DietCreateFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_detail);
+
         getSupportActionBar().setElevation(0.0f);
         Bundle extras = getIntent().getExtras();
         clientId = extras.getString("clientId");
@@ -60,6 +66,7 @@ public class CreateDiet extends AppCompatActivity implements DietCreateFragment.
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(adapter.getTabView(i));
         }
+
 
         TextView text = (TextView) tabLayout.getTabAt(0).getCustomView().findViewById(R.id.text2);
         text.setBackgroundResource(R.drawable.customer_image_placeholder_light);
@@ -104,32 +111,37 @@ public class CreateDiet extends AppCompatActivity implements DietCreateFragment.
          adapter = new ViewPagerDietViewAdapter(getSupportFragmentManager(),this);
             String year="";
         dates = new ArrayList<>();
+        dates1=new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd-MMM-yyyy");
+
         String month1="";
         for(int i=0;i<7;i++){
             Calendar calendar = new GregorianCalendar();
             calendar.add(Calendar.DATE,i);
             String day = sdf.format(calendar.getTime());
-            Log.d("day",day);
-            Log.d("Date",Calendar.DATE+"");
+            SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+            String datenew = df.format(calendar.getTime());
+            Log.d("lolman",datenew);
             String dates[] = day.split(" ");
             Log.d("This Day",dates[0]);
             String mDay = ""+dates[0].charAt(0)+dates[0].charAt(1)+dates[0].charAt(2);
             String mDate = dates[1].split("-")[0];
             adapter.addTitles(mDay,mDate);
+            String newDate=dates[1];
             month1 = dates[1].split("-")[1];
             year = dates[1].split("-")[2];
             monthTxt.setText(dates[1].split("-")[1]+" "+dates[1].split("-")[2]);
             this.dates.add(mDate);
+            this.dates1.add(datenew);
         }
         monthTxt.setText(month1+" "+year);
-        DietCreateFragment dietViewFragment1 = DietCreateFragment.newInstance(clientId,dates.get(0));
-        DietCreateFragment dietViewFragment2 = DietCreateFragment.newInstance(clientId,dates.get(1));
-        DietCreateFragment dietViewFragment3 = DietCreateFragment.newInstance(clientId,dates.get(2));
-        DietCreateFragment dietViewFragment4 = DietCreateFragment.newInstance(clientId,dates.get(3));
-        DietCreateFragment dietViewFragment5 = DietCreateFragment.newInstance(clientId,dates.get(4));
-        DietCreateFragment dietViewFragment6 = DietCreateFragment.newInstance(clientId,dates.get(5));
-        DietCreateFragment dietViewFragment7 = DietCreateFragment.newInstance(clientId,dates.get(6));
+        DietCreateFragment dietViewFragment1 = DietCreateFragment.newInstance(clientId,dates1.get(0));
+        DietCreateFragment dietViewFragment2 = DietCreateFragment.newInstance(clientId,dates1.get(1));
+        DietCreateFragment dietViewFragment3 = DietCreateFragment.newInstance(clientId,dates1.get(2));
+        DietCreateFragment dietViewFragment4 = DietCreateFragment.newInstance(clientId,dates1.get(3));
+        DietCreateFragment dietViewFragment5 = DietCreateFragment.newInstance(clientId,dates1.get(4));
+        DietCreateFragment dietViewFragment6 = DietCreateFragment.newInstance(clientId,dates1.get(5));
+        DietCreateFragment dietViewFragment7 = DietCreateFragment.newInstance(clientId,dates1.get(6));
 
 
         adapter.addFragment(dietViewFragment1,"1");
@@ -189,7 +201,7 @@ public class CreateDiet extends AppCompatActivity implements DietCreateFragment.
             alertDialog.show();
         }
         else if(id == R.id.save){
-            Toast.makeText(getApplicationContext(),"Diet Saved",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getApplicationContext(),"Diet Saved",Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -23,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.dietitianshreya.dtshreyaadmin.ChatActivity;
 import com.dietitianshreya.dtshreyaadmin.ClientDetailActivity;
 import com.dietitianshreya.dtshreyaadmin.R;
+import com.dietitianshreya.dtshreyaadmin.Utils.VariablesModels;
 import com.dietitianshreya.dtshreyaadmin.models.MealModel;
 import com.dietitianshreya.dtshreyaadmin.models.RescheduleAppointmentModel;
 
@@ -110,7 +111,7 @@ public class RescheduleAppointmentAdaper extends RecyclerView.Adapter<Reschedule
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(mCtx, ClientDetailActivity.class);
-                i.putExtra("clientID",appointment.getClientId());
+                i.putExtra("client",appointment.getClientId());
                 mCtx.startActivity(i);
             }
         });

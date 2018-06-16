@@ -8,19 +8,19 @@ import java.util.ArrayList;
 
 public class ChooseMealModel {
     String mealName,mealQuant;
-    ArrayList<String> exempted;
+    int exempted,pos;
 
-    public ChooseMealModel(String mealName, String mealQuant,ArrayList<String> exempted) {
+    public ChooseMealModel(String mealName, String mealQuant,int exempted) {
         this.mealName = mealName;
         this.mealQuant = mealQuant;
         this.exempted = exempted;
     }
 
-    public ArrayList<String> getExempted() {
+    public int getExempted() {
         return exempted;
     }
 
-    public void setExempted(ArrayList<String> exempted) {
+    public void setExempted(int exempted) {
         this.exempted = exempted;
     }
 
@@ -39,4 +39,16 @@ public class ChooseMealModel {
     public void setMealQuant(String mealQuant) {
         this.mealQuant = mealQuant;
     }
+
+    public  void setMealPos(int pos)
+    {
+        this.pos = pos;
+    }
+
+    public  int getMealPos()
+    {
+        return pos;
+    }
+
+
 }

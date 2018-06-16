@@ -1,6 +1,7 @@
 package com.dietitianshreya.dtshreyaadmin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +25,9 @@ public class ClientAppointmentFragment extends Fragment {
 
     private String clientId;
     RecyclerView recyclerView;
-    ArrayList<ClientAppointmentModel> appointmentList;
+    ArrayList<ClientAppointmentModel> appointmentList= new ArrayList<>();
+
+
     ClientAppointmentAdapter appointmentAdapter;
     private OnFragmentInteractionListener mListener;
     FloatingActionButton fab;
@@ -45,7 +49,8 @@ public class ClientAppointmentFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             clientId = getArguments().getString(ARG_PARAM1);
-
+            appointmentList=getArguments().getParcelableArrayList("appointments");
+            Log.d("appoint",appointmentList+"");
         }
     }
 
@@ -56,20 +61,17 @@ public class ClientAppointmentFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_client_appointment, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-        appointmentList = new ArrayList<>();
         appointmentAdapter = new ClientAppointmentAdapter(appointmentList,getActivity());
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(appointmentAdapter);
-        appointmentList.add(new ClientAppointmentModel("02/02/2018","9:30 A.M.","In Person","Complete","Dt. Shreya"));
-        appointmentList.add(new ClientAppointmentModel("02/02/2018","9:30 A.M.","In Person","Complete","Dt. Shreya"));
-        appointmentList.add(new ClientAppointmentModel("02/02/2018","9:30 A.M.","In Person","Complete","Dt. Shreya"));
-        appointmentList.add(new ClientAppointmentModel("02/02/2018","9:30 A.M.","In Person","Complete","Dt. Shreya"));
-        appointmentAdapter.notifyDataSetChanged();
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),BookAppointment.class);
+                startActivity(intent);
                 //Handle Book appointment here
             }
         });

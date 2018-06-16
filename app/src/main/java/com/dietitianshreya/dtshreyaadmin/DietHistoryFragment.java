@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,14 +24,16 @@ import com.dietitianshreya.dtshreyaadmin.adapters.DietPlanAdapter;
 import com.dietitianshreya.dtshreyaadmin.models.DietPlanModel;
 import com.dietitianshreya.dtshreyaadmin.models.MealModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class DietHistoryFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
-
+    String formattedDate;
     private String clientId;
     DatePicker datePicker;
     Button button;
@@ -44,6 +47,7 @@ public class DietHistoryFragment extends Fragment {
     int month,date,year;
     Intent intent;
 
+
     private OnFragmentInteractionListener mListener;
 
     public DietHistoryFragment() {
@@ -55,6 +59,7 @@ public class DietHistoryFragment extends Fragment {
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -63,39 +68,32 @@ public class DietHistoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             clientId = getArguments().getString(ARG_PARAM1);
+
             setHasOptionsMenu(true);
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_diet_history, container, false);
+
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
         dateSelection = (TextView) rootView.findViewById(R.id.dateSelection);
         dietList=new ArrayList<>();
         mealList = new ArrayList<>();
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        formattedDate = df.format(c);
         dietPlanAdapter = new DietPlanAdapter(dietList,getActivity());
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(dietPlanAdapter);
-        mealList.add(new MealModel("Corn Flakes","1 Bowl",false));
-        mealList.add(new MealModel("Cow's Milk","1 Glass",false));
-        dietList.add(new DietPlanModel("Breakfast",mealList));
+        dateSelection.setText(formattedDate);
 
-        ArrayList<MealModel> mealList1 = new ArrayList<>();
-        mealList1.add(new MealModel("Dal","1 bowl",false));
-        mealList1.add(new MealModel("Roti","3 full",false));
-        mealList1.add(new MealModel("Rice","Half bowl",false));
-        dietList.add(new DietPlanModel("Lunch",mealList1));
-
-        ArrayList<MealModel> mealList2 = new ArrayList<>();
-        mealList2.add(new MealModel("Chips","1 packet",false));
-        mealList2.add(new MealModel("Coke","300 ML",false));
-        mealList2.add(new MealModel("Chocolate","20g",false));
-        dietList.add(new DietPlanModel("Snack",mealList2));
-        dietPlanAdapter.notifyDataSetChanged();
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

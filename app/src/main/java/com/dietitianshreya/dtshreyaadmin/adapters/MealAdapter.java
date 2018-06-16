@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
     private Context mCtx;
 
 
+
     public MealAdapter(ArrayList<MealModel> mealList,Context mCtx) {
         this.mealList = mealList;
         this.mCtx = mCtx;
@@ -33,10 +35,14 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
 
 
         public TextView mealHead,mealDesc;
+        ImageView cross;
         public MyViewHolder(View view) {
             super(view);
             mealHead = (TextView)  view.findViewById(R.id.mealHeader);
             mealDesc = (TextView)  view.findViewById(R.id.mealDetail);
+            cross = view.findViewById(R.id.cross);
+
+
         }
     }
 
@@ -50,7 +56,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(MealAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MealAdapter.MyViewHolder holder, final int position) {
 
         final MealModel meal = mealList.get(position);
         holder.mealHead.setText(meal.getMealHead());
@@ -62,6 +68,14 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
         });
 
         holder.mealDesc.setText(meal.getMealDesc());
+
+        holder.cross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mealList.remove(position);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

@@ -1,10 +1,14 @@
 package com.dietitianshreya.dtshreyaadmin;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -14,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dietitianshreya.dtshreyaadmin.Utils.VariablesModels;
 import com.dietitianshreya.dtshreyaadmin.adapters.UpcomingAppointmentAdapter;
 import com.dietitianshreya.dtshreyaadmin.models.AppointmentDetailsModel;
 import com.dietitianshreya.dtshreyaadmin.models.LastMonthUsersModel;
@@ -26,8 +31,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.dietitianshreya.dtshreyaadmin.Login.MyPREFERENCES;
+
 public class UpcomingAppointmentsActivty extends AppCompatActivity {
 
+    String userid;
     RecyclerView recyclerView;
     ArrayList<AppointmentDetailsModel> appointmentDetailsList;
     UpcomingAppointmentAdapter appointmentAdapter;
@@ -42,20 +50,13 @@ public class UpcomingAppointmentsActivty extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(UpcomingAppointmentsActivty.this);
         recyclerView.setAdapter(appointmentAdapter);
         recyclerView.setLayoutManager(mLayoutManager);
+        SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
+
         fetchData();
-//        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","0","Akshit Tyagi","4 days left","12345"));
-//        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","0","Akshit Tyagi","4 days left","12345"));
-//        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","0","Akshit Tyagi","4 days left","12345"));
-//        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","0","Akshit Tyagi","4 days left","12345"));
-//        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","0","Akshit Tyagi","4 days left","12345"));
-//        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","0","Akshit Tyagi","4 days left","12345"));
-//        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","0","Akshit Tyagi","4 days left","12345"));
-//        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","0","Akshit Tyagi","4 days left","12345"));
-//        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","0","Akshit Tyagi","4 days left","12345"));
-//        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","0","Akshit Tyagi","4 days left","12345"));
-//        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","0","Akshit Tyagi","4 days left","12345"));
-//        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","0","Akshit Tyagi","4 days left","12345"));
-//        appointmentAdapter.notifyDataSetChanged();
+
+
+
     }
 
     public void fetchData() {
@@ -87,8 +88,8 @@ public class UpcomingAppointmentsActivty extends AppCompatActivity {
                                         }
                                         String newtime = hour + ":" + time.split(":")[1]+" "+ampm;
                                         status = ob.getString("status");
-                                        id = String.valueOf(ob.getInt("id"));
-                                        username = ob.getString("username");
+                                        id = String.valueOf(ob.getInt(VariablesModels.userId));
+                                        username = ob.getString(VariablesModels.user_name);
                                         daysleft = ob.getString("daysleft");
                                         //change the url for upcoming appointments, add days left with every client name
                                         appointmentDetailsList.add(new AppointmentDetailsModel(newtime,type,status,username,daysleft+ " days left",id));
@@ -119,7 +120,7 @@ public class UpcomingAppointmentsActivty extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("dietitianId","1");
+                params.put("dietitianId",userid);
                 return params;
             }
 

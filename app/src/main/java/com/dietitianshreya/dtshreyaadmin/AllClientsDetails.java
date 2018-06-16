@@ -2,12 +2,14 @@ package com.dietitianshreya.dtshreyaadmin;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +22,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dietitianshreya.dtshreyaadmin.Utils.VariablesModels;
 import com.dietitianshreya.dtshreyaadmin.adapters.AllClientsCompoundAdapter;
 import com.dietitianshreya.dtshreyaadmin.models.AllClientListOthersModel;
 import com.dietitianshreya.dtshreyaadmin.models.AllClientsCompoundModel;
+import com.dietitianshreya.dtshreyaadmin.models.ClientAppointmentModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,14 +36,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.dietitianshreya.dtshreyaadmin.Login.MyPREFERENCES;
+
 
 public class AllClientsDetails extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     RecyclerView recyclerView;
     ArrayList<AllClientsCompoundModel> clientList;
+
     ArrayList<AllClientListOthersModel> pendingdiet,otherclients;
     AllClientsCompoundAdapter clientListAdapter;
+    String userid;
 
     public AllClientsDetails() {
         // Required empty public constructor
@@ -66,6 +74,8 @@ public class AllClientsDetails extends Fragment {
         View rootView =  inflater.inflate(R.layout.fragment_all_clients_details, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
         clientList=new ArrayList<>();
+        SharedPreferences sharedpreferences1 = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
         clientListAdapter = new AllClientsCompoundAdapter(clientList,getActivity());
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -114,6 +124,7 @@ public class AllClientsDetails extends Fragment {
                         try {
                             progressDialog.dismiss();
                             JSONObject result = new JSONObject(response);
+                            Log.d("mytag",response);
                             if(result.getInt("res")==1) {
                                 JSONArray ar = result.getJSONArray("response");
                                 if (ar.length() != 0){
@@ -121,8 +132,8 @@ public class AllClientsDetails extends Fragment {
                                         JSONObject ob = ar.getJSONObject(i);
                                         String name,id,daysleft,createIn;
                                         int creatinInt;
-                                        name = ob.getString("name");
-                                        id = "Id : "+ob.getInt("id");
+                                        name = ob.getString(VariablesModels.user_name);
+                                        id = ob.getInt(VariablesModels.userId)+"";
                                         daysleft = ob.getInt("daysleft")+" days left";
                                         creatinInt = ob.getInt("createIn");
                                         if(creatinInt<=0){
@@ -163,7 +174,7 @@ public class AllClientsDetails extends Fragment {
             @Override
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("dietitianId","1");
+                params.put("dietitianId",userid);
                 return params;
             }
 

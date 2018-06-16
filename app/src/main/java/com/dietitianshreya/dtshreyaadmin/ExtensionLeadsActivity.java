@@ -1,6 +1,8 @@
 package com.dietitianshreya.dtshreyaadmin;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.beloo.widget.chipslayoutmanager.util.log.Log;
+import com.dietitianshreya.dtshreyaadmin.Utils.VariablesModels;
 import com.dietitianshreya.dtshreyaadmin.adapters.ExtensionLeadsAdaper;
 import com.dietitianshreya.dtshreyaadmin.models.AppointmentDetailsModel;
 import com.dietitianshreya.dtshreyaadmin.models.ExtensionLeadsModel;
@@ -26,15 +30,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.dietitianshreya.dtshreyaadmin.Login.MyPREFERENCES;
+
 public class ExtensionLeadsActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ArrayList<ExtensionLeadsModel> leadList;
     ExtensionLeadsAdaper leadsAdaper;
+    String userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extension_leads);
+
+        SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
         recyclerView = (RecyclerView) findViewById(R.id.re);
         leadList = new ArrayList<>();
         leadsAdaper = new ExtensionLeadsAdaper(leadList,this);
@@ -42,12 +52,7 @@ public class ExtensionLeadsActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         fetchData();
-//        leadList.add(new ExtensionLeadsModel("Akshit Tyagi","123456","10/02/2018","5 days","2 Months","awaited","4 days left"));
-//        leadList.add(new ExtensionLeadsModel("Akshit Tyagi","123456","10/02/2018","5 days","2 Months","awaited","4 days left"));
-//        leadList.add(new ExtensionLeadsModel("Akshit Tyagi","123456","10/02/2018","5 days","2 Months","awaited","4 days left"));
-//        leadList.add(new ExtensionLeadsModel("Akshit Tyagi","123456","10/02/2018","5 days","2 Months","awaited","4 days left"));
-//        leadList.add(new ExtensionLeadsModel("Akshit Tyagi","123456","10/02/2018","5 days","2 Months","awaited","4 days left"));
-//        leadsAdaper.notifyDataSetChanged();
+
     }
 
     public void fetchData() {
@@ -65,16 +70,17 @@ public class ExtensionLeadsActivity extends AppCompatActivity {
                             JSONObject result = new JSONObject(response);
                             if(result.getInt("res")==1) {
                                 JSONArray ar = result.getJSONArray("response");
+                                Log.d("manya",response);
                                 if (ar.length() != 0){
                                     for (int i = 0; i < ar.length(); i++) {
                                         JSONObject ob = ar.getJSONObject(i);
                                         String startdate,userid,username,plan,daysleft,dayspassed,phone;
-                                        username = ob.getString("username");
+                                        username = ob.getString(VariablesModels.user_name);
                                         dayspassed = ob.getString("dayspassed");
                                         plan = ob.getString("plan");
                                         daysleft = ob.getString("daysleft");
                                         phone = ob.getString("phone");
-                                        userid = String.valueOf(ob.getInt("userid"));
+                                        userid = String.valueOf(ob.getInt(VariablesModels.userId));
                                         startdate = ob.getString("startdate");
                                         //change the url for upcoming leads, add days left with every client name
                                         leadList.add(new ExtensionLeadsModel(username,userid,startdate,dayspassed,plan,phone,daysleft+" days left"));
@@ -105,7 +111,7 @@ public class ExtensionLeadsActivity extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("dietitianId","1");
+                params.put(VariablesModels.dietitianId,userid);
                 return params;
             }
 

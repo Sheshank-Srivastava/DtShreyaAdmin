@@ -1,10 +1,13 @@
 package com.dietitianshreya.dtshreyaadmin;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -14,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dietitianshreya.dtshreyaadmin.Utils.VariablesModels;
 import com.dietitianshreya.dtshreyaadmin.adapters.ExtensionLeadsAdaper;
 import com.dietitianshreya.dtshreyaadmin.adapters.LastMonthUsersAdapter;
 import com.dietitianshreya.dtshreyaadmin.models.ExtensionLeadsModel;
@@ -28,17 +32,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.dietitianshreya.dtshreyaadmin.Login.MyPREFERENCES;
+
 public class LastMonthUsers extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ArrayList<LastMonthUsersModel> clientList;
     LastMonthUsersAdapter clientAdapter;
+    String userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_last_month_users);
         recyclerView = (RecyclerView) findViewById(R.id.re);
         clientList = new ArrayList<>();
+        SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
         clientAdapter = new LastMonthUsersAdapter(clientList,this);
         recyclerView.setAdapter(clientAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -60,19 +69,22 @@ public class LastMonthUsers extends AppCompatActivity {
 
                         try {
                             progressDialog.dismiss();
+                            Log.d("last",response);
                             JSONObject result = new JSONObject(response);
                             if(result.getInt("res")==1) {
                                 JSONArray ar = result.getJSONArray("response");
                                 if (ar.length() != 0){
                                     for (int i = 0; i < ar.length(); i++) {
                                         JSONObject ob = ar.getJSONObject(i);
-                                        String clientId,name,plan,startdate,daysleft,kgslost;
+                                        String clientId,name,plan,startdate,daysleft,kgslost,email;
                                         plan = ob.getString("plan");
-                                        name = ob.getString("name");
+                                        name = ob.getString(VariablesModels.user_name);
                                         kgslost = ob.getString("kgslost");
                                         startdate = ob.getString("startdate");
                                         daysleft = String.valueOf(ob.getInt("daysleft"));
-                                        clientId = ob.getString("clientId");
+                                        clientId = ob.getString(VariablesModels.userId);
+                                        email=ob.getString("email");
+
                                         clientList.add(new LastMonthUsersModel(name,clientId,startdate,kgslost,plan,"null",daysleft));
                                     }
                                     clientAdapter.notifyDataSetChanged();
@@ -101,7 +113,7 @@ public class LastMonthUsers extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("dietitianId","1");
+                params.put(VariablesModels.dietitianId,userid);
                 return params;
             }
 
