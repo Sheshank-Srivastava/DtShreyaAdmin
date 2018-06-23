@@ -1,6 +1,7 @@
 package com.dietitianshreya.dtshreyaadmin;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,7 +11,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +50,10 @@ public class ChatSelectionFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     RecyclerView recyclerView;
     ArrayList<ClientListModel> clientList;
+    ArrayList<ClientListModel> filteredData;
     ClientListAdapter clientListAdapter;
     String userid;
+    int searchFlag=0;
 
     public ChatSelectionFragment() {
         // Required empty public constructor
@@ -70,9 +78,11 @@ public class ChatSelectionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true);
         View rootView =  inflater.inflate(R.layout.fragment_chat_selection, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
         clientList=new ArrayList<>();
+        filteredData = new ArrayList<>();
         clientListAdapter = new ClientListAdapter(clientList,getActivity());
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -85,6 +95,65 @@ public class ChatSelectionFragment extends Fragment {
 
 
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(final Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.search_menu,menu);
+        MenuItem searchViewItem = menu.findItem(R.id.actionsearch);
+
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) searchViewItem.getActionView();
+//        searchView.setQueryHint("Type name here...");
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView.setIconifiedByDefault(false);// Do not iconify the widget; expand it by defaul
+
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+            public boolean onQueryTextChange(String newText) {
+
+                // This is your adapter that will be filtered
+                //Toast.makeText(getApplicationContext(),"textChanged :"+newText,Toast.LENGTH_LONG).show();
+
+                filter(newText);
+                return true;
+            }
+
+            public boolean onQueryTextSubmit(String query) {
+                // **Here you can get the value "query" which is entered in the search box.**
+
+                filter(query);
+                return true;
+            }
+        };
+        searchView.setOnQueryTextListener(queryTextListener);
+    }
+    public void filter(String charSequence) {
+        if (!(TextUtils.isEmpty(charSequence)))
+        {
+            searchFlag = 1;
+            if (filteredData!= null)
+                filteredData.clear();
+            ClientListAdapter filteredAdapter = new ClientListAdapter(filteredData,getActivity());
+
+            for (ClientListModel row : clientList) {
+
+                // name match condition. this might differ depending on your requirement
+                // here we are looking for name or phone number match
+
+                if (row.getClientName().toLowerCase().contains(charSequence.toLowerCase())) {
+                    filteredData.add(row);
+                }
+            }
+
+            recyclerView.setAdapter(filteredAdapter);
+            filteredAdapter.notifyDataSetChanged();
+        } else
+
+        {
+            searchFlag = 0;
+            recyclerView.setAdapter(clientListAdapter);
+            clientListAdapter.notifyDataSetChanged();
+        }
     }
 
     public void onButtonPressed(Uri uri) {
@@ -186,3 +255,5 @@ public class ChatSelectionFragment extends Fragment {
 
     }
 }
+
+

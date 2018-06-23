@@ -84,8 +84,8 @@ public class TestBooking extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(TestBooking.this,BookTest.class);
+                finish();
                 startActivity(intent);
             }
         });

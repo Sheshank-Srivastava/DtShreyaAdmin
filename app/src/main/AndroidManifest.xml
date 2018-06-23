@@ -14,20 +14,17 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ClientListActivity" />
         <activity android:name=".CreateDiet" />
         <activity android:name=".ClientDetailActivity" />
-        <activity android:name=".ChatActivity"
-            android:theme="@style/Toolbar.Light"/>
+        <activity
+            android:name=".ChatActivity"
+            android:theme="@style/Toolbar.Light" />
         <activity android:name=".ViewDietActivity" />
         <activity android:name=".ChooseMealActivity" />
         <activity android:name=".BookTest" />
-        <activity
-            android:name=".DiaryViewActivity"/>
-
+        <activity android:name=".DiaryViewActivity" />
         <activity android:name=".CompleteProfileActivity" />
         <activity android:name=".ClientProfileActivity" />
         <activity android:name=".UpcomingAppointmentsActivty" />
@@ -38,26 +35,23 @@
         <activity android:name=".TestBooking" />
         <activity android:name=".ExtensionLeadsActivity" />
         <activity android:name=".LastMonthUsers" />
-        <activity android:name=".DietDiary"></activity>
+        <activity android:name=".DietDiary" />
         <activity android:name=".OverallProgress" />
         <activity android:name=".BookAppointment" />
         <activity android:name=".TemplateSelection" />
-        <activity android:name=".Login"/>
-        <activity android:name=".view.FullScreenImageActivity"
+        <activity android:name=".Login" />
+        <activity
+            android:name=".view.FullScreenImageActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
-
-
-
-        </activity>
-        <activity android:name=".SplashScreen"
-            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
         <service android:name=".Utils.MyFirebaseInstanceIdService">
             <intent-filter>
@@ -69,6 +63,9 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".SendGroupNotification" />
+        <activity android:name=".DietitianProfileReviews"></activity>
     </application>
 
 </manifest>

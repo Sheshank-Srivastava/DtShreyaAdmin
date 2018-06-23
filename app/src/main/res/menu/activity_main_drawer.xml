@@ -10,14 +10,14 @@
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_ladka_ladki"
             android:title="Profile" />
-        <item
+        <!--<item-->
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_progress"
             android:title="Overall Progress" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/notification"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Send Notification" />
     </group>
 
     <item android:title="Extras">

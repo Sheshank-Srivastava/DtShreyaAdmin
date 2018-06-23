@@ -36,14 +36,16 @@ public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.My
     private ArrayList<ChooseMealModel> filteredmealList;
     EditText quant;
     int searchFlag =0;
+    ChooseMealAdapter mealAdapter;
 
 
-    public ChooseMealAdapter(ArrayList<ChooseMealModel> mealList, Context mCtx) {
+    public ChooseMealAdapter(ArrayList<ChooseMealModel> mealList, Context mCtx,int searchFlag,ChooseMealAdapter mealAdapter) {
         this.mealList = mealList;
         this.mCtx = mCtx;
         choosenList = new ArrayList<>();
         this.filteredmealList = mealList;
-
+        this.searchFlag=searchFlag;
+        this.mealAdapter=mealAdapter;
     }
 
 
@@ -77,7 +79,16 @@ public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.My
 
         final ChooseMealModel meal = mealList.get(position);
         holder.name.setText(meal.getMealName());
-        holder.img.setTag("add");
+
+
+        if(meal.getMealQuant().equals("")){
+            holder.img.setImageResource(R.drawable.ic_tick);
+            holder.img.setTag("tick");
+        }else{
+            holder.img.setImageResource(R.drawable.ic_add);
+            holder.img.setTag("add");
+
+        }
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,8 +97,8 @@ public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.My
 
     Log.d("lol","i am here");
     if (meal.getExempted() == 0) {
-        choosenList.add(new ChooseMealModel(meal.getMealName(), "", 0));
-        Log.d("manya",meal.getMealName()+ choosenList.size());
+        choosenList.add(new ChooseMealModel(meal.getMealName(), meal.getMealQuant()+"", 0));
+        Log.d("manya",meal.getMealName()+ choosenList.size()+"   "+meal.getMealQuant());
         meal.setMealQuant("");
         //set right image
         holder.img.setImageResource(R.drawable.ic_tick);
@@ -95,6 +106,9 @@ public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.My
     } else {
         Toast.makeText(mCtx, "This food is exempted according to medical history", Toast.LENGTH_SHORT).show();
     }
+        if(searchFlag==1){
+            mealAdapter.appendList(choosenList);
+        }
 }
 //                        }
 //                    }
@@ -114,6 +128,13 @@ public class ChooseMealAdapter extends RecyclerView.Adapter<ChooseMealAdapter.My
     public ArrayList<ChooseMealModel> getMealList(){
         return choosenList;
     }
+
+    public void appendList(ArrayList<ChooseMealModel> list){
+        for(int i=0;i<list.size();i++) {
+            this.choosenList.add(list.get(i));
+        }
+    }
+
 
 
 

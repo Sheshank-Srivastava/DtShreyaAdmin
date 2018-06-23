@@ -87,8 +87,10 @@ public class DashboardFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(appointmentsAdapter);
-
+        appointmentsList.clear();
+        appointmentsAdapter.notifyDataSetChanged();
         fetchData();
+        Log.d("Dashboard","fetching data");
 
         viewAllAppointments.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +130,8 @@ public class DashboardFragment extends Fragment {
         progressDialog.setMessage("Fetching data...");
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/upcomingappointments/";
+        appointmentsList.clear();
+        appointmentsAdapter.notifyDataSetChanged();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -224,6 +228,7 @@ public class DashboardFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
+            Log.d("Dashboard fragment","Attached");
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -239,4 +244,26 @@ public class DashboardFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
+
+    int pauseFlag=0;
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(pauseFlag==1) {
+            pauseFlag=0;
+            appointmentsList.clear();
+            appointmentsAdapter.notifyDataSetChanged();
+            Log.d("Dashboard","on resume");
+            fetchData();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        pauseFlag=1;
+        Log.d("Dahsboard","Onpause");
+    }
+
+
 }

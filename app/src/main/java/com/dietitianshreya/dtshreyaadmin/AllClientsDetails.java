@@ -1,6 +1,7 @@
 package com.dietitianshreya.dtshreyaadmin;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -9,8 +10,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -24,8 +30,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dietitianshreya.dtshreyaadmin.Utils.VariablesModels;
 import com.dietitianshreya.dtshreyaadmin.adapters.AllClientsCompoundAdapter;
+import com.dietitianshreya.dtshreyaadmin.adapters.ChooseMealAdapter;
 import com.dietitianshreya.dtshreyaadmin.models.AllClientListOthersModel;
 import com.dietitianshreya.dtshreyaadmin.models.AllClientsCompoundModel;
+import com.dietitianshreya.dtshreyaadmin.models.ChooseMealModel;
 import com.dietitianshreya.dtshreyaadmin.models.ClientAppointmentModel;
 
 import org.json.JSONArray;
@@ -43,9 +51,9 @@ public class AllClientsDetails extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     RecyclerView recyclerView;
-    ArrayList<AllClientsCompoundModel> clientList;
+    ArrayList<AllClientsCompoundModel> clientList,filterclientList;
 
-    ArrayList<AllClientListOthersModel> pendingdiet,otherclients;
+    ArrayList<AllClientListOthersModel> pendingdiet,otherclients,pendingfilterlist,otherclientfilterlist;
     AllClientsCompoundAdapter clientListAdapter;
     String userid;
 
@@ -73,7 +81,9 @@ public class AllClientsDetails extends Fragment {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_all_clients_details, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
+        setHasOptionsMenu(true);
         clientList=new ArrayList<>();
+        filterclientList = new ArrayList<>();
         SharedPreferences sharedpreferences1 = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
         clientListAdapter = new AllClientsCompoundAdapter(clientList,getActivity());
@@ -84,22 +94,24 @@ public class AllClientsDetails extends Fragment {
         recyclerView.setAdapter(clientListAdapter);
         pendingdiet = new ArrayList<>();
         otherclients = new ArrayList<>();
+        pendingfilterlist = new ArrayList<>();
+        otherclientfilterlist = new ArrayList<>();
         sendR();
 //
-//        clientListDetails.add(new AllClientListOthersModel("Akshit Tyagi","Id : 345rde3","0","4 days left"));
-//        clientListDetails.add(new AllClientListOthersModel("Paras Garg","Id : 345rde3","0","4 days left"));
-//        clientListDetails.add(new AllClientListOthersModel("Balkeerat","Id : 345rde3","0","4 days left"));
-//        clientListDetails.add(new AllClientListOthersModel("Manya ","Id : 345rde3","0","4 days left"));
-//        clientList.add(new AllClientsCompoundModel("Pending Diet Creation",clientListDetails));
+//        pendingdiet.add(new AllClientListOthersModel("Akshit Tyagi","Id : 345rde3","0","4 days left"));
+//        pendingdiet.add(new AllClientListOthersModel("Paras Garg","Id : 345rde3","0","4 days left"));
+//        pendingdiet.add(new AllClientListOthersModel("Balkeerat","Id : 345rde3","0","4 days left"));
+//        pendingdiet.add(new AllClientListOthersModel("Manya ","Id : 345rde3","0","4 days left"));
+//        clientList.add(new AllClientsCompoundModel("Pending Diet Creation",pendingdiet));
 //
 //        ArrayList<AllClientListOthersModel> clientDetailsList1 = new ArrayList<>();
-//        clientDetailsList1.add(new AllClientListOthersModel("Akshit Tyagi","Id : 345rde3","4","4 days left"));
-//        clientDetailsList1.add(new AllClientListOthersModel("Akshit Tyagi","Id : 345rde3","4","4 days left"));
-//        clientDetailsList1.add(new AllClientListOthersModel("Akshit Tyagi","Id : 345rde3","4","4 days left"));
-//        clientDetailsList1.add(new AllClientListOthersModel("Akshit Tyagi","Id : 345rde3","4","4 days left"));
-//        clientDetailsList1.add(new AllClientListOthersModel("Akshit Tyagi","Id : 345rde3","4","4 days left"));
-//        clientList.add(new AllClientsCompoundModel("Other Clients",clientDetailsList1));
-//        clientListAdapter.notifyDataSetChanged();
+//        otherclients.add(new AllClientListOthersModel("wer ","Id : 345rde3","4","4 days left"));
+//        otherclients.add(new AllClientListOthersModel("tfh ","Id : 345rde3","4","4 days left"));
+//        otherclients.add(new AllClientListOthersModel("fdfdf ","Id : 345rde3","4","4 days left"));
+//        otherclients.add(new AllClientListOthersModel("ffdfsd ","Id : 345rde3","4","4 days left"));
+//        otherclients.add(new AllClientListOthersModel("sdsdsdadasd ","Id : 345rde3","4","4 days left"));
+//        clientList.add(new AllClientsCompoundModel("Other Clients",otherclients));
+        clientListAdapter.notifyDataSetChanged();
 
 
         return rootView;
@@ -209,5 +221,76 @@ public class AllClientsDetails extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search_menu,menu);
+        MenuItem searchViewItem = menu.findItem(R.id.actionsearch);
+
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) searchViewItem.getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView.setIconifiedByDefault(false);// Do not iconify the widget; expand it by defaul
+
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+            public boolean onQueryTextChange(String newText) {
+                // This is your adapter that will be filtered
+                //Toast.makeText(getApplicationContext(),"textChanged :"+newText,Toast.LENGTH_LONG).show();
+                filter(newText);
+                return true;
+            }
+
+            public boolean onQueryTextSubmit(String query) {
+                // **Here you can get the value "query" which is entered in the search box.**
+                filter(query);
+                return true;
+            }
+        };
+        searchView.setOnQueryTextListener(queryTextListener);
+    }
+
+    public void filter(String charSequence)
+    {
+        if(!(TextUtils.isEmpty(charSequence)))
+
+        {
+            if(filterclientList!=null){
+                filterclientList.clear();
+            }
+            if(pendingfilterlist!= null)
+                pendingfilterlist.clear();
+            if(otherclientfilterlist!=null){
+                otherclientfilterlist.clear();
+            }
+            AllClientsCompoundAdapter filteredAdapter = new AllClientsCompoundAdapter(filterclientList,getActivity());
+            for (AllClientListOthersModel row : pendingdiet) {
+
+                // name match condition. this might differ depending on your requirement
+                // here we are looking for name or phone number match
+
+                if (row.getClientName().toLowerCase().contains(charSequence.toLowerCase()))  {
+                    pendingfilterlist.add(row);
+                }
+            }
+            for(AllClientListOthersModel row : otherclients){
+                if (row.getClientName().toLowerCase().contains(charSequence.toLowerCase()))  {
+                    otherclientfilterlist.add(row);
+                }
+            }
+
+            if(pendingfilterlist.size()>0)
+            filterclientList.add(new AllClientsCompoundModel("Pending Diet Creation", pendingfilterlist));
+            if(otherclientfilterlist.size()>0)
+            filterclientList.add(new AllClientsCompoundModel("Other Clients",otherclientfilterlist));
+            recyclerView.setAdapter(filteredAdapter);
+            filteredAdapter.notifyDataSetChanged();
+        }else
+
+        {
+            recyclerView.setAdapter(clientListAdapter);
+            clientListAdapter.notifyDataSetChanged();
+        }
     }
 }

@@ -65,7 +65,7 @@ public class ChooseMealActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.re);
         mealList=new ArrayList<>();
         fmealList=new ArrayList<>();
-        mealAdapter = new ChooseMealAdapter(mealList,ChooseMealActivity.this);
+        mealAdapter = new ChooseMealAdapter(mealList,ChooseMealActivity.this,0,null);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(ChooseMealActivity.this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(ChooseMealActivity.this, LinearLayoutManager.VERTICAL));
@@ -111,6 +111,7 @@ public class ChooseMealActivity extends AppCompatActivity {
 
                         try {
                             progressDialog.dismiss();
+                            Log.d("Data",response);
                             JSONObject object = new JSONObject(response);
                             int res = object.getInt(VariablesModels.res);
                             String msg= object.getString(VariablesModels.msg);
@@ -168,7 +169,7 @@ public class ChooseMealActivity extends AppCompatActivity {
 
 
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu,menu);
 
@@ -199,7 +200,7 @@ public class ChooseMealActivity extends AppCompatActivity {
         return true;
 
     }
-    */
+
 
 
     public void filter(String charSequence)
@@ -210,7 +211,7 @@ public class ChooseMealActivity extends AppCompatActivity {
             searchFlag = 1;
             if(fmealList!= null)
             fmealList.clear();
-            ChooseMealAdapter filteredAdapter = new ChooseMealAdapter(fmealList, ChooseMealActivity.this);
+            ChooseMealAdapter filteredAdapter = new ChooseMealAdapter(fmealList, ChooseMealActivity.this,1,mealAdapter);
             for (ChooseMealModel row : mealList) {
 
                 // name match condition. this might differ depending on your requirement

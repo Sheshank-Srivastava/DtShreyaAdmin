@@ -85,6 +85,7 @@ public class DietViewFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_diet_view, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
         dietList=new ArrayList<>();
+        Log.d("Test date",date);
         mealList = new ArrayList<>();
         SharedPreferences sharedpreferences1 = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         userid= String.valueOf(sharedpreferences1.getInt("clientId",0));

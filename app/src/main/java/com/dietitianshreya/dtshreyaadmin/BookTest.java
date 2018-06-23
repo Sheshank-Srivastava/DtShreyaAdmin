@@ -37,6 +37,9 @@ import com.dietitianshreya.dtshreyaadmin.adapters.AllClientListOthersAdapter;
 import com.dietitianshreya.dtshreyaadmin.adapters.DiseaseAdapter;
 import com.dietitianshreya.dtshreyaadmin.models.AllClientListOthersModel;
 import com.dietitianshreya.dtshreyaadmin.models.DiseaseModel;
+import com.dietitianshreya.dtshreyaadmin.models.FoodChip;
+import com.pchmn.materialchips.ChipsInput;
+import com.pchmn.materialchips.model.ChipInterface;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,6 +47,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.dietitianshreya.dtshreyaadmin.Login.MyPREFERENCES;
@@ -60,10 +64,13 @@ public class BookTest extends AppCompatActivity {
     String time24format,id="none";
     String notes,test_text;
     int searchFlag = 0;
-    Button bookTest;
+    Button bookTest,add;
     String userid;
     ArrayList<DiseaseModel> testList;
     DiseaseAdapter testAdapter;
+    private ChipsInput mChipsInput;
+    private List<FoodChip> items = new ArrayList<>();
+    private List<ChipInterface> items_added = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,19 +79,50 @@ public class BookTest extends AppCompatActivity {
         SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
         test_client = (EditText) findViewById(R.id.TestClientName);
+        mChipsInput = (ChipsInput) findViewById(R.id.chips_input);
+        add = (Button) findViewById(R.id.addTest);
         test_time= (EditText) findViewById(R.id.testTime);
         test_date = (EditText) findViewById(R.id.testDate);
-        test_name = (EditText) findViewById(R.id.testName);
+//        test_name = (EditText) findViewById(R.id.testName);
         test_notes= (EditText) findViewById(R.id.testNotes);
         bookTest= (Button) findViewById(R.id.booktestbutton);
         allclients = new ArrayList<>();
         sendR();
+        testList = new ArrayList<>();
+        getTestData();
+        mChipsInput.setFilterableList(new ArrayList<ChipInterface>());
+//        mChipsInput.getEditText().setEnabled(false);
+        mChipsInput.addChipsListener(new ChipsInput.ChipsListener() {
+            @Override
+            public void onChipAdded(ChipInterface chip, int newSize) {
+                items_added.add(chip);
+            }
+
+            @Override
+            public void onChipRemoved(ChipInterface chip, int newSize) {
+                items_added.remove(chip);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence text) {
+                //Log.e(TAG, "text changed: " + text.toString());
+            }
+        });
         bookTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 notes= test_notes.getText().toString();
+                String testname="";
+                for(int i=0;i<items_added.size();i++){
+                    if(i==0){
+                        testname = items_added.get(i).getLabel();
+                    }
+                    else{
+                        testname += " + "+items_added.get(i).getLabel();
+                    }
+                }
+                PostTestData(testname);
                 Log.d("notes",notes);
-                PostTestData();
             }
         });
         test_client.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +131,7 @@ public class BookTest extends AppCompatActivity {
                 dialogContacts();
             }
         });
-            String testname=test_name.getText().toString();
+//            String testname=test_name.getText().toString();
 
         test_time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,13 +197,11 @@ public class BookTest extends AppCompatActivity {
             }
         });
 
-
-        test_name.setOnClickListener(new View.OnClickListener() {
+//        test_name.setFocusable(false);
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                testList = new ArrayList<>();
-                getTestData();
+                dialogtest();
             }
         });
 
@@ -176,7 +212,7 @@ public class BookTest extends AppCompatActivity {
     }
 
 
-    public void PostTestData() {
+    public void PostTestData(final String testname) {
         final ProgressDialog progressDialog = new ProgressDialog(BookTest.this);
         progressDialog.setMessage("Fetching data...");
         progressDialog.show();
@@ -194,6 +230,7 @@ public class BookTest extends AppCompatActivity {
                             if(res ==1){
 
                                 Intent i = new Intent(BookTest.this,TestBooking.class);
+                                finish();
                                 startActivity(i);
                             }
                             else
@@ -225,7 +262,7 @@ public class BookTest extends AppCompatActivity {
                 params.put("time",time24format);
                 params.put("date",test_date.getText().toString());
                 params.put("notes",notes);
-                params.put("testname",test_name.getText().toString());
+                params.put("testname",testname);
                 params.put("clinicid","3");
 
                 return params;
@@ -406,7 +443,7 @@ public class BookTest extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-
+                            progressDialog.dismiss();
 
                             try {
 
@@ -422,7 +459,7 @@ public class BookTest extends AppCompatActivity {
                                     Log.d("lolwa", testList.size() + "");
                                 }
 
-                                dialogtest();
+
                             }
 
 
@@ -520,29 +557,33 @@ public class BookTest extends AppCompatActivity {
             public void onClick(View view, int position) throws NoSuchFieldException, IllegalAccessException {
                 if(searchFlag==0) {
                     DiseaseModel client = testList.get(position);
+                    FoodChip chip = new FoodChip(client.getDiseaseName());
+                    mChipsInput.addChip(chip);
                     //test_client.setText(client.getDiseaseName());
-                    if(test_text==null)
-                    {
-                        test_text= client.getDiseaseName();
-                        test_name.setText(test_text);
-
-                    }
-                    else {
-                        test_text = test_text + " + " + client.getDiseaseName();
-                        test_name.setText(test_text);
-                    }
+//                    if(test_text==null)
+//                    {
+//                        test_text= client.getDiseaseName();
+//                        test_name.setText(test_text);
+//
+//                    }
+//                    else {
+//                        test_text = test_text + " + " + client.getDiseaseName();
+//                        test_name.setText(test_text);
+//                    }
                     //id = client.getClientId();
                 }else{
                     DiseaseModel client = filteredList.get(position);
-                    if(test_text==null)
-                    {
-                        test_text= client.getDiseaseName();
-                        test_name.setText(test_text);
-                    }
-                    else {
-                        test_text = test_text + " + " + client.getDiseaseName();
-                        test_name.setText(test_text);
-                    }
+                    FoodChip chip = new FoodChip(client.getDiseaseName());
+                    mChipsInput.addChip(chip);
+//                    if(test_text==null)
+//                    {
+//                        test_text= client.getDiseaseName();
+//                        test_name.setText(test_text);
+//                    }
+//                    else {
+//                        test_text = test_text + " + " + client.getDiseaseName();
+//                        test_name.setText(test_text);
+//                    }
                     // test_client.setText(client.getDiseaseName());
                     // id = client.getClientId();
                 }

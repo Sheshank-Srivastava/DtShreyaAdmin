@@ -113,8 +113,9 @@ EditText date,time;
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mCtx,"Remove!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mCtx,"Removed!",Toast.LENGTH_SHORT).show();
                 leadsList.remove(position);
+                sendRemoveRequest(lead.getClientId());
                 notifyDataSetChanged();
             }
         });
@@ -233,6 +234,46 @@ EditText date,time;
                 params.put("enddate",date+"");
                 params.put("userId",id);
                 params.put("pId",id);
+                return params;
+            }
+        };
+
+        int MY_SOCKET_TIMEOUT_MS = 50000;
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(mCtx);
+        requestQueue.add(stringRequest);
+    }
+
+    public void sendRemoveRequest(final String userid) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(mCtx);
+//        progressDialog.setMessage("Requesting .");
+//        progressDialog.show();
+        String url = "https://shreyaapi.herokuapp.com/cancelextension/";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("Cancel response",response);
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+//                        progressDialog.dismiss();
+                        Toast.makeText(mCtx,"Something went wrong!\nCheck your Internet connection and try again..", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(MedicineData.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("userId",userid);
                 return params;
             }
         };

@@ -1,35 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lyt_view_profile"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/nav_header_height"
-    android:background="@drawable/side_nav_bar"
-    android:gravity="bottom"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:layout_height="130dp"
+    android:background="@drawable/bg_polygon"
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Android Studio"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:clickable="true"
+        android:layout_marginTop="@dimen/layout_big_margin"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/layout_medium_margin"
+        >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="android.studio@android.com" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:padding="@dimen/medium_padding"
+    android:layout_height="wrap_content">
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/profileImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/image_2"
+            app:civ_border="true"
+            android:layout_gravity="center"
+            app:civ_border_width="2dp" />
+</LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="@dimen/large_padding"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Akshit Tyagi"
+                android:id="@+id/clientName"
+                android:textSize="@dimen/text_large"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/textColorLight" />
+
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="a.tyagi20596@gmail.com"-->
+                <!--android:id="@+id/clientEmail"-->
+                <!--android:textSize="@dimen/text_very_small"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
+                <!--android:textColor="@color/textColorLight" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Weight Loss Plan"-->
+                <!--android:id="@+id/plan"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
+                <!--android:textColor="@color/textColorLight" />-->
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_10" />
 
 </LinearLayout>

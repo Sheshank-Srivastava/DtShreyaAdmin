@@ -264,7 +264,7 @@ public class TodayDietFragment extends Fragment {
 
                                 if (innerobject.has("foodsix")) {
                                     ArrayList<MealModel> mealList = new ArrayList<>();
-                                    JSONArray array = innerobject.getJSONArray("sixfood");
+                                    JSONArray array = innerobject.getJSONArray("foodsix");
                                     for (int i = 0; i < array.length(); i++) {
                                         String food = array.getString(i);
                                         mealList.add(new MealModel(food, "xy", true));
