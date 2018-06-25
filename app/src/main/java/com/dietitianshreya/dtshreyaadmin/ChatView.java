@@ -1,9 +1,5 @@
 package com.dietitianshreya.dtshreyaadmin;
 
-
-
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,19 +19,15 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -75,14 +67,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 
 import static com.dietitianshreya.dtshreyaadmin.Login.MyPREFERENCES;
-import static com.dietitianshreya.dtshreyaadmin.Utils.MyFirebaseInstanceIdService.SharedPrefToken;
 
+/**
+ * Created by manyamadan on 25/06/18.
+ */
 
-public class ChatActivity extends AppCompatActivity implements  View.OnClickListener, ClickListenerChatFirebase {
+public class ChatView extends AppCompatActivity implements  View.OnClickListener, ClickListenerChatFirebase {
 
     private static final int IMAGE_GALLERY_REQUEST = 1;
     private static final int IMAGE_CAMERA_REQUEST = 2;
@@ -95,6 +90,8 @@ public class ChatActivity extends AppCompatActivity implements  View.OnClickList
     //Firebase and GoogleApiClient
     private FirebaseAuth mFirebaseAuth;
     Menu menu;
+    RelativeLayout sendMess;
+
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mFirebaseDatabaseReference;
     FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -104,13 +101,12 @@ public class ChatActivity extends AppCompatActivity implements  View.OnClickList
 
     //Views UI
     private RecyclerView rvListMessage;
-
     private LinearLayoutManager mLinearLayoutManager;
     private ImageView btSendMessage,btEmoji,edattach;
     private EmojiconEditText edMessage;
     private View contentRoot;
     private EmojIconActions emojIcon;
-String clientID,dietitianId;
+    String clientID,dietitianId;
     ArrayList<String> nameList = new ArrayList<>();
     ArrayList<String> idList = new ArrayList<>();
     ArrayList<String> urlList = new ArrayList<>();
@@ -136,7 +132,7 @@ String clientID,dietitianId;
         Bundle extras = getIntent().getExtras();
         clientID = extras.getString(VariablesModels.userId);
         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        dietitianId = sharedpreferences.getInt("clientId",0)+"";
+        dietitianId = extras.getString(VariablesModels.dietitianId);
 
         CHAT_REFERENCE = clientID + "-"+ dietitianId;
         if (!Util.verificaConexao(this)){
@@ -147,7 +143,7 @@ String clientID,dietitianId;
             verificaUsuarioLogado();
         }
 
-        UpdateDietitians();
+
     }
 
     @Override
@@ -177,56 +173,14 @@ String clientID,dietitianId;
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_chat, menu);
-        this.menu = menu;
 
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
 
-            case R.id.dietitian1:
-
-                // verifyStoragePermissions();
-            {
-
-                Intent i = new Intent(getApplicationContext(), ChatView.class);
-                i.putExtra(VariablesModels.userId, clientID);
-                i.putExtra(VariablesModels.dietitianId,idList.get(0));
-                startActivity(i);
-            }
-//                photoCameraIntent();
-                break;
-            case R.id.superviser:
-
-            {
-
-                Intent i = new Intent(getApplicationContext(), ChatView.class);
-                i.putExtra(VariablesModels.userId, clientID);
-                i.putExtra(VariablesModels.dietitianId,idList.get(1));
-                startActivity(i);
-            }
-
-                break;
-
-            case R.id.addnotes:
-                clinicalnotes();
-                break;
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-public void clinicalnotes()
+    public void clinicalnotes()
     {
         final EditText editText;
-        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ChatActivity.this);
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ChatView.this);
         // Get the layout inflater
         LayoutInflater linf = LayoutInflater.from(getApplicationContext());
         final View inflator = linf.inflate(R.layout.custom_dialog, null);
@@ -304,7 +258,7 @@ public void clinicalnotes()
                     Log.i(TAG,"onSuccess sendFileFirebase");
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
                     FileModel fileModel = new FileModel("img",downloadUrl.toString(),name,"");
-                    ChatModelNew chatModel = new ChatModelNew(userModel,"",Calendar.getInstance().getTime().getTime()+"",fileModel);
+                    ChatModelNew chatModel = new ChatModelNew(userModel,"", Calendar.getInstance().getTime().getTime()+"",fileModel);
                     mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(chatModel);
                 }
             });
@@ -319,7 +273,7 @@ public void clinicalnotes()
      */
     private void sendFileFirebase(StorageReference storageReference, final File file){
         if (storageReference != null){
-            Uri photoURI = FileProvider.getUriForFile(ChatActivity.this,
+            Uri photoURI = FileProvider.getUriForFile(ChatView.this,
                     BuildConfig.APPLICATION_ID + ".provider",
                     file);
             UploadTask uploadTask = storageReference.putFile(photoURI);
@@ -355,7 +309,7 @@ public void clinicalnotes()
         String nomeFoto = DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString();
         filePathImageCamera = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), nomeFoto+"camera.jpg");
         Intent it = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        Uri photoURI = FileProvider.getUriForFile(ChatActivity.this,
+        Uri photoURI = FileProvider.getUriForFile(ChatView.this,
                 BuildConfig.APPLICATION_ID + ".provider",
                 filePathImageCamera);
         it.putExtra(MediaStore.EXTRA_OUTPUT,photoURI);
@@ -374,20 +328,18 @@ public void clinicalnotes()
 
 
     private void sendMessageFirebase(){
-        if(edMessage.getText().toString().length()>0) {
-            mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-            Log.d("manya", FirebaseDatabase.getInstance().getReference() + "");
+        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        Log.d("manya",FirebaseDatabase.getInstance().getReference()+"");
 
-            ChatModelNew model = new ChatModelNew(userModel, edMessage.getText().toString(), Calendar.getInstance().getTime().getTime() + "", null);
-            //mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        ChatModelNew model = new ChatModelNew(userModel,edMessage.getText().toString(), Calendar.getInstance().getTime().getTime()+"",null);
+        //mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
-            mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(model);
-            edMessage.setText(null);
-            sendNotification(edMessage.getText().toString());
-        }
+        mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(model);
+        edMessage.setText(null);
+        sendNotification();
     }
 
-    private void sendNotification(final String message){
+    private void sendNotification(){
 
         String url = "https://shreyaapi.herokuapp.com/chatnotification/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -413,7 +365,7 @@ public void clinicalnotes()
                 Map<String, String> params = new HashMap<>();
                 params.put("from",dietitianId);
                 params.put("to",clientID);
-                params.put("message",message);
+                params.put("message","You have new message from the dietitian");
 
                 return params;
             }
@@ -487,10 +439,8 @@ public void clinicalnotes()
         contentRoot = findViewById(R.id.contentRoot);
         edMessage = (EmojiconEditText)findViewById(R.id.editTextMessage);
         btSendMessage = (ImageView)findViewById(R.id.buttonMessage);
-
         edattach = (ImageView)findViewById(R.id.attachment);
-        btSendMessage.setOnClickListener(ChatActivity.this);
-        edattach.setOnClickListener(ChatActivity.this);
+        btSendMessage.setOnClickListener(ChatView.this);
         btEmoji = (ImageView)findViewById(R.id.buttonEmoji);
         emojIcon = new EmojIconActions(getApplicationContext(),contentRoot,edMessage,btEmoji);
         emojIcon.ShowEmojIcon();
@@ -498,6 +448,8 @@ public void clinicalnotes()
         mLinearLayoutManager = new LinearLayoutManager(getApplicationContext());
         mLinearLayoutManager.setStackFromEnd(true);
 
+        sendMess = findViewById(R.id.sendMessageLayout);
+        sendMess.setVisibility(View.GONE);
     }
 
     /**
@@ -513,12 +465,12 @@ public void clinicalnotes()
      */
     public void verifyStoragePermissions() {
         // Check if we have write permission
-        int permission = ActivityCompat.checkSelfPermission(ChatActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permission = ActivityCompat.checkSelfPermission(ChatView.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
             // We don't have permission so prompt the user
             ActivityCompat.requestPermissions(
-                    ChatActivity.this,
+                    ChatView.this,
                     PERMISSIONS_STORAGE,
                     REQUEST_EXTERNAL_STORAGE
             );
@@ -556,7 +508,6 @@ public void clinicalnotes()
                             JSONObject object = new JSONObject(response);
                             String msg = object.getString("msg");
                             int res= object.getInt("res");
-
 
                             if(res==1)
                             {
@@ -602,109 +553,5 @@ public void clinicalnotes()
 
 
 
-    public void UpdateDietitians() {
 
-        String url = "https://shreyaapi.herokuapp.com/dietitianids/";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        JSONArray array = new JSONArray();
-
-                        try {
-
-
-                            JSONObject object = new JSONObject(response);
-                            String msg = object.getString("msg");
-                            int res= object.getInt("res");
-                            int count = object.getInt("count");
-
-
-
-                            if(res==1)
-                            {
-                                array = object.getJSONArray("response");
-
-                                for(int i =0;i< array.length();i++)
-                                {
-                                    JSONObject object1 = array.getJSONObject(i);
-
-                                    if(!String.valueOf(object1.getInt("id")).equals(dietitianId)) {
-                                        nameList.add(object1.getString("name"));
-                                        idList.add(object1.getString("id"));
-                                        urlList.add(object1.getString("url"));
-                                    }
-
-                                }
-                                if( count ==1)
-                                {
-                                    MenuItem dietitian1menu= menu.findItem(R.id.dietitian1);
-                                    dietitian1menu.setVisible(false);
-                                    MenuItem dietitian2menu= menu.findItem(R.id.superviser);
-                                    dietitian2menu.setVisible(false);
-                                    updateMenuTitles("dummy1","dummy2");
-
-
-                                }
-                                else if( count ==2)
-                                {
-                                    MenuItem dietitian2menu= menu.findItem(R.id.superviser);
-                                    dietitian2menu.setVisible(false);
-                                    updateMenuTitles("dummy1",nameList.get(1));
-                                }
-                                else
-                                {
-                                    updateMenuTitles(nameList.get(0),nameList.get(1));
-
-                                }
-
-
-
-                            }
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                        Toast.makeText(getApplicationContext(),"Something went wrong!", Toast.LENGTH_LONG).show();
-                        //Toast.makeText(MedicineData.this,error.toString(),Toast.LENGTH_LONG).show();
-                    }
-                }){
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String, String> params = new HashMap<>();
-                params.put("userId",clientID);
-
-                return params;
-            }
-
-        };
-
-        int MY_SOCKET_TIMEOUT_MS = 50000;
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                MY_SOCKET_TIMEOUT_MS,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
-
-    }
-
-    private void updateMenuTitles(String dietitian1, String dietitian2) {
-        MenuItem dietitian1menu= menu.findItem(R.id.dietitian1);
-        dietitian1menu.setTitle(dietitian1);
-        MenuItem dietitian2menu= menu.findItem(R.id.superviser);
-        dietitian2menu.setTitle(dietitian2);
-
-    }
 }

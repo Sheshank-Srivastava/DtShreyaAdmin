@@ -13,16 +13,13 @@ public class DietDiary extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet_diary);
+
 //        earlyMorning = (EditText) findViewById(R.id.early_id);
-//        breakfast = (EditText) findViewById(R.id.break_id);
 //        midMorning = (EditText) findViewById(R.id.mid_id);
 //        lunch = (EditText) findViewById(R.id.lunch_id);
 //        evening = (EditText) findViewById(R.id.eve_id);
 //        dinner = (EditText) findViewById(R.id.dinner_id);
 //        postDinner = (EditText) findViewById(R.id.post_id);
-
-
-
 
 
     }

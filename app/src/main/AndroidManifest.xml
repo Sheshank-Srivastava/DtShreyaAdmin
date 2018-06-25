@@ -66,6 +66,8 @@
 
         <activity android:name=".SendGroupNotification" />
         <activity android:name=".DietitianProfileReviews"></activity>
+        <activity android:name=".NotesSelection"></activity>
+        <activity android:name=".ChatView"></activity>
     </application>
 
 </manifest>

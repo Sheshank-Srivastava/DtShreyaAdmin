@@ -177,30 +177,8 @@ public class CreateDiet extends AppCompatActivity implements DietCreateFragment.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.notes){
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-            // Get the layout inflater
-            LayoutInflater linf = LayoutInflater.from(this);
-            final View inflator = linf.inflate(R.layout.custom_dialog, null);
-            alertDialog.setTitle("Add a diet note...");
-            alertDialog.setView(inflator);
-            editText = (EditText) inflator.findViewById(R.id.quant);
-            editText.setHint("Type here the note");
-            TextView text = (TextView) inflator.findViewById(R.id.text);
-            TextView dot = (TextView) inflator.findViewById(R.id.dot);
-            text.setVisibility(View.GONE);
-            dot.setVisibility(View.GONE);
-            alertDialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    if(!(TextUtils.isEmpty(editText.getText().toString().trim()))){
-                        //Handle diet notes here
-                    }
-                }
-            });
-            alertDialog.show();
-        }
-        else if(id == R.id.save){
+
+         if(id == R.id.save){
            // Toast.makeText(getApplicationContext(),"Diet Saved",Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
