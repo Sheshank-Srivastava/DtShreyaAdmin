@@ -1,13 +1,17 @@
 package com.dietitianshreya.dtshreyaadmin.adapters;
 
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.Image;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -53,7 +57,7 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
 
     private ArrayList<AppointmentDetailsModel> appointmentDetailsList;
     private Context mCtx;
-    EditText date,time;
+    EditText date, time;
     String time24format;
 
 
@@ -63,19 +67,17 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
     }
 
 
-
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView time,type,client,daysLeft;
-        public ImageView typeImage,status;
+        public TextView time, type, client, daysLeft;
+        public ImageView typeImage, status;
         public LinearLayout profileLayout;
 
         public MyViewHolder(View view) {
             super(view);
-            time = (TextView)  view.findViewById(R.id.appointmentTime);
-            type = (TextView)  view.findViewById(R.id.appointmentType);
+            time = (TextView) view.findViewById(R.id.appointmentTime);
+            type = (TextView) view.findViewById(R.id.appointmentType);
             client = (TextView) view.findViewById(R.id.client);
             status = (ImageView) view.findViewById(R.id.optionsMenu);
             typeImage = (ImageView) view.findViewById(R.id.appointmentTypeImage);
@@ -94,7 +96,7 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
     }
 
     @Override
-    public void onBindViewHolder(UpcomingAppointmentAdapter.MyViewHolder holder,final int position) {
+    public void onBindViewHolder(UpcomingAppointmentAdapter.MyViewHolder holder, final int position) {
 
         final AppointmentDetailsModel appointment = appointmentDetailsList.get(position);
         holder.time.setText(appointment.getTime());
@@ -103,20 +105,28 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
         holder.status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(mCtx,view);
+                PopupMenu popupMenu = new PopupMenu(mCtx, view);
                 MenuInflater inflater = popupMenu.getMenuInflater();
-                inflater.inflate(R.menu.appointments_menu,popupMenu.getMenu());
+                if (appointment.getType().equals("Call")) {
+                    inflater.inflate(R.menu.appointments_menu_withcall, popupMenu.getMenu());
+                    Log.d("UpcomingAppointments", appointment.getType());
+                } else {
+                    inflater.inflate(R.menu.appointments_menu, popupMenu.getMenu());
+                    Log.d("UpcomingAppointments", appointment.getType());
+                }
                 popupMenu.show();
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        if(item.getTitle().equals("Cancel")){
-                            sendResponse("canceled",position,appointment.getId());
-                        }else if(item.getTitle().equals("Done")){
-                            sendResponse("completed",position,appointment.getId());
-                        }
-                        else if(item.getTitle().equals("Reschedule")){
-                            showDialog(position,appointment.getId());
+                        if (item.getTitle().equals("Cancel")) {
+                            sendResponse("canceled", position, appointment.getId());
+                        } else if (item.getTitle().equals("Done")) {
+                            sendResponse("completed", position, appointment.getId());
+                        } else if (item.getTitle().equals("Reschedule")) {
+                            showDialog(position, appointment.getId());
+                        } else if (item.getTitle().equals("Call")) {
+                            getUserNumber(appointment.getId());
+
                         }
                         return true;
                     }
@@ -125,16 +135,16 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
         });
 
         holder.client.setText(appointment.getClient());
-        if(appointment.getType().equalsIgnoreCase("in person")||appointment.getType().equalsIgnoreCase("walk-in")){
+        if (appointment.getType().equalsIgnoreCase("in person") || appointment.getType().equalsIgnoreCase("walk-in")) {
             //Change TypeImage
-        }else{
+        } else {
             //Change TypeImage
         }
 
     }
 
 
-    public void showDialog(final int position,final String id){
+    public void showDialog(final int position, final String id) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mCtx);
         // Get the layout inflater
         LayoutInflater linf = LayoutInflater.from(mCtx);
@@ -167,8 +177,8 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 // set day of month , month and year value in the edit text
-                                int month = monthOfYear+1;
-                                String Date1 = dayOfMonth+"-"+month+"-"+year;
+                                int month = monthOfYear + 1;
+                                String Date1 = dayOfMonth + "-" + month + "-" + year;
                                 date.setText(Date1);
 
                             }
@@ -189,36 +199,35 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                                String amorpm="a.m.";
+                                String amorpm = "a.m.";
                                 String min;
-                                if(i>12){
-                                    amorpm="p.m.";
-                                    i-=12;
+                                if (i > 12) {
+                                    amorpm = "p.m.";
+                                    i -= 12;
                                 }
-                                if(i==12){
-                                    amorpm="p.m.";
+                                if (i == 12) {
+                                    amorpm = "p.m.";
                                 }
-                                if(i==24){
-                                    amorpm="a.m.";
+                                if (i == 24) {
+                                    amorpm = "a.m.";
                                 }
-                                if(i1<10){
-                                    min="0"+i1;
+                                if (i1 < 10) {
+                                    min = "0" + i1;
+                                } else {
+                                    min = "" + i1;
                                 }
-                                else{
-                                    min=""+i1;
-                                }
-                                time.setText(i+":"+min+" "+amorpm);
-                                time24format = i+":"+i1;
+                                time.setText(i + ":" + min + " " + amorpm);
+                                time24format = i + ":" + i1;
                             }
-                        },hour,minute, DateFormat.is24HourFormat(mCtx));
+                        }, hour, minute, DateFormat.is24HourFormat(mCtx));
                 timePickerDialog.show();
             }
         });
         alertDialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(!(TextUtils.isEmpty(date.getText().toString().trim())&& TextUtils.isEmpty(time.getText().toString().trim()))){
-                    sendR(date.getText().toString().trim(),time24format,id,position);
+                if (!(TextUtils.isEmpty(date.getText().toString().trim()) && TextUtils.isEmpty(time.getText().toString().trim()))) {
+                    sendR(date.getText().toString().trim(), time24format, id, position);
                 }
             }
         });
@@ -226,7 +235,7 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
     }
 
 
-    public void sendR(final String date,final String time,final  String id,final int pos) {
+    public void sendR(final String date, final String time, final String id, final int pos) {
 
         final ProgressDialog progressDialog = new ProgressDialog(mCtx);
         progressDialog.setMessage("Requesting Reschedule...");
@@ -236,18 +245,76 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        JSONObject result=new JSONObject();
+                        JSONObject result = new JSONObject();
                         try {
                             result = new JSONObject(response);
-                            if(result.getInt("res")==1){
-                                Log.d("res",response);
+                            if (result.getInt("res") == 1) {
+                                Log.d("res", response);
                                 progressDialog.dismiss();
-                                Log.d("Success","I'm here");
+                                Log.d("Success", "I'm here");
                                 appointmentDetailsList.remove(pos);
                                 notifyDataSetChanged();
+                            } else {
+                                progressDialog.dismiss();
+                                Toast.makeText(mCtx, result.getString("msg"), Toast.LENGTH_SHORT).show();
+                                Log.d("fail", "I'm here");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(mCtx, "Something went wrong!\nCheck your Internet connection and try again..", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(MedicineData.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("date", date + " " + time);
+                params.put("id", id);
+                return params;
+            }
+        };
+
+        int MY_SOCKET_TIMEOUT_MS = 50000;
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(mCtx);
+        requestQueue.add(stringRequest);
+    }
+
+
+    public void getUserNumber(final String id) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(mCtx);
+        progressDialog.setMessage("Requesting Call...");
+        progressDialog.show();
+        String url = "https://shreyaapi.herokuapp.com/getphone/";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        JSONObject result = new JSONObject();
+                        try {
+                            result = new JSONObject(response);
+                            if (result.getInt("res") == 1) {
+                                Log.d("res", response);
+                                Intent intent = new Intent(Intent.ACTION_DIAL);
+                                intent.setData(Uri.parse("tel:"+result.getString("phone")));
+                                mCtx.startActivity(intent);
                             }
                             else{
-                                progressDialog.dismiss();
                                 Toast.makeText(mCtx,result.getString("msg"),Toast.LENGTH_SHORT).show();
                                 Log.d("fail","I'm here");
                             }
@@ -269,8 +336,7 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
             @Override
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("date",date+" "+time);
-                params.put("id",id);
+                params.put("appointmentId",id);
                 return params;
             }
         };

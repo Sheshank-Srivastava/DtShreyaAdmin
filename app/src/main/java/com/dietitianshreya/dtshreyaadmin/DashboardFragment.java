@@ -139,6 +139,10 @@ public class DashboardFragment extends Fragment {
                         try {
                             progressDialog.dismiss();
                             Log.d("dashboard",response);
+                            if(!appointmentsList.isEmpty()){
+                                appointmentsList.clear();
+                                appointmentsAdapter.notifyDataSetChanged();
+                            }
                             JSONObject result = new JSONObject(response);
                             if(result.getInt("res")==1) {
                                 JSONArray ar = result.getJSONArray("response");

@@ -2,13 +2,17 @@ package com.dietitianshreya.dtshreyaadmin.adapters;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dietitianshreya.dtshreyaadmin.R;
 import com.dietitianshreya.dtshreyaadmin.models.MealModel;
@@ -35,13 +39,14 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.MyViewHo
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView userName,userComment,readMore;
+        public TextView userName,userComment;
+        public LinearLayout readMore;
         public RatingBar ratingClient;
         public MyViewHolder(View view) {
             super(view);
             userName = (TextView)  view.findViewById(R.id.userName);
             userComment = (TextView)  view.findViewById(R.id.userComment);
-            readMore = (TextView)  view.findViewById(R.id.readMore);
+            readMore = (LinearLayout)  view.findViewById(R.id.readMore);
             ratingClient = view.findViewById(R.id.ratingClient);
         }
     }
@@ -65,6 +70,18 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.MyViewHo
         holder.readMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(mCtx);
+                // Setting Dialog Message
+                alertDialog.setTitle("Review by "+review.getClientName());
+                alertDialog.setMessage(review.getComment());
+                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                alertDialog.show();
 //                Toast.makeText(mCtx,"You Clicked "+meal.getMealHead(),Toast.LENGTH_SHORT).show();
             }
         });
