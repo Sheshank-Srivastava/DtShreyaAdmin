@@ -1,5 +1,6 @@
 package com.dietitianshreya.dtshreyaadmin;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -47,6 +48,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.app.Activity.RESULT_OK;
 import static com.dietitianshreya.dtshreyaadmin.Login.MyPREFERENCES;
 
 
@@ -62,6 +64,7 @@ public class DietCreateFragment extends Fragment {
     ArrayList<MealModel> mealList;
     DietCreateAdapter dietPlanAdapter;
     String userid;
+    ArrayList<String> notesList = new ArrayList<>();
     EditText editText;
     JSONObject object= new JSONObject();
     ArrayList<MealModel> mealListem = new ArrayList<>();
@@ -151,35 +154,22 @@ public class DietCreateFragment extends Fragment {
 
         int id = item.getItemId();
         if(id == R.id.notes){
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-            // Get the layout inflater
-            LayoutInflater linf = LayoutInflater.from(getActivity());
-            final View inflator = linf.inflate(R.layout.custom_dialog, null);
-            alertDialog.setTitle("Add a diet note...");
-            alertDialog.setView(inflator);
-            editText = (EditText) inflator.findViewById(R.id.quant);
-            editText.setHint("Type here the note");
-            TextView text = (TextView) inflator.findViewById(R.id.text);
-            TextView dot = (TextView) inflator.findViewById(R.id.dot);
-            text.setVisibility(View.GONE);
-            dot.setVisibility(View.GONE);
-            alertDialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    notesarray.put(editText.getText().toString());
-                    Log.d("notes",notesarray.length()+"");
-                    if(!(TextUtils.isEmpty(editText.getText().toString().trim()))){
-                        //Handle diet notes here
-                    }
-                }
-            });
-            alertDialog.show();
+            notesList.clear();
+            getNotes();
+
         }
         else if(id == R.id.save){
            // Toast.makeText(getActivity(),"Diet Saved",Toast.LENGTH_SHORT).show();
             try {
                 createJson1();
-               RequestData();
+                if(notesList.size()==0)
+                {
+                    Toast.makeText(getActivity(),"Please add notes first",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    RequestData();
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -209,6 +199,14 @@ public class DietCreateFragment extends Fragment {
 
                 dietPlanAdapter.onActivityResult(requestCode, resultCode, data);
 
+            }
+
+            else if(requestCode==100)
+            {
+                ArrayList<String> notes1 = data.getStringArrayListExtra("notes");
+
+                notesList = notes1;
+                Log.d("mytag",notes1.get(0));
             }
             else
             {
@@ -255,7 +253,10 @@ public class DietCreateFragment extends Fragment {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Uploading data...");
         progressDialog.show();
+        for(int i =0;i< notesList.size();i++){
+            notesarray.put(notesList.get(i));
 
+        }
         final JSONObject notesObject = new JSONObject();
         notesObject.put("data",notesarray);
         String url = "https://shreyaapi.herokuapp.com/creatediet/";
@@ -518,6 +519,83 @@ if(mealdata.length()>0) {
 Log.d("lol",object+"");
 
     }
+
+
+    public  void getNotes()
+    {
+
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("fetching data...");
+        progressDialog.show();
+
+
+
+        String url = "https://shreyaapi.herokuapp.com/getdiseasenote/";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        Log.d("response",response);
+                        try {
+
+                            JSONObject notesObject = new JSONObject(response);
+                            if( notesObject.getInt("res")==1){
+
+                                JSONArray array  = notesObject.getJSONArray("response");
+
+                                for( int i =0;i<array.length();i++)
+                                {
+                                    notesList.add(array.getString(i));
+
+                                }
+
+                                Intent intent = new Intent(getActivity(),NotesSelection.class);
+                                intent.putExtra("notes",notesList);
+                                startActivityForResult(intent,100);
+
+
+
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getActivity().getApplicationContext(),"Something went wrong!", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(MedicinData.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put(VariablesModels.userId,clientId);
+
+                return params;
+            }
+
+        };
+
+        int MY_SOCKET_TIMEOUT_MS = 50000;
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+
+    }
+
+
 
 
 

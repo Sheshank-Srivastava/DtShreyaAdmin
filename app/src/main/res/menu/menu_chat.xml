@@ -4,15 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:title="@string/sendImage"
-        android:id="@+id/sendPhoto"
+        android:title=""
+        android:id="@+id/dietitian1"
         app:showAsAction="never"/>
 
     <item
-        android:title="@string/sendPhotoGallery"
-        android:id="@+id/sendPhotoGallery"
+        android:title=""
+        android:id="@+id/superviser"
         app:showAsAction="never"/>
 
+    <item
+        android:title="Add Clinical Notes"
+        android:id="@+id/addnotes"
+        app:showAsAction="never"/>
 
 
 </menu>

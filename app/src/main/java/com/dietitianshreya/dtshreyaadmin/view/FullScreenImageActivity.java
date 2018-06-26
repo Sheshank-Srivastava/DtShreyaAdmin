@@ -64,8 +64,6 @@ public class FullScreenImageActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         mImageView = (TouchImageView) findViewById(R.id.imageView);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
