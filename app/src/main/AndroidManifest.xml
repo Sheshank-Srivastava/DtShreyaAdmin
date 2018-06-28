@@ -65,9 +65,13 @@
         </service>
 
         <activity android:name=".SendGroupNotification" />
-        <activity android:name=".DietitianProfileReviews"></activity>
-        <activity android:name=".NotesSelection"></activity>
-        <activity android:name=".ChatView"></activity>
+        <activity android:name=".DietitianProfileReviews" />
+        <activity android:name=".NotesSelection"
+        android:theme="@style/Toolbar.Light">
+        </activity>
+        <activity android:name=".ChatView">
+
+        </activity>
     </application>
 
 </manifest>
