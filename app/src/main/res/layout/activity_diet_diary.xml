@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.dietitianshreya.dtshreyaadmin.DietDiary">
+    tools:context="com.dietitianshreya.eatrightdietadmin.DietDiary">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,7 +14,7 @@
     android:layout_marginLeft="@dimen/spacing_medium"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.dietitianshreya.dtshreyaadmin.DietDiary">
+    tools:context="com.dietitianshreya.eatrightdietadmin.DietDiary">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

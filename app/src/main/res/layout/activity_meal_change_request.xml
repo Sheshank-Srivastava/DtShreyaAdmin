@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.dietitianshreya.dtshreyaadmin.MealChangeRequestActivty">
+    tools:context="com.dietitianshreya.eatrightdietadmin.MealChangeRequestActivty">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

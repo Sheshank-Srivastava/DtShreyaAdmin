@@ -31,7 +31,7 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <com.dietitianshreya.dtshreyaadmin.view.TouchImageView
+    <com.dietitianshreya.eatrightdietadmin.view.TouchImageView
         android:layout_below="@+id/toolbar"
         android:id="@+id/imageView"
         android:layout_width="match_parent"

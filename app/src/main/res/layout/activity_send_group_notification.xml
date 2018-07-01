@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.dietitianshreya.dtshreyaadmin.SendGroupNotification">
+    tools:context="com.dietitianshreya.eatrightdietadmin.SendGroupNotification">
 
     <TextView
         android:layout_width="match_parent"
@@ -78,13 +78,7 @@
         android:id="@+id/all"
         android:text="All Users"
         android:textSize="@dimen/text_medium"/>
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            android:id="@+id/pro"
-            android:text="Program Specific"
-            android:textSize="@dimen/text_medium"/>
+
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
