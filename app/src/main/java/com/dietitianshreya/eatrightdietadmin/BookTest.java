@@ -559,6 +559,7 @@ public class BookTest extends AppCompatActivity {
                     DiseaseModel client = testList.get(position);
                     FoodChip chip = new FoodChip(client.getDiseaseName());
                     mChipsInput.addChip(chip);
+
                     //test_client.setText(client.getDiseaseName());
 //                    if(test_text==null)
 //                    {
