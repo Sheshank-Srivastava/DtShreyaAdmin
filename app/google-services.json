@@ -25,10 +25,6 @@
         {
           "client_id": "414509150710-sttllslth8ojaeeej5m63g2ht3om7g24.apps.googleusercontent.com",
           "client_type": 3
-        },
-        {
-          "client_id": "414509150710-sttllslth8ojaeeej5m63g2ht3om7g24.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -80,6 +76,104 @@
         {
           "client_id": "414509150710-sttllslth8ojaeeej5m63g2ht3om7g24.apps.googleusercontent.com",
           "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCOLz3Kdpm68bwqHgNRj9ueOZ41jvzxg8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414509150710-sttllslth8ojaeeej5m63g2ht3om7g24.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "414509150710-mg39pu6per2k514a87q095mvf17j40sm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dummy.Meditician"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414509150710:android:286f8424bdd6074c",
+        "android_client_info": {
+          "package_name": "com.dietitianshreya.eatrightdiet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414509150710-6npd5vcak5v01n9ren7d9nucivdjm7l7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dietitianshreya.eatrightdiet",
+            "certificate_hash": "9b801420af8cbcbc72a335f32a814123ec1c4aec"
+          }
+        },
+        {
+          "client_id": "414509150710-sttllslth8ojaeeej5m63g2ht3om7g24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCOLz3Kdpm68bwqHgNRj9ueOZ41jvzxg8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414509150710-sttllslth8ojaeeej5m63g2ht3om7g24.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "414509150710-mg39pu6per2k514a87q095mvf17j40sm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dummy.Meditician"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414509150710:android:af1d8a6df2ae4fd2",
+        "android_client_info": {
+          "package_name": "com.dietitianshreya.eatrightdietadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414509150710-0mtf3s4g0hd369f92d1brkcf7k0k3iok.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dietitianshreya.eatrightdietadmin",
+            "certificate_hash": "9b801420af8cbcbc72a335f32a814123ec1c4aec"
+          }
         },
         {
           "client_id": "414509150710-sttllslth8ojaeeej5m63g2ht3om7g24.apps.googleusercontent.com",
