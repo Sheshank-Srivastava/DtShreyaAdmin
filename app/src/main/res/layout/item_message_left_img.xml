@@ -14,6 +14,8 @@
         android:layout_alignBottom="@+id/contentMessageChat"
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:visibility="gone"
+
         android:id="@+id/ivUserChat" />
 
     <me.himanshusoni.chatmessageview.ChatMessageView
@@ -34,6 +36,7 @@
             android:minWidth="100dp"
             android:minHeight="100dp"
             android:maxWidth="150dp"
+
             android:maxHeight="150dp"
             android:background="#000"
             android:layout_width="wrap_content"

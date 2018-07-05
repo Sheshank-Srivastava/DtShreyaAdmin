@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/textColorLight"
-    tools:context="com.dietitianshreya.dtshreyaadmin.ClientProfileActivity">
+    tools:context="com.dietitianshreya.eatrightdietadmin.ClientProfileActivity">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -532,43 +532,43 @@
                 android:textSize="@dimen/text_very_small"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:padding="@dimen/small_padding"
-            android:layout_margin="@dimen/layout_very_small_margin"
-            android:layout_height="wrap_content">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:padding="@dimen/small_padding"-->
+            <!--android:layout_margin="@dimen/layout_very_small_margin"-->
+            <!--android:layout_height="wrap_content">-->
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:text="Cholesterol"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small" />
+            <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0.8"-->
+                <!--android:text="Cholesterol"-->
+                <!--android:textColor="@color/textColorDark"-->
+                <!--android:textSize="@dimen/text_very_small" />-->
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:text=":"
-                android:gravity="center"/>
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:id="@+id/cholesterol"
-                android:layout_marginRight="@dimen/layout_very_small_margin"
-                android:layout_marginLeft="@dimen/layout_very_small_margin"
-                android:hint=""
-                android:layout_gravity="center"
-                android:background="@color/textColorLight"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="0.2"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textColor="@color/textColorDark"-->
+                <!--android:textSize="@dimen/text_very_small"-->
+                <!--android:text=":"-->
+                <!--android:gravity="center"/>-->
+            <!--<EditText-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="2"-->
+                <!--android:id="@+id/cholesterol"-->
+                <!--android:layout_marginRight="@dimen/layout_very_small_margin"-->
+                <!--android:layout_marginLeft="@dimen/layout_very_small_margin"-->
+                <!--android:hint=""-->
+                <!--android:layout_gravity="center"-->
+                <!--android:background="@color/textColorLight"-->
+                <!--android:textColor="@color/textColorDark"-->
+                <!--android:textSize="@dimen/text_very_small"-->
+                <!--android:layout_height="wrap_content" />-->
+        <!--</LinearLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
@@ -915,6 +915,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8"
                 android:text="Add Diseases"
+                android:id="@+id/addDisease"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/text_very_small" />
 
@@ -927,17 +928,40 @@
                 android:textSize="@dimen/text_very_small"
                 android:text=":"
                 android:gravity="center"/>
-            <EditText
+            <LinearLayout
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:id="@+id/otherDisease"
-                android:layout_marginRight="@dimen/layout_very_small_margin"
-                android:layout_marginLeft="@dimen/layout_very_small_margin"
-                android:hint=""
-                android:layout_gravity="center"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/text_very_small"
-                android:layout_height="wrap_content" />
+                android:orientation="horizontal">
+
+                <com.pchmn.materialchips.ChipsInput
+                    android:id="@+id/chips_input"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    app:chip_deletable="true"
+                    android:focusable="false"
+                    app:maxRows="3"
+                    app:showChipDetailed="false" >
+                </com.pchmn.materialchips.ChipsInput>
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="0.4"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@color/textColorDark"-->
+                    <!--android:textSize="@dimen/text_very_small"-->
+                    <!--android:text="Add"-->
+                    <!--android:gravity="center"/>-->
+                <!--<ImageView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="0.4"-->
+                    <!--android:layout_gravity="top"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:id="@+id/addDisease"-->
+                    <!--android:tint="@color/textColorDark"-->
+                    <!--app:srcCompat="@drawable/ic_add"/>-->
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

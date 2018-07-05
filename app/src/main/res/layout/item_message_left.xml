@@ -15,6 +15,7 @@
         android:layout_alignBottom="@+id/contentMessageChat"
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:visibility="gone"
         android:id="@+id/ivUserChat" />
 
     <me.himanshusoni.chatmessageview.ChatMessageView
@@ -34,6 +35,8 @@
         <hani.momanii.supernova_emoji_library.Helper.EmojiconTextView
             android:id="@+id/txtMessage"
             android:layout_width="wrap_content"
+            android:textColor="#000"
+            android:text="kjgdfkjdsgfsdfgdks"
             android:layout_height="wrap_content"
             android:textIsSelectable="true"
             emojicon:emojiconSize="28sp"
@@ -48,6 +51,8 @@
         android:layout_marginLeft="10dp"
         android:paddingLeft="10dp"
         android:paddingTop="6dp"
+        android:textColor="@android:color/black"
+
         android:textSize="10sp"
         android:layout_below="@+id/contentMessageChat"
         android:layout_toEndOf="@+id/ivUserChat"

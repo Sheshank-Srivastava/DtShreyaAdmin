@@ -6,7 +6,7 @@
     android:orientation="vertical"
     app:theme="@style/Toolbar.Light"
     android:layout_height="match_parent"
-    tools:context="com.dietitianshreya.dtshreyaadmin.MainActivity">
+    tools:context="com.dietitianshreya.eatrightdietadmin.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
