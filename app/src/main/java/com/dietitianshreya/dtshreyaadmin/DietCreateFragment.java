@@ -74,7 +74,9 @@ public class DietCreateFragment extends Fragment {
     ArrayList<MealModel> mealList3 = new ArrayList<>();
     ArrayList<MealModel> mealListpd = new ArrayList<>();
     ArrayList<MealModel> mealListsup = new ArrayList<>();
+    ArrayList<MealModel> mealListlateEve = new ArrayList<>();
     private OnFragmentInteractionListener mListener;
+
 
     public DietCreateFragment() {
         // Required empty public constructor
@@ -125,12 +127,13 @@ public class DietCreateFragment extends Fragment {
         dietList.add(new DietPlanModel("Lunch",mealList1,4));
 
         dietList.add(new DietPlanModel("Evening",mealList2,5));
+        dietList.add(new DietPlanModel("Late Evening",mealListlateEve,6));
 
-        dietList.add(new DietPlanModel("Dinner",mealList3,6));
+        dietList.add(new DietPlanModel("Dinner",mealList3,7));
 
-        dietList.add(new DietPlanModel("Post Dinner",mealListpd,7));
+        dietList.add(new DietPlanModel("Post Dinner",mealListpd,8));
 
-        dietList.add(new DietPlanModel("Supplements",mealListsup,8));
+        dietList.add(new DietPlanModel("Supplements",mealListsup,9));
         dietPlanAdapter.notifyDataSetChanged();
 
 
@@ -221,17 +224,25 @@ public class DietCreateFragment extends Fragment {
                 model1.setMealList(mealList1);
                 DietPlanModel model2 = dietList.get(4);
                 model2.setMealList(mealList2);
-                DietPlanModel model3 = dietList.get(5);
+                DietPlanModel modelLateEve = dietList.get(5);
+                modelLateEve.setMealList(mealListlateEve);
+                DietPlanModel model3 = dietList.get(6);
                 model3.setMealList(mealList3);
-                DietPlanModel model4= dietList.get(6);
+                DietPlanModel model4= dietList.get(7);
                 model4.setMealList(mealListpd);
+                DietPlanModel modelSup= dietList.get(8);
+                modelSup.setMealList(mealListsup);
                 mealListem = data.getParcelableArrayListExtra("meal1");
                 mealList = data.getParcelableArrayListExtra("meal2");
                 mealListmm = data.getParcelableArrayListExtra("meal3");
                 mealList1 = data.getParcelableArrayListExtra("meal4");
                 mealList2 = data.getParcelableArrayListExtra("meal5");
-                mealList3 = data.getParcelableArrayListExtra("meal6");
-                mealListpd = data.getParcelableArrayListExtra("meal7");
+                mealListlateEve = data.getParcelableArrayListExtra("meal6");
+
+                mealList3 = data.getParcelableArrayListExtra("meal7");
+                mealListpd = data.getParcelableArrayListExtra("meal8");
+                mealListsup = data.getParcelableArrayListExtra("meal9");
+
                 dietPlanAdapter.notifyDataSetChanged();
             }
         }
