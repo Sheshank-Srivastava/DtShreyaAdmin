@@ -268,7 +268,7 @@ public class TodayDietFragment extends Fragment {
                                         String food = array.getString(i);
                                         mealList.add(new MealModel(food, "xy", true));
                                     }
-                                    dietList.add(new DietPlanModel("Dinner", mealList, 6));
+                                    dietList.add(new DietPlanModel("Late Evening", mealList, 6));
                                 }
 
                                 if (innerobject.has("foodseven")) {
@@ -278,10 +278,19 @@ public class TodayDietFragment extends Fragment {
                                         String food = array.getString(i);
                                         mealList.add(new MealModel(food, "xy", true));
                                     }
-                                    dietList.add(new DietPlanModel("Post Dinner", mealList, 7));
+                                    dietList.add(new DietPlanModel("Dinner", mealList, 7));
                                 }
 
                                 if (innerobject.has("foodeight")) {
+                                    ArrayList<MealModel> mealList = new ArrayList<>();
+                                    JSONArray array = innerobject.getJSONArray("foodeight");
+                                    for (int i = 0; i < array.length(); i++) {
+                                        String food = array.getString(i);
+                                        mealList.add(new MealModel(food, "Supplements", true));
+                                    }
+                                    dietList.add(new DietPlanModel("Post Dinner", mealList, 8));
+                                }
+                                if (innerobject.has("foodnine")) {
                                     ArrayList<MealModel> mealList = new ArrayList<>();
                                     JSONArray array = innerobject.getJSONArray("foodeight");
                                     for (int i = 0; i < array.length(); i++) {

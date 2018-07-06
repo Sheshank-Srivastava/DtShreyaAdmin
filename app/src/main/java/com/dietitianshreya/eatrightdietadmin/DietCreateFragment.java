@@ -64,6 +64,7 @@ public class DietCreateFragment extends Fragment {
     ArrayList<MealModel> mealList3 = new ArrayList<>();
     ArrayList<MealModel> mealListpd = new ArrayList<>();
     ArrayList<MealModel> mealListsup = new ArrayList<>();
+    ArrayList<MealModel> mealListlateEve = new ArrayList<>();
     private OnFragmentInteractionListener mListener;
 
     public DietCreateFragment() {
@@ -196,17 +197,27 @@ public class DietCreateFragment extends Fragment {
                 model1.setMealList(mealList1);
                 DietPlanModel model2 = dietList.get(4);
                 model2.setMealList(mealList2);
-                DietPlanModel model3 = dietList.get(5);
+                DietPlanModel modellateEve= dietList.get(5);
+                modellateEve.setMealList(mealListlateEve);
+                DietPlanModel model3 = dietList.get(6);
                 model3.setMealList(mealList3);
-                DietPlanModel model4= dietList.get(6);
+                DietPlanModel model4= dietList.get(7);
                 model4.setMealList(mealListpd);
+                DietPlanModel modelsup= dietList.get(7);
+                modelsup.setMealList(mealListsup);
+
                 mealListem = data.getParcelableArrayListExtra("meal1");
                 mealList = data.getParcelableArrayListExtra("meal2");
                 mealListmm = data.getParcelableArrayListExtra("meal3");
                 mealList1 = data.getParcelableArrayListExtra("meal4");
                 mealList2 = data.getParcelableArrayListExtra("meal5");
-                mealList3 = data.getParcelableArrayListExtra("meal6");
-                mealListpd = data.getParcelableArrayListExtra("meal7");
+                mealListlateEve = data.getParcelableArrayListExtra("meal6");
+
+                mealList3 = data.getParcelableArrayListExtra("meal7");
+                mealListpd = data.getParcelableArrayListExtra("meal8");
+                mealListsup = data.getParcelableArrayListExtra("meal8");
+
+
                 dietPlanAdapter.notifyDataSetChanged();
             }
         }
@@ -488,6 +499,19 @@ if(mealdata.length()>0) {
         }
     }
 
+    else if (pos ==9)
+    {
+        int meallistsize=dietList.get(i).getMealList().size();
+        JSONArray mealdata= new JSONArray();
+        for(int j =0;j<meallistsize;j++)
+        {
+            mealdata.put(dietList.get(i).getMealList().get(j).getMealHead());
+        }
+        if(mealdata.length()>0) {
+            object.put("foodnine", mealdata);
+        }
+    }
+
         }
 
 
@@ -645,17 +669,16 @@ Log.d("lol",object+"");
                                 }else{
                                     dietList.add(new DietPlanModel("Evening",mealList2,5));
                                 }
-
                                 if (innerobject.has("foodsix")) {
                                     ArrayList<MealModel> mealList = new ArrayList<>();
                                     JSONArray array = innerobject.getJSONArray("foodsix");
                                     for (int i = 0; i < array.length(); i++) {
                                         String food = array.getString(i);
-                                        mealList3.add(new MealModel(food, "xy", true));
+                                        mealListlateEve.add(new MealModel(food, "xy", true));
                                     }
-                                    dietList.add(new DietPlanModel("Dinner", mealList3, 6));
+                                    dietList.add(new DietPlanModel("Late Evening", mealListlateEve, 6));
                                 }else{
-                                    dietList.add(new DietPlanModel("Dinner",mealList3,6));
+                                    dietList.add(new DietPlanModel("Late Evening",mealListlateEve,6));
                                 }
 
                                 if (innerobject.has("foodseven")) {
@@ -663,11 +686,11 @@ Log.d("lol",object+"");
                                     JSONArray array = innerobject.getJSONArray("foodseven");
                                     for (int i = 0; i < array.length(); i++) {
                                         String food = array.getString(i);
-                                        mealListpd.add(new MealModel(food, "xy", true));
+                                        mealList3.add(new MealModel(food, "xy", true));
                                     }
-                                    dietList.add(new DietPlanModel("Post Dinner", mealListpd, 7));
+                                    dietList.add(new DietPlanModel("Dinner", mealList3, 7));
                                 }else{
-                                    dietList.add(new DietPlanModel("Post Dinner",mealListpd,7));
+                                    dietList.add(new DietPlanModel("Dinner",mealList3,7));
                                 }
 
                                 if (innerobject.has("foodeight")) {
@@ -675,11 +698,23 @@ Log.d("lol",object+"");
                                     JSONArray array = innerobject.getJSONArray("foodeight");
                                     for (int i = 0; i < array.length(); i++) {
                                         String food = array.getString(i);
+                                        mealListpd.add(new MealModel(food, "xy", true));
+                                    }
+                                    dietList.add(new DietPlanModel("Post Dinner", mealListpd, 8));
+                                }else{
+                                    dietList.add(new DietPlanModel("Post Dinner",mealListpd,8));
+                                }
+
+                                if (innerobject.has("foodnine")) {
+                                    ArrayList<MealModel> mealList = new ArrayList<>();
+                                    JSONArray array = innerobject.getJSONArray("foodnine");
+                                    for (int i = 0; i < array.length(); i++) {
+                                        String food = array.getString(i);
                                         mealListsup.add(new MealModel(food, "Supplements", true));
                                     }
-                                    dietList.add(new DietPlanModel("Supplements", mealListsup, 8));
+                                    dietList.add(new DietPlanModel("Supplements", mealListsup, 9));
                                 }else{
-                                    dietList.add(new DietPlanModel("Supplements",mealListsup,8));
+                                    dietList.add(new DietPlanModel("Supplements",mealListsup,9));
                                 }
                             }else{
                                 dietList.add(new DietPlanModel("Early Morning",mealListem,1));
@@ -687,9 +722,10 @@ Log.d("lol",object+"");
                                 dietList.add(new DietPlanModel("Mid Morning",mealListmm,3));
                                 dietList.add(new DietPlanModel("Lunch",mealList1,4));
                                 dietList.add(new DietPlanModel("Evening",mealList2,5));
-                                dietList.add(new DietPlanModel("Dinner",mealList3,6));
-                                dietList.add(new DietPlanModel("Post Dinner",mealListpd,7));
-                                dietList.add(new DietPlanModel("Supplements",mealListsup,8));
+                                dietList.add(new DietPlanModel("Late Eevening",mealListlateEve,6));
+                                dietList.add(new DietPlanModel("Dinner",mealList3,7));
+                                dietList.add(new DietPlanModel("Post Dinner",mealListpd,8));
+                                dietList.add(new DietPlanModel("Supplements",mealListsup,9));
 
                             }
                             dietPlanAdapter.notifyDataSetChanged();
