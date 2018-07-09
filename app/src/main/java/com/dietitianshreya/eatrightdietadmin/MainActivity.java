@@ -1,6 +1,7 @@
 package com.dietitianshreya.eatrightdietadmin;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +33,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,13 +72,16 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         SharedPreferences sharedpreferences = getSharedPreferences(SharedPrefToken, Context.MODE_PRIVATE);
-        String token = sharedpreferences.getString("token","zero");
-        int change = sharedpreferences.getInt("change",0);
+//        String token = sharedpreferences.getString("token","zero");
+        int change = sharedpreferences.getInt("change",1);
+        Log.d("MainActivity",change+"");
+        String deviceToken = FirebaseInstanceId.getInstance().getToken();
         SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
         if(change==1) {
-            if (!token.equals("zero")) {
-                sendR(token, userid);
+            if (deviceToken!=null) {
+                sendR(deviceToken, userid);
+                Log.d("Token : ",deviceToken);
             }
         }
         long id = intentToWhatsapp(this);
@@ -201,9 +209,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
         TextView clientName = (TextView) header.findViewById(R.id.clientName);
+        TextView clientEmail = (TextView) header.findViewById(R.id.clientEmail);
+        CircularImageView image = (CircularImageView) header.findViewById(R.id.profileImage);
 //        clientEmail = (TextView) header.findViewById(R.id.clientEmail);
         SharedPreferences sharedpreferences2 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         clientName.setText(sharedpreferences2.getString("user_name", "Unkonwn"));
+        clientEmail.setText(sharedpreferences2.getString("email","Unknown"));
+        Picasso.with(MainActivity.this).load(sharedpreferences2.getString("image","Unknown")).into(image);
 //        clientEmail.setText(sharedpreferences2.getString("email", "Unknown"));
     }
 
@@ -277,6 +289,9 @@ public class MainActivity extends AppCompatActivity
             SharedPreferences mPrefs_delete = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor_delete = mPrefs_delete.edit();
             editor_delete.clear().commit();
+            SharedPreferences mPrefs_delete1 = getSharedPreferences(SharedPrefToken, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor_delete1 = mPrefs_delete1.edit();
+            editor_delete1.clear().commit();
             finish();
             startActivity(new Intent(MainActivity.this,Login.class));
         }

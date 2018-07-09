@@ -116,7 +116,7 @@ EditText days,amount;
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(mCtx, ChatActivity.class);
-                i.putExtra("clientId",lead.getClientId());
+                i.putExtra("userId",lead.getClientId());
                 mCtx.startActivity(i);
             }
         });

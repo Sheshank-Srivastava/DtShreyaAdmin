@@ -100,7 +100,7 @@ public class RescheduleAppointmentAdaper extends RecyclerView.Adapter<Reschedule
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(mCtx, ChatActivity.class);
-                i.putExtra("clientId",appointment.getClientId());
+                i.putExtra("userId",appointment.getClientId());
                 mCtx.startActivity(i);
             }
         });

@@ -36,7 +36,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingLeft="@dimen/large_padding"
+            android:paddingLeft="@dimen/small_padding"
             android:orientation="vertical">
 
             <TextView
@@ -49,14 +49,14 @@
                 android:textColor="@color/textColorLight" />
 
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="a.tyagi20596@gmail.com"-->
-                <!--android:id="@+id/clientEmail"-->
-                <!--android:textSize="@dimen/text_very_small"-->
-                <!--android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
-                <!--android:textColor="@color/textColorLight" />-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="a.tyagi20596@gmail.com"
+                android:id="@+id/clientEmail"
+                android:textSize="@dimen/text_very_small"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/textColorLight" />
 
             <!--<TextView-->
                 <!--android:layout_width="wrap_content"-->

@@ -83,7 +83,7 @@ public class LastMonthUsersAdapter extends RecyclerView.Adapter<LastMonthUsersAd
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(mCtx, ChatActivity.class);
-                i.putExtra("clientId",client.getClientId());
+                i.putExtra("userId",client.getClientId());
                 mCtx.startActivity(i);
             }
         });

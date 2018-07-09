@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#E91E63</color>
-    <color name="colorPrimaryDark">#C2185B</color>
-    <color name="colorAccent">#43a047</color>
+    <color name="colorPrimary">#4CAF50</color><!--E91E63-->
+    <color name="colorPrimaryDark">#388E3C</color><!--C2185B-->
+    <color name="colorAccent">#E91E63</color><!--43a047-->
     <color name="bmiUnder">#1e88e5</color>
     <color name="bmiIdeal">#43a047</color>
     <color name="bmiOverweight">#fbc02d</color>

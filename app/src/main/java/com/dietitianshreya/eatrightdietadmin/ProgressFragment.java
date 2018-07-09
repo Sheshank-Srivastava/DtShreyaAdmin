@@ -41,6 +41,7 @@ public class ProgressFragment extends Fragment {
 int level,badge,bells,kgs;
 ImageView badge1,badge2,badge3,badge4,badge5,level1,level2,level3,level4,level5;
 TextView numberOfBells,rank,badgesEarn,kgslost;
+    TextView badgeText1,badgeText2,badgeText3,badgeText4,badgeText5;
     String clientId;
     String userid;
 
@@ -83,67 +84,117 @@ TextView numberOfBells,rank,badgesEarn,kgslost;
         level2=view.findViewById(R.id.rank2);
         level3=view.findViewById(R.id.rank3);
         level4=view.findViewById(R.id.rank4);
+        badgeText1 = view.findViewById(R.id.badgeText1);
+        badgeText2 = view.findViewById(R.id.badgeText2);
+        badgeText3 = view.findViewById(R.id.badgeText3);
+        badgeText4 = view.findViewById(R.id.badgeText4);
+        badgeText5 = view.findViewById(R.id.badgeText5);
         numberOfBells = view.findViewById(R.id.noOfBells);
         badgesEarn=view.findViewById(R.id.badgesEarned);
         kgslost=view.findViewById(R.id.kgsLost);
         rank = view.findViewById(R.id.currentRank);
         bells=getArguments().getInt("bells");
         badge = getArguments().getInt("badge");
-        bells = getArguments().getInt("level");
+        level = getArguments().getInt("level");
         kgs = getArguments().getInt("kgs");
         clientId = getArguments().getString(VariablesModels.userId);
-
+        fetchProgressData();
         numberOfBells.setText(bells+" bells rung");
         kgslost.setText(kgs+ " lost");
         if(badge==1)
         {
+            level1.setAlpha(1.0f);
             level2.setAlpha(0.3f);
             level3.setAlpha(0.3f);
             level4.setAlpha(0.3f);
-
+            badge1.setAlpha(1.0f);
             badge2.setAlpha(0.3f);
             badge3.setAlpha(0.3f);
             badge4.setAlpha(0.3f);
             badge5.setAlpha(0.3f);
+            badgeText1.setAlpha(1.0f);
+            badgeText2.setAlpha(0.3f);
+            badgeText3.setAlpha(0.3f);
+            badgeText4.setAlpha(0.3f);
+            badgeText5.setAlpha(0.3f);
             badgesEarn.setText("1");
             rank.setText("  NEWBIE ");
 
         }
         else if(badge==2)
         {
-
+            level1.setAlpha(1.0f);
+            level2.setAlpha(1.0f);
             level3.setAlpha(0.3f);
             level4.setAlpha(0.3f);
-
+            badge1.setAlpha(1.0f);
+            badge2.setAlpha(1.0f);
             badge3.setAlpha(0.3f);
             badge4.setAlpha(0.3f);
             badge5.setAlpha(0.3f);
+            badgeText1.setAlpha(1.0f);
+            badgeText2.setAlpha(1.0f);
+            badgeText3.setAlpha(0.3f);
+            badgeText4.setAlpha(0.3f);
+            badgeText5.setAlpha(0.3f);
             badgesEarn.setText("2");
             rank.setText("  SENIOR ");
         }
 
         else if(badge==3)
         {
-
+            level1.setAlpha(1.0f);
+            level2.setAlpha(1.0f);
+            level3.setAlpha(1.0f);
             level4.setAlpha(0.3f);
-
+            badge1.setAlpha(1.0f);
+            badge2.setAlpha(1.0f);
+            badge3.setAlpha(1.0f);
             badge4.setAlpha(0.3f);
             badge5.setAlpha(0.3f);
+            badgeText1.setAlpha(1.0f);
+            badgeText2.setAlpha(1.0f);
+            badgeText3.setAlpha(1.0f);
+            badgeText4.setAlpha(0.3f);
+            badgeText5.setAlpha(0.3f);
             badgesEarn.setText("3");
             rank.setText("  PRO ");
         }
         else if( badge==4)
         {
-
+            level1.setAlpha(1.0f);
+            level2.setAlpha(1.0f);
+            level3.setAlpha(1.0f);
             level4.setAlpha(0.3f);
+            badge1.setAlpha(1.0f);
+            badge2.setAlpha(1.0f);
+            badge3.setAlpha(1.0f);
+            badge4.setAlpha(1.0f);
             badge5.setAlpha(0.3f);
+            badgeText1.setAlpha(1.0f);
+            badgeText2.setAlpha(1.0f);
+            badgeText3.setAlpha(1.0f);
+            badgeText4.setAlpha(1.0f);
+            badgeText5.setAlpha(0.3f);
             badgesEarn.setText("4");
             rank.setText("  PRO ");
         }
         else if( badge==5)
         {
 
-
+            level1.setAlpha(1.0f);
+            level2.setAlpha(1.0f);
+            level3.setAlpha(1.0f);
+            level4.setAlpha(1.0f);
+            badge1.setAlpha(1.0f);
+            badge2.setAlpha(1.0f);
+            badge3.setAlpha(1.0f);
+            badge4.setAlpha(1.0f);
+            badgeText1.setAlpha(1.0f);
+            badgeText2.setAlpha(1.0f);
+            badgeText3.setAlpha(1.0f);
+            badgeText4.setAlpha(1.0f);
+            badgeText5.setAlpha(1.0f);
             badgesEarn.setText("5");
             rank.setText("  SUPER PRO   ");
         }
@@ -290,15 +341,16 @@ TextView numberOfBells,rank,badgesEarn,kgslost;
 
     public void fetchProgressData() {
         final ProgressDialog progressDialog= new ProgressDialog(getActivity());
-
+        progressDialog.setMessage("Fetching Data...");
+        progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getprogress/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        progressDialog.dismiss();
                         try {
-                            progressDialog.dismiss();
+
                             Log.d("res",response);
                             JSONObject object = new JSONObject(response);
                             String msg = object.getString("msg");

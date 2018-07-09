@@ -1,5 +1,6 @@
 package com.dietitianshreya.eatrightdietadmin;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,11 +13,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.dietitianshreya.eatrightdietadmin.Utils.VariablesModels;
 import com.dietitianshreya.eatrightdietadmin.adapters.ClientAppointmentAdapter;
 import com.dietitianshreya.eatrightdietadmin.models.ClientAppointmentModel;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ClientAppointmentFragment extends Fragment {
@@ -48,7 +64,7 @@ public class ClientAppointmentFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             clientId = getArguments().getString(ARG_PARAM1);
-            appointmentList=getArguments().getParcelableArrayList("appointments");
+//            appointmentList=getArguments().getParcelableArrayList("appointments");
             Log.d("appoint",appointmentList+"");
         }
     }
@@ -62,6 +78,7 @@ public class ClientAppointmentFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         appointmentAdapter = new ClientAppointmentAdapter(appointmentList,getActivity());
+        fetchAppointmentsData();
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(appointmentAdapter);
@@ -105,4 +122,78 @@ public class ClientAppointmentFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public void fetchAppointmentsData() {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Fetching Data");
+        progressDialog.show();
+        String url = "https://shreyaapi.herokuapp.com/getuserappointment/";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        try {
+
+                            JSONObject object = new JSONObject(response);
+                            String msg = object.getString("msg");
+                            int res= object.getInt("res");
+                            if(res==1) {
+                                JSONArray array = object.getJSONArray("response");
+                                Log.d("res_user_appointment", response);
+
+                                for (int i = 0; i < array.length(); i++) {
+                                    JSONObject response_object = array.getJSONObject(i);
+                                    String datekey = response_object.getString("date");
+
+                                    String date = datekey.split(" ")[0];
+                                    String status = response_object.getString("status");
+                                    String time = datekey.split(" ")[1];
+                                    String dietitian = response_object.getString("dietitian");
+                                    String type = response_object.getString("type");
+                                    String id = response_object.getString(VariablesModels.appointmentId);
+                                    appointmentList.add(new ClientAppointmentModel(date, time, type, status, dietitian));
+                                }
+//                           Log.d("app",appointmentList.get(0).getDate());
+                            }
+
+//                            fetchProgressData();
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getActivity().getApplicationContext(),"Something went wrong!", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(MedicineData.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put(VariablesModels.userId,clientId);
+                return params;
+            }
+
+        };
+
+        int MY_SOCKET_TIMEOUT_MS = 50000;
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+
+    }
+
+
 }

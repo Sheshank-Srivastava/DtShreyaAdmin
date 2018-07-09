@@ -48,7 +48,7 @@ public class ClientDetailActivity extends AppCompatActivity implements DietHisto
     String clientID;
     int month,date,year;
     String dateString;
-    int bells,badge,level,kgs;
+    int bells=0,badge=0,level=0,kgs=0;
     ProgressDialog progressDialog ;
 
     ArrayList<DietPlanModel> dietList= new ArrayList<>();
@@ -84,11 +84,13 @@ progressDialog = new ProgressDialog(ClientDetailActivity.this);
         dateString= currentdate.format(todaysDate);
         compositionList = new ArrayList<>();
 
-        fetchNotesData();
+//        fetchNotesData();
 
 //Initializing the tablayout
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
+
+        setupViewPager(viewPager);
     }
     private void setupViewPager(ViewPager viewPager)
     {
@@ -97,19 +99,20 @@ progressDialog = new ProgressDialog(ClientDetailActivity.this);
 
         ClinicalNotesFragment clinicalNotesFragment= ClinicalNotesFragment.newInstance(clientID);
         Bundle data = new Bundle();//create bundle instance
-        data.putStringArrayList("notes", notesList);
+        data.putString("clientID",clientID);
+//        data.putStringArrayList("notes", notesList);
         clinicalNotesFragment.setArguments(data);//Set bundle data to fragment
 
 
         ClientAppointmentFragment appointment = ClientAppointmentFragment.newInstance(clientID);
-        Bundle appointdata = new Bundle();//create bundle instance
-        appointdata.putParcelableArrayList("appointments", appointmentList);
-        appointment.setArguments(appointdata);//Set bundle data to fragment
+//        Bundle appointdata = new Bundle();//create bundle instance
+//        appointdata.putParcelableArrayList("appointments", appointmentList);
+//        appointment.setArguments(appointdata);//Set bundle data to fragment
 
         TodayDietFragment dietHistoryFragment= TodayDietFragment.newInstance(clientID,dietList);
-        Bundle dietdata = new Bundle();//create bundle instance
-        dietdata.putParcelableArrayList("lol", dietList);
-        dietHistoryFragment.setArguments(dietdata);//Set bundle data to fragment
+//        Bundle dietdata = new Bundle();//create bundle instance
+//        dietdata.putParcelableArrayList("lol", dietList);
+//        dietHistoryFragment.setArguments(dietdata);//Set bundle data to fragment
 
         BodyCompositionFragment bodyCompositionFragment = BodyCompositionFragment.newInstance(clientID);
         Bundle bcadata = new Bundle();//create bundle instance
@@ -213,7 +216,7 @@ progressDialog = new ProgressDialog(ClientDetailActivity.this);
                                     notesList.add(array.getString(i));
                                 }
                             }
-                            fetchAppointmentsData();
+//                            fetchAppointmentsData();
 
 
 
@@ -284,7 +287,7 @@ progressDialog = new ProgressDialog(ClientDetailActivity.this);
 //                           Log.d("app",appointmentList.get(0).getDate());
                            }
 
-                            fetchProgressData();
+//                            fetchProgressData();
 
 
                         } catch (JSONException e) {
@@ -353,7 +356,7 @@ progressDialog = new ProgressDialog(ClientDetailActivity.this);
 //                              compositionList.add(new CompositionModel(date,weight,fat,water,muscle,bone));
 
                             }
-                            fetchProgressData();
+//                            fetchProgressData();
 
 
 
@@ -420,7 +423,7 @@ progressDialog = new ProgressDialog(ClientDetailActivity.this);
 
 
 
-                            setupViewPager(viewPager);
+
 
 
                         } catch (JSONException e) {

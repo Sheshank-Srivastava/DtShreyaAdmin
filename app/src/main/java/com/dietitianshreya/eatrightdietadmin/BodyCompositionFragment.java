@@ -169,7 +169,7 @@ public class BodyCompositionFragment extends Fragment {
                 alertDialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(!(TextUtils.isEmpty(date.getText().toString().trim()))){
+                        if(!(TextUtils.isEmpty(date.getText().toString().trim())&&TextUtils.isEmpty(weight.getText().toString().trim()))){
                             String datetxt = date.getText().toString().trim();
                             String weighttxt = weight.getText().toString().trim();
                             String heighttxt = height.getText().toString().trim();
@@ -182,6 +182,8 @@ public class BodyCompositionFragment extends Fragment {
                             addBCAData(datetxt,weighttxt,heighttxt,sfattxt,vfattxt,bmitxt,muscletxt,bodyagetxt,resmetatxt);
 //                            compositionList.add(new CompositionModel(datetxt,weighttxt,fattxt,watertxt,muscletxt,bonetxt));
 //                            compositionAdapter.notifyDataSetChanged();
+                        }else{
+                            Toast.makeText(getActivity().getApplicationContext(),"Date and weight are required fields",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

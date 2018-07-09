@@ -44,7 +44,7 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-
+                android:alpha="0.3"
                 android:src="@drawable/senior"
                 android:layout_height="@dimen/image_height"
 
@@ -52,6 +52,7 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:alpha="0.3"
                 android:layout_height="@dimen/image_height"
                 android:src="@drawable/pro"
 
@@ -59,6 +60,7 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:alpha="0.3"
                 android:layout_height="@dimen/image_height"
                 android:src="@drawable/beast"
 
@@ -129,6 +131,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/badge_height"
+                    android:alpha="0.3"
                     android:layout_gravity="center"
                     android:src="@drawable/enthu"
 
@@ -138,6 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_small"
+                    android:alpha="0.3"
                     android:gravity="center"
                     android:id="@+id/badgeText2"
                     android:textColor="@color/colorPrimary"
@@ -159,6 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/badge_height"
                     android:layout_gravity="center"
+                    android:alpha="0.3"
                     android:src="@drawable/disciplined"
                     android:padding="@dimen/small_padding"
                     android:id="@+id/badge3"/>
@@ -167,6 +172,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_small"
                     android:gravity="center"
+                    android:alpha="0.3"
                     android:id="@+id/badgeText3"
                     android:textColor="@color/colorPrimary"
                     android:text="Disciplined"/>
@@ -182,12 +188,14 @@
                     android:layout_gravity="center"
                     android:src="@drawable/awesome"
                     android:padding="@dimen/small_padding"
+                    android:alpha="0.3"
                     android:id="@+id/badge4"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_small"
                     android:gravity="center"
+                    android:alpha="0.3"
                     android:id="@+id/badgeText4"
                     android:textColor="@color/colorPrimary"
                     android:text="Going Awesome"/>
@@ -208,6 +216,7 @@
                    android:id="@+id/badge5"
                    android:layout_width="wrap_content"
                    android:layout_height="@dimen/badge_height"
+                   android:alpha="0.3"
                    android:layout_marginLeft="@dimen/layout_medium_margin"
                    android:src="@drawable/fav" />
            </LinearLayout>
@@ -216,7 +225,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_small"
                 android:layout_below="@+id/fav_badge"
-
+                android:alpha="0.3"
                 android:id="@+id/badgeText5"
                 android:layout_centerHorizontal="true"
                 android:padding="@dimen/medium_padding"
@@ -245,7 +254,7 @@
                 android:layout_gravity="center"
                 android:padding="@dimen/medium_padding"
                 android:textColor="@color/colorAccent"
-                android:text="8 Bells rung"
+                android:text="0 Bells rung"
                 />
         </LinearLayout>
         <LinearLayout
@@ -269,7 +278,7 @@
                 android:layout_gravity="center"
                 android:padding="@dimen/medium_padding"
                 android:textColor="@color/colorAccent"
-                android:text="4 Kgs Lost"
+                android:text="0 Kgs Lost"
                 />
         </LinearLayout>
     </LinearLayout>

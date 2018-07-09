@@ -97,6 +97,7 @@ public class Login extends AppCompatActivity {
                                 editor.putInt("clientId", result.getInt(VariablesModels.dietitianId));
                                 editor.putString("user_name", result.getString(VariablesModels.user_name));
                                 editor.putString("email", email);
+                                editor.putString("image",result.getString("url"));
                                 editor.putString("clinicId",result.getString("clinicId"));
                                 //Send a request to double check if the user is confirmed or not
                                 //if the user is confirmed, send directly to dashboard else send to not confirmed

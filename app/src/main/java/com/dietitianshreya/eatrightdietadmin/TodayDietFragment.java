@@ -83,7 +83,7 @@ public class TodayDietFragment extends Fragment {
         if (getArguments() != null) {
            // clientId = getArguments().getString("client");
         Log.d("client",clientId);
-            dietList=getArguments().getParcelableArrayList(ARG_PARAM2);
+//            dietList=getArguments().getParcelableArrayList(ARG_PARAM2);
 
             setHasOptionsMenu(true);
 
