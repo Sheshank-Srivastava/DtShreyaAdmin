@@ -56,6 +56,7 @@ public class Login extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
         progressDialog.setMessage("Logging in...");
 
         signin.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +80,7 @@ public class Login extends AppCompatActivity {
 
         String url = "https://shreyaapi.herokuapp.com/dietitianlogin/";
         final ProgressDialog progressDialog = new ProgressDialog(Login.this);
+        progressDialog.setCancelable(false);
         progressDialog.setMessage("Logging in...");
         progressDialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

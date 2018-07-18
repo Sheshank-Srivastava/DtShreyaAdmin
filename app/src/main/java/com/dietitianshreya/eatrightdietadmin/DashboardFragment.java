@@ -130,6 +130,7 @@ public class DashboardFragment extends Fragment {
     public void fetchData() {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/upcomingappointments/";
         appointmentsList.clear();

@@ -114,6 +114,7 @@ CoordinatorLayout coordinatorLayout;
     public void fetchData() {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/allappointments/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

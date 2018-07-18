@@ -58,6 +58,7 @@ public class MealChangeRequestActivty extends AppCompatActivity {
     public void fetchData() {
         final ProgressDialog progressDialog = new ProgressDialog(MealChangeRequestActivty.this);
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/mealrequestview/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

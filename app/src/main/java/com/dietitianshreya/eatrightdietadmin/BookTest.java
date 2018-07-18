@@ -215,6 +215,7 @@ public class BookTest extends AppCompatActivity {
     public void PostTestData(final String testname) {
         final ProgressDialog progressDialog = new ProgressDialog(BookTest.this);
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/booktest/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -364,6 +365,7 @@ public class BookTest extends AppCompatActivity {
     public void sendR() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Fetching Clients...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getclients/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -436,6 +438,7 @@ public class BookTest extends AppCompatActivity {
     public void getTestData() {
         final ProgressDialog progressDialog = new ProgressDialog(BookTest.this);
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/gettest/";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

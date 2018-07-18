@@ -217,6 +217,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
 
         final ProgressDialog progressDialog = new ProgressDialog(mCtx);
         progressDialog.setMessage("Requesting Reschedule...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/rescheduledietitian/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -275,6 +276,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     public void sendResponse(final String action,final int position,final String id) {
         final ProgressDialog progressDialog = new ProgressDialog(mCtx);
         progressDialog.setMessage("Storing response");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/changeappointmentstatus/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

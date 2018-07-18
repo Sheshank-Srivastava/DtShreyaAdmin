@@ -97,6 +97,7 @@ public class ChooseMealActivity extends AppCompatActivity {
     public void fetchData() {
         final ProgressDialog progressDialog = new ProgressDialog(ChooseMealActivity.this);
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getallfood/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

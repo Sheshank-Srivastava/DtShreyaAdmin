@@ -69,7 +69,7 @@ public class ClientDetailActivity extends AppCompatActivity implements DietHisto
         Bundle extras = getIntent().getExtras();
         clientID = extras.getString("client");
 
-progressDialog = new ProgressDialog(ClientDetailActivity.this);
+//progressDialog = new ProgressDialog(ClientDetailActivity.this);
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         formattedDate = df.format(c);

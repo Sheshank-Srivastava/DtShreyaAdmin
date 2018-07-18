@@ -103,6 +103,7 @@ public class TemplateSelection extends AppCompatActivity {
     public void fetchData() {
         final ProgressDialog progressDialog = new ProgressDialog(TemplateSelection.this);
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/templatename/";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -166,6 +167,7 @@ public class TemplateSelection extends AppCompatActivity {
     public void fetchTemplateData(final String name) {
         final ProgressDialog progressDialog = new ProgressDialog(TemplateSelection.this);
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getdiettemplate/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

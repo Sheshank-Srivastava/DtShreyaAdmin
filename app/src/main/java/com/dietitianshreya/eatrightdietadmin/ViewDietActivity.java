@@ -171,6 +171,7 @@ BlankFragment.OnFragmentInteractionListener{
     public void fetchDietData() {
         final ProgressDialog progressDialog = new ProgressDialog(ViewDietActivity.this);
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getdiet/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

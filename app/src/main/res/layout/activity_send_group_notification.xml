@@ -101,6 +101,7 @@
         android:background="@drawable/buttons_background"
         android:layout_gravity="center_horizontal"
         android:text="send Notification"
+        android:id="@+id/send"
         android:padding="@dimen/medium_padding"
         android:textColor="@color/textColorLight"/>
 </LinearLayout>

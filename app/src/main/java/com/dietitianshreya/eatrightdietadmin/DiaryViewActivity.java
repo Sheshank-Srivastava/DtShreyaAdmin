@@ -72,6 +72,7 @@ public class DiaryViewActivity extends AppCompatActivity {
     {
         final ProgressDialog progressDialog = new ProgressDialog(DiaryViewActivity.this);
         progressDialog.setMessage("Updating data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getdatediary/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

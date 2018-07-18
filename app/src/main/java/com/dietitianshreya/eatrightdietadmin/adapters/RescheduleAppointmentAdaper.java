@@ -123,6 +123,7 @@ public class RescheduleAppointmentAdaper extends RecyclerView.Adapter<Reschedule
     public void sendResponse(final String action,final int position,final String id) {
         final ProgressDialog progressDialog = new ProgressDialog(mCtx);
         progressDialog.setMessage("Storing response");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/reschedulerequestaction/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

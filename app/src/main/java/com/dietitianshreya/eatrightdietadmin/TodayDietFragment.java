@@ -200,6 +200,7 @@ public class TodayDietFragment extends Fragment {
     public void fetchDietData() {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getdatediet/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -292,7 +293,7 @@ public class TodayDietFragment extends Fragment {
                                 }
                                 if (innerobject.has("foodnine")) {
                                     ArrayList<MealModel> mealList = new ArrayList<>();
-                                    JSONArray array = innerobject.getJSONArray("foodeight");
+                                    JSONArray array = innerobject.getJSONArray("foodnine");
                                     for (int i = 0; i < array.length(); i++) {
                                         String food = array.getString(i);
                                         mealList.add(new MealModel(food, "Supplements", true));

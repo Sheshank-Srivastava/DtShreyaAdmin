@@ -189,6 +189,7 @@ public class  BookAppointment extends AppCompatActivity {
     public void sendR() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Fetching Clients...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getclients/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -260,6 +261,7 @@ public class  BookAppointment extends AppCompatActivity {
     public void bookappointment(final String date,final String time,final String type, final String id) {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Booking Appointment...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/bookAppointment/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

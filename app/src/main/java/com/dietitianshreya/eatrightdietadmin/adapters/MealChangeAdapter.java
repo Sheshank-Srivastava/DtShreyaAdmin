@@ -118,6 +118,7 @@ public class MealChangeAdapter extends RecyclerView.Adapter<MealChangeAdapter.My
     public void fetchData(final String type, final String dateofdiet, final String Status, final int position, final String id) {
         final ProgressDialog progressDialog = new ProgressDialog(mCtx);
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/acceptmealrequest/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

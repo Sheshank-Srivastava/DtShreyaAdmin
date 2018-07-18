@@ -159,6 +159,7 @@ public class ClinicalNotesFragment extends Fragment {
     public void UpdateNotesData(final String notes) {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Updating data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/addnote/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -219,13 +220,14 @@ public class ClinicalNotesFragment extends Fragment {
 
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getnote/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                            progressDialog.dismiss();
                         try {
 
                             Log.d("thanks",response);

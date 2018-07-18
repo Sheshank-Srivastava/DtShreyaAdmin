@@ -342,6 +342,7 @@ TextView numberOfBells,rank,badgesEarn,kgslost;
     public void fetchProgressData() {
         final ProgressDialog progressDialog= new ProgressDialog(getActivity());
         progressDialog.setMessage("Fetching Data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getprogress/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

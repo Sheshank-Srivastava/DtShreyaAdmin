@@ -183,6 +183,7 @@ public class ChatSelectionFragment extends Fragment {
     public void sendR() {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Fetching Clients...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getclients/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

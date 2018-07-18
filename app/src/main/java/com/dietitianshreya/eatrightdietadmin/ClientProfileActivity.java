@@ -411,6 +411,7 @@ EditText dieterName,dieterPhone,dieterEmail,dieterReferredby,dieterDob,dieterWha
 
         final ProgressDialog progressDialog = new ProgressDialog(ClientProfileActivity.this);
         progressDialog.setMessage("Updating data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getprofiledata/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -537,6 +538,7 @@ EditText dieterName,dieterPhone,dieterEmail,dieterReferredby,dieterDob,dieterWha
         createJson();
         final ProgressDialog progressDialog = new ProgressDialog(ClientProfileActivity.this);
         progressDialog.setMessage("Updating data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/saveprofiledata/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

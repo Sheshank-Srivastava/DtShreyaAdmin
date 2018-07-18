@@ -166,6 +166,7 @@ EditText days,amount;
 
         final ProgressDialog progressDialog = new ProgressDialog(mCtx);
         progressDialog.setMessage("Requesting Extension...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/confirmextension/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

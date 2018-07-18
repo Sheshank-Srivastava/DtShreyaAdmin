@@ -222,6 +222,7 @@ public class BodyCompositionFragment extends Fragment {
     public void addBCAData(final String date,final String weight,final String height,final String sfat,final String vfat,final String bmi,final String muscle,final String bodyage,final String resMeta) {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Updating data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/addbcadata/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -290,6 +291,7 @@ public class BodyCompositionFragment extends Fragment {
     public void fetchBCAData() {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getbcadata/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

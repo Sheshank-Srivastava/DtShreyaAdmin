@@ -123,6 +123,7 @@ public class AllClientsDetails extends Fragment {
     public void sendR() {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Fetching All Clients...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getclients/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

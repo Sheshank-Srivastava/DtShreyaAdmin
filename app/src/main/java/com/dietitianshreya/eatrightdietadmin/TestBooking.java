@@ -93,6 +93,7 @@ public class TestBooking extends AppCompatActivity {
     public void fetchData() {
         final ProgressDialog progressDialog = new ProgressDialog(TestBooking.this);
         progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/alltestappointments/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

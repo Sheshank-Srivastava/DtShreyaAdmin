@@ -89,6 +89,7 @@ public class DietitianProfileReviews extends AppCompatActivity {
     public void getReview() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Fetching Reviews...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getreview/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

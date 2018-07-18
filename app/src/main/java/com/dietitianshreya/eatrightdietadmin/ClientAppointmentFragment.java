@@ -126,6 +126,7 @@ public class ClientAppointmentFragment extends Fragment {
     public void fetchAppointmentsData() {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Fetching Data");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getuserappointment/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
