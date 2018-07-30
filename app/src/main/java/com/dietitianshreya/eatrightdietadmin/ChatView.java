@@ -383,7 +383,7 @@ public class ChatView extends AppCompatActivity implements  View.OnClickListener
     private void lerMessagensFirebase(){
 
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        final ChatFirebaseAdapter firebaseAdapter = new ChatFirebaseAdapter(mFirebaseDatabaseReference.child(CHAT_REFERENCE),userModel.getName(),this);
+        final ChatFirebaseAdapter firebaseAdapter = new ChatFirebaseAdapter(mFirebaseDatabaseReference.child(CHAT_REFERENCE),userModel.getId(),this);
         firebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {

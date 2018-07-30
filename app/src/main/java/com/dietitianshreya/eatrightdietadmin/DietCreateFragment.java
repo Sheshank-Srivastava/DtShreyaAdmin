@@ -43,6 +43,8 @@ import static com.dietitianshreya.eatrightdietadmin.Login.MyPREFERENCES;
 
 
 public class DietCreateFragment extends Fragment {
+
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String clientId;
@@ -66,7 +68,7 @@ public class DietCreateFragment extends Fragment {
     ArrayList<MealModel> mealListsup = new ArrayList<>();
     ArrayList<MealModel> mealListlateEve = new ArrayList<>();
     private OnFragmentInteractionListener mListener;
-
+JSONArray supplementArray = new JSONArray();
     public DietCreateFragment() {
         // Required empty public constructor
     }
@@ -170,6 +172,7 @@ public class DietCreateFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
 //        super.onActivityResult(requestCode,resultCode,data);
         if(data != null) {
+            Log.d("data",requestCode+"");
             if(requestCode<9) {
 
 
@@ -187,6 +190,19 @@ public class DietCreateFragment extends Fragment {
             else
             {
 
+
+/*
+                mealListem = data.getParcelableArrayListExtra("meal1");
+                mealList = data.getParcelableArrayListExtra("meal2");
+                mealListmm = data.getParcelableArrayListExtra("meal3");
+                mealList1 = data.getParcelableArrayListExtra("meal4");
+                mealList2 = data.getParcelableArrayListExtra("meal5");
+                mealListlateEve = data.getParcelableArrayListExtra("meal6");
+
+                mealList3 = data.getParcelableArrayListExtra("meal7");
+                mealListpd = data.getParcelableArrayListExtra("meal8");
+                mealListsup = data.getParcelableArrayListExtra("meal9");
+
                 DietPlanModel model = dietList.get(1);
                 model.setMealList(mealList);
                 DietPlanModel modelem = dietList.get(0);
@@ -203,22 +219,23 @@ public class DietCreateFragment extends Fragment {
                 model3.setMealList(mealList3);
                 DietPlanModel model4= dietList.get(7);
                 model4.setMealList(mealListpd);
-                DietPlanModel modelsup= dietList.get(7);
+                DietPlanModel modelsup= dietList.get(8);
                 modelsup.setMealList(mealListsup);
 
-                mealListem = data.getParcelableArrayListExtra("meal1");
-                mealList = data.getParcelableArrayListExtra("meal2");
-                mealListmm = data.getParcelableArrayListExtra("meal3");
-                mealList1 = data.getParcelableArrayListExtra("meal4");
-                mealList2 = data.getParcelableArrayListExtra("meal5");
-                mealListlateEve = data.getParcelableArrayListExtra("meal6");
+                for( int i=0;i<mealListsup.size();i++)
+                {
 
-                mealList3 = data.getParcelableArrayListExtra("meal7");
-                mealListpd = data.getParcelableArrayListExtra("meal8");
-                mealListsup = data.getParcelableArrayListExtra("meal8");
+                    supplementArray.put(mealListsup.get(i).getMealDesc());
+
+                    Log.d("manya",supplementArray+"");
+                }
+
 
 
                 dietPlanAdapter.notifyDataSetChanged();
+
+                */
+
             }
         }
     }
@@ -236,6 +253,8 @@ public class DietCreateFragment extends Fragment {
 
 
     public void RequestData() throws JSONException {
+
+        Log.d("manya",supplementArray+"");
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Uploading data...");
         progressDialog.show();
@@ -272,7 +291,7 @@ public class DietCreateFragment extends Fragment {
                 params.put(VariablesModels.dietitianId,userid);
                 params.put("dateofdiet",date);
                 params.put("dietdata",object+"");
-                params.put("supplements","lol");
+                params.put("supplements",supplementArray+"");
                 params.put("notes",notesObject+"");
                 return params;
             }
@@ -502,14 +521,17 @@ if(mealdata.length()>0) {
     else if (pos ==9)
     {
         int meallistsize=dietList.get(i).getMealList().size();
-        JSONArray mealdata= new JSONArray();
         for(int j =0;j<meallistsize;j++)
         {
-            mealdata.put(dietList.get(i).getMealList().get(j).getMealHead());
+            supplementArray.put(dietList.get(i).getMealList().get(j).getMealHead());
         }
-        if(mealdata.length()>0) {
-            object.put("foodnine", mealdata);
-        }
+
+
+
+
+
+
+
     }
 
         }

@@ -11,12 +11,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
-    <ImageView
-        android:layout_alignBottom="@+id/contentMessageChat"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:visibility="gone"
-        android:id="@+id/ivUserChat" />
+
 
     <me.himanshusoni.chatmessageview.ChatMessageView
         android:id="@+id/contentMessageChat"

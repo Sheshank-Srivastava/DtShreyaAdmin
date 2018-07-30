@@ -87,6 +87,8 @@ public class NotesSelection extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
 public  void setAddNotes()
 {
     AlertDialog.Builder alertDialog = new AlertDialog.Builder(NotesSelection.this);
@@ -116,5 +118,7 @@ public  void setAddNotes()
     });
     alertDialog.show();
 }
+
+
 
 }

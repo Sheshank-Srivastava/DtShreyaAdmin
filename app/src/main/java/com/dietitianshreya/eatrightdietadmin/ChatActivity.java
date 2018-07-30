@@ -426,7 +426,7 @@ public void clinicalnotes()
     private void lerMessagensFirebase(){
 
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        final ChatFirebaseAdapter firebaseAdapter = new ChatFirebaseAdapter(mFirebaseDatabaseReference.child(CHAT_REFERENCE),userModel.getName(),this);
+        final ChatFirebaseAdapter firebaseAdapter = new ChatFirebaseAdapter(mFirebaseDatabaseReference.child(CHAT_REFERENCE),userModel.getId(),this);
         firebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -453,7 +453,7 @@ public void clinicalnotes()
             finish();
         }else{
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName("Richa Garg")
+                    .setDisplayName("Dietitian"+clientID)
                     .setPhotoUri(Uri.parse("www.uic.mx/posgrados/files/2018/05/default-user.png"))
                     .build();
 
@@ -463,7 +463,7 @@ public void clinicalnotes()
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Log.d("hehe", "User profile updated.");
-                                userModel = new UserModel(mFirebaseUser.getDisplayName(),mFirebaseUser.getPhotoUrl().toString(), mFirebaseUser.getUid() );
+                                userModel = new UserModel(mFirebaseUser.getDisplayName(),mFirebaseUser.getPhotoUrl().toString(), clientID);
                                 lerMessagensFirebase();
                             }
                             else {

@@ -63,13 +63,13 @@ public class ChatFirebaseAdapter extends FirebaseRecyclerAdapter<ChatModelNew,Ch
          model = getItem(position);
 //        Log.d("lol",model.getUserModel().getName());
         if (model.getFile() != null){
-            if (model.getFile().getType().equals("img") && model.getUserModel().getName().equals(nameUser)){
+            if (model.getFile().getType().equals("img") && model.getUserModel().getName().equals("Dietitian"+nameUser)){
                 return RIGHT_MSG_IMG;
             }else{
                 return LEFT_MSG_IMG;
             }
         }else if (model.getUserModel() != null){
-            if( model.getUserModel().getName().equals(nameUser)){
+            if( model.getUserModel().getName().equals("Dietitian"+nameUser)){
                 return RIGHT_MSG;
             }
             else {
@@ -129,6 +129,8 @@ public class ChatFirebaseAdapter extends FirebaseRecyclerAdapter<ChatModelNew,Ch
         }
 
         public void setTvTimestamp(String timestamp){
+            if (tvTimestamp == null)return;
+            tvTimestamp.setText(converteTimestamp(timestamp));
 
         }
 
@@ -146,8 +148,8 @@ public class ChatFirebaseAdapter extends FirebaseRecyclerAdapter<ChatModelNew,Ch
 
     }
 
-    private CharSequence converteTimestamp(String mileSegundos){
-        return DateUtils.getRelativeTimeSpanString(Long.parseLong(mileSegundos), System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
+    private CharSequence converteTimestamp(String timestamp){
+        return DateUtils.getRelativeTimeSpanString(Long.parseLong(timestamp), System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
     }
 
 }
