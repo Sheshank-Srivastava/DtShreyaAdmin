@@ -255,6 +255,7 @@ JSONArray supplementArray = new JSONArray();
     public void RequestData() throws JSONException {
 
         Log.d("manya",supplementArray+"");
+        Log.d("array",supplementArray+"");
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Uploading data...");
         progressDialog.show();
@@ -293,6 +294,7 @@ JSONArray supplementArray = new JSONArray();
                 params.put("dietdata",object+"");
                 params.put("supplements",supplementArray+"");
                 params.put("notes",notesObject+"");
+
                 return params;
             }
 
@@ -525,8 +527,7 @@ if(mealdata.length()>0) {
         {
             supplementArray.put(dietList.get(i).getMealList().get(j).getMealHead());
         }
-
-
+        Log.d("array2",supplementArray+"");
 
 
 

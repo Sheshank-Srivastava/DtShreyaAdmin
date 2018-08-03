@@ -454,7 +454,7 @@ public void clinicalnotes()
             finish();
         }else{
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName("Dietitian"+clientID)
+                    .setDisplayName("Dietitian"+ dietitianId)
                     .setPhotoUri(Uri.parse("www.uic.mx/posgrados/files/2018/05/default-user.png"))
                     .build();
 
@@ -464,7 +464,7 @@ public void clinicalnotes()
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Log.d("hehe", "User profile updated.");
-                                userModel = new UserModel(mFirebaseUser.getDisplayName(),mFirebaseUser.getPhotoUrl().toString(), clientID);
+                                userModel = new UserModel(mFirebaseUser.getDisplayName(),mFirebaseUser.getPhotoUrl().toString(), dietitianId);
                                 lerMessagensFirebase();
                             }
                             else {

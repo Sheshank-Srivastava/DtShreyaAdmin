@@ -153,7 +153,7 @@ public class ChatView extends AppCompatActivity implements  View.OnClickListener
             if (resultCode == RESULT_OK){
                 Uri selectedImageUri = data.getData();
                 if (selectedImageUri != null){
-                    sendFileFirebase(storageRef,selectedImageUri);
+                   // sendFileFirebase(storageRef,selectedImageUri);
                 }else{
                     //URI IS NULL
                 }
@@ -237,34 +237,7 @@ public class ChatView extends AppCompatActivity implements  View.OnClickListener
     }
 
 
-    /**
-     * Envia o arvquivo para o firebase
-     */
-    private void sendFileFirebase(StorageReference storageReference, final Uri file){
-        if (storageReference != null){
-            final String name = DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString();
-            StorageReference imageGalleryRef = storageReference.child(name+"_gallery");
-            UploadTask uploadTask = imageGalleryRef.putFile(file);
-            uploadTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.e(TAG,"onFailure sendFileFirebase "+e.getMessage());
-                }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Log.i(TAG,"onSuccess sendFileFirebase");
-                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    FileModel fileModel = new FileModel("img",downloadUrl.toString(),name,"");
-                    ChatModelNew chatModel = new ChatModelNew(userModel,"", Calendar.getInstance().getTime().getTime()+"",fileModel);
-                    mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(chatModel);
-                }
-            });
-        }else{
-            //IS NULL
-        }
 
-    }
 
     /**
      * Envia o arvquivo para o firebase
@@ -303,16 +276,6 @@ public class ChatView extends AppCompatActivity implements  View.OnClickListener
     /**
      * Enviar foto tirada pela camera
      */
-    private void photoCameraIntent(){
-        String nomeFoto = DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString();
-        filePathImageCamera = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), nomeFoto+"camera.jpg");
-        Intent it = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        Uri photoURI = FileProvider.getUriForFile(ChatView.this,
-                BuildConfig.APPLICATION_ID + ".provider",
-                filePathImageCamera);
-        it.putExtra(MediaStore.EXTRA_OUTPUT,photoURI);
-        startActivityForResult(it, IMAGE_CAMERA_REQUEST);
-    }
 
     /**
      * Enviar foto pela galeria
@@ -410,7 +373,7 @@ public class ChatView extends AppCompatActivity implements  View.OnClickListener
             finish();
         }else{
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName("Dietitian"+clientID)
+                    .setDisplayName("Dietitian"+dietitianId)
                     .setPhotoUri(Uri.parse("www.uic.mx/posgrados/files/2018/05/default-user.png"))
                     .build();
 
@@ -420,7 +383,7 @@ public class ChatView extends AppCompatActivity implements  View.OnClickListener
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Log.d("hehe", "User profile updated.");
-                                userModel = new UserModel(mFirebaseUser.getDisplayName(),mFirebaseUser.getPhotoUrl().toString(), mFirebaseUser.getUid() );
+                                userModel = new UserModel(mFirebaseUser.getDisplayName(),mFirebaseUser.getPhotoUrl().toString(), dietitianId );
                                 lerMessagensFirebase();
                             }
                             else {
@@ -474,7 +437,7 @@ public class ChatView extends AppCompatActivity implements  View.OnClickListener
             );
         }else{
             // we already have permission, lets go ahead and call camera intent
-            photoCameraIntent();
+            //photoCameraIntent();
         }
     }
 
@@ -487,7 +450,7 @@ public class ChatView extends AppCompatActivity implements  View.OnClickListener
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted
-                    photoCameraIntent();
+                   // photoCameraIntent();
                 }
                 break;
         }
