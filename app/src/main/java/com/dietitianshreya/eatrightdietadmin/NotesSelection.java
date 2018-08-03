@@ -65,7 +65,7 @@ public class NotesSelection extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.create_diet_menu,menu);
+        getMenuInflater().inflate(R.menu.notes_selection_menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
 

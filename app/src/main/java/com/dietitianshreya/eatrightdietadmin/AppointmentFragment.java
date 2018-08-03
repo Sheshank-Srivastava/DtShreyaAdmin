@@ -86,7 +86,7 @@ CoordinatorLayout coordinatorLayout;
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(appointmentHistoryAdapter);
-        fetchData();
+//        fetchData();
 //        appointmentDetailsList.add(new AppointmentDetailsModel("9:30 A.M.","In Person","Completed","Akshit Tyagi","4 days left","12345"));
 //        appointmentDetailsList.add(new AppointmentDetailsModel("10:30 A.M.","In Person","Completed","Akshit Tyagi","4 days left","12345"));
 //        appointmentDetailsList.add(new AppointmentDetailsModel("11:30 A.M.","In Person","Completed","Akshit Tyagi","4 days left","12345"));
@@ -111,6 +111,12 @@ CoordinatorLayout coordinatorLayout;
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        fetchData();
+    }
+
     public void fetchData() {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Fetching data...");
@@ -122,7 +128,7 @@ CoordinatorLayout coordinatorLayout;
                     @Override
                     public void onResponse(String response) {
                         Log.d("user",response);
-
+                        appointmentList.clear();
                         try {
                             progressDialog.dismiss();
                             JSONObject result = new JSONObject(response);

@@ -155,6 +155,7 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
         final String dateText = df.format(c);
         date.setText(dateText);
         time = (EditText) inflator.findViewById(R.id.time);
+        time.setFocusable(false);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -367,8 +368,8 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
                             result= object.getInt("res");
                             if(result == 1)
                             {
-                                appointmentDetailsList.remove(position);
-                                notifyDataSetChanged();
+//                                appointmentDetailsList.remove(position);
+//                                notifyDataSetChanged();
 
                             }
 

@@ -410,8 +410,8 @@ public class ChatView extends AppCompatActivity implements  View.OnClickListener
             finish();
         }else{
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName("Richa Garg")
-                    .setPhotoUri(Uri.parse("https://images-na.ssl-images-amazon.com/images/I/81wizIuFO1L._UX250_.jpg"))
+                    .setDisplayName("Dietitian"+clientID)
+                    .setPhotoUri(Uri.parse("www.uic.mx/posgrados/files/2018/05/default-user.png"))
                     .build();
 
             mFirebaseUser.updateProfile(profileUpdates)

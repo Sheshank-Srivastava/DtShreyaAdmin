@@ -79,6 +79,7 @@ public class ClientAppointmentFragment extends Fragment {
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         appointmentAdapter = new ClientAppointmentAdapter(appointmentList,getActivity());
         fetchAppointmentsData();
+        Log.d("Appointments","Calling fetch appointment");
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(appointmentAdapter);
@@ -110,6 +111,12 @@ public class ClientAppointmentFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("Appointment","OnResume");
     }
 
     @Override
@@ -155,8 +162,10 @@ public class ClientAppointmentFragment extends Fragment {
                                     String id = response_object.getString(VariablesModels.appointmentId);
                                     appointmentList.add(new ClientAppointmentModel(date, time, type, status, dietitian));
                                 }
+                                appointmentAdapter.notifyDataSetChanged();
 //                           Log.d("app",appointmentList.get(0).getDate());
                             }
+
 
 //                            fetchProgressData();
 

@@ -375,8 +375,9 @@ public void clinicalnotes()
             //mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
             mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(model);
-            edMessage.setText(null);
             sendNotification(edMessage.getText().toString());
+            edMessage.setText(null);
+
         }
     }
 
@@ -614,6 +615,7 @@ public void clinicalnotes()
                             int count = object.getInt("count");
 
 
+                            Log.d("tag",count+"");
 
                             if(res==1)
                             {
@@ -644,7 +646,7 @@ public void clinicalnotes()
                                 {
                                     MenuItem dietitian2menu= menu.findItem(R.id.superviser);
                                     dietitian2menu.setVisible(false);
-                                    updateMenuTitles("dummy1",nameList.get(1));
+                                    updateMenuTitles(nameList.get(0),"dummy2");
                                 }
                                 else
                                 {

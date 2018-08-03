@@ -90,7 +90,7 @@ public class Login extends AppCompatActivity {
                         JSONObject result1 = new JSONObject();
                         try {
                             result1 = new JSONObject(response);
-                            if (result1.getInt("res") == 1) {
+                            if (result1.getInt("res") == 1&&result1.getString("loginstatus").equals("Y")) {
                                 Log.d("res", response);
                                 JSONObject result = result1.getJSONObject("response");
                                 progressDialog.dismiss();
