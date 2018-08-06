@@ -141,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_small"
-                    android:alpha="0.3"
+
                     android:gravity="center"
                     android:id="@+id/badgeText2"
                     android:textColor="@color/colorPrimary"
@@ -172,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_small"
                     android:gravity="center"
-                    android:alpha="0.3"
+
                     android:id="@+id/badgeText3"
                     android:textColor="@color/colorPrimary"
                     android:text="Disciplined"/>
@@ -195,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_small"
                     android:gravity="center"
-                    android:alpha="0.3"
+
                     android:id="@+id/badgeText4"
                     android:textColor="@color/colorPrimary"
                     android:text="Going Awesome"/>
@@ -225,7 +225,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_small"
                 android:layout_below="@+id/fav_badge"
-                android:alpha="0.3"
+
                 android:id="@+id/badgeText5"
                 android:layout_centerHorizontal="true"
                 android:padding="@dimen/medium_padding"
