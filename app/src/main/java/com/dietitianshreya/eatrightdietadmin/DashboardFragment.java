@@ -180,9 +180,13 @@ public class DashboardFragment extends Fragment {
                                         //change the url for upcoming appointments, add days left with every client name
                                         appointmentsList.add(new AppointmentsModel(username,newtime,type,daysleft+" days left",appId));
                                     }
+                                    viewAllAppointments.setText("View All");
+                                    viewAllAppointments.setClickable(true);
                                     appointmentsAdapter.notifyDataSetChanged();
                                 }else{
                                     //show that there are no appointments
+                                    viewAllAppointments.setText("No appointments for today");
+                                    viewAllAppointments.setClickable(false);
                                 }
                             }else{
                                 //error

@@ -76,7 +76,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.MyViewHolder> 
         holder.recyclerView.setLayoutManager(mLayoutManager);
         holder.recyclerView.setAdapter(detailsAdapter);
         detailsAdapter.notifyDataSetChanged();
-        holder.groupIndicator.setImageResource(R.drawable.ic_down);
+        holder.groupIndicator.setImageResource(R.drawable.ic_up);
         holder.date.setText(header.getDate());
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override

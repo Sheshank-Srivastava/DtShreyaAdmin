@@ -62,6 +62,7 @@ public class TestBooking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_booking);
 
+        getSupportActionBar().setTitle("All Tests");
         // Inflate the layout for this fragment
         recyclerView = (RecyclerView) findViewById(R.id.re);
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -140,8 +141,10 @@ public class TestBooking extends AppCompatActivity {
                                         testList.add(new TestHistoryModel(Date,testDetailsList1));
                                     }
                                     testAdapter.notifyDataSetChanged();
+                                    findViewById(R.id.noDietView).setVisibility(View.GONE);
                                 }else{
                                     //show that there are no appointments
+                                    findViewById(R.id.noDietView).setVisibility(View.VISIBLE);
                                 }
                             }else{
                                 //error

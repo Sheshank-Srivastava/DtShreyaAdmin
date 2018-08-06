@@ -174,6 +174,8 @@ public class MainActivity extends AppCompatActivity
                     case 1:
                         getSupportActionBar().setTitle("Chat");
                         fragment = new ChatSelectionFragment();
+//                        ChatSelectionFragment ch = (ChatSelectionFragment)fragment;
+//                        ch.getData();
                         break;
                     case 2:
                         getSupportActionBar().setTitle("Client");
@@ -262,6 +264,11 @@ public class MainActivity extends AppCompatActivity
 //
 //        return super.onOptionsItemSelected(item);
 //    }
+
+
+    public void MyFunction(){
+
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

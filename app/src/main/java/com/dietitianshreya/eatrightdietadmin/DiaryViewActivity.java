@@ -30,10 +30,10 @@ public class DiaryViewActivity extends AppCompatActivity {
     String MyPREFERENCES = "MyPrefs" ;
     String clientId,dateStr;
     TextView wakeupTime,sleepTime,waterIntake,greenTea,pooped,early_morning,todaysweight,
-            breakfast,mid_morning,lunch,evening,dinner,post_dinner,supplements;
+            breakfast,mid_morning,lunch,evening,late_evening,dinner,post_dinner,supplements;
 
     String wakeupTime_str,sleepTime_str,waterIntake_str,greenTea_str,pooped_str,early_morning_str,weight_str,
-            breakfast_str,mid_morning_str,lunch_str,evening_str,dinner_str,post_dinner_str,supplements_str;
+            breakfast_str,mid_morning_str,lunch_str,evening_str,late_eve_str,dinner_str,post_dinner_str,supplements_str;
 
 
     RecyclerView recyclerView;
@@ -47,7 +47,9 @@ public class DiaryViewActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         clientId = extras.getString(VariablesModels.userId);
+        Log.d("Client ID",clientId);
         dateStr = extras.getString("day");
+        Log.d("Day",dateStr);
         wakeupTime=(TextView)findViewById(R.id.wakeupTime);
         sleepTime=(TextView)findViewById(R.id.sleepTime);
         waterIntake=(TextView)findViewById(R.id.waterIntake);
@@ -58,6 +60,7 @@ public class DiaryViewActivity extends AppCompatActivity {
         mid_morning =(TextView) findViewById(R.id.mid_id);
         lunch = (TextView)findViewById(R.id.lunch_id);
         evening = (TextView)findViewById(R.id.eve_id);
+        late_evening = (TextView)findViewById(R.id.late_eve_id);
         dinner = (TextView)findViewById(R.id.dinner_id);
         post_dinner = (TextView)findViewById(R.id.post_id);
         supplements = (TextView)findViewById(R.id.supplements_id);
@@ -82,80 +85,55 @@ public class DiaryViewActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         try {
 
+                            Log.d("Diary",response);
                             JSONObject object = new JSONObject(response);
-                            String msg = object.getString(VariablesModels.msg);
-                            int res= object.getInt(VariablesModels.res);
-                            Log.d("manya",response);
-                            if(res==1){
-                            JSONObject innerobject = object.getJSONObject(VariablesModels.response);
-                            if(res==1) {
-                                if (!innerobject.getString(VariablesModels.sleeptime).equals(null)) {
-                                    sleepTime_str = innerobject.getString(VariablesModels.sleeptime);
-                                }
-                                if (!innerobject.getString(VariablesModels.wakeuptime).equals(null)) {
-                                    wakeupTime_str = innerobject.getString(VariablesModels.wakeuptime);
-                                }
+                            if (object.has("response")) {
+//                                extravalues(response);
+//                                {"response": {"sleeptime": "00:00", "wakeuptime": "00:00", "pooped": null, "waterintake": null,
+//                                        "greentea": null, "todayweight": null,
+//                                        "dietdata": {"foodfour": ",Steamed dahi bhalle,Overnight Gluten free oats",
+//                                        "foodthree": ",pear,litchi", "foodtwo": ",Peach smoothie,Anar raita"}}
+//                                    , "res": 1, "msg": "Diary"}
+//
+//
+//                                fooddata(response);
+                                if(object.getInt("res")==1){
+                                    JSONObject result = object.getJSONObject("response");
+                                    sleepTime.setText("Wake Up Time : "+result.getString("sleeptime"));
+                                    wakeupTime.setText("Sleep Time : "+result.getString("wakeuptime"));
+                                    pooped.setText("Pooped: "+result.getString("pooped")+" times");
+                                    waterIntake.setText("Water Intake : "+result.getString("waterintake")+" Glasses");
+                                    greenTea.setText("Green tea : "+result.getString("greentea")+" Cups");
+                                    todaysweight.setText("Todays's Weight : "+result.getString("todayweight"));
+                                    JSONObject diet = result.getJSONObject("dietdata");
+                                    if(diet.has("foodone"))
+                                        early_morning.setText(diet.getString("foodone"));
+                                    if(diet.has("foodtwo"))
+                                        breakfast.setText(diet.getString("foodtwo"));
+                                    if(diet.has("foodthree"))
+                                        mid_morning.setText(diet.getString("foodthree"));
+                                    if(diet.has("foodfour"))
+                                        lunch.setText(diet.getString("foodfour"));
+                                    if(diet.has("foodfive"))
+                                        evening.setText(diet.getString("foodfive"));
+                                    if(diet.has("foodsix"))
+                                        late_evening.setText(diet.getString("foodsix"));
+                                    if(diet.has("foodseven"))
+                                        dinner.setText(diet.getString("foodseven"));
+                                    if(diet.has("foodeight"))
+                                        post_dinner.setText(diet.getString("foodeight"));
 
-                                waterIntake_str = innerobject.getInt(VariablesModels.waterintake) + "";
-                                pooped_str = innerobject.getInt(VariablesModels.pooped) + "";
-                                greenTea_str = innerobject.getInt(VariablesModels.greentea) + "";
-                                weight_str = innerobject.getString(VariablesModels.todayweight) + "";
-
-                                JSONObject dietobject = innerobject.getJSONObject(VariablesModels.dietdata);
-                                if (dietobject.has(VariablesModels.foodone)) {
-                                    early_morning_str = dietobject.getString(VariablesModels.foodone);
                                 }
-                                if (dietobject.has(VariablesModels.foodtwo)) {
-                                    breakfast_str = dietobject.getString(VariablesModels.foodtwo);
-                                }
-                                if (dietobject.has(VariablesModels.foodthree)) {
-                                    mid_morning_str = dietobject.getString(VariablesModels.foodthree);
-                                }
-                                if (dietobject.has(VariablesModels.foodfour)) {
-                                    lunch_str = dietobject.getString(VariablesModels.foodfour);
-                                }
-                                if (dietobject.has(VariablesModels.foodfive)) {
-                                    evening_str = dietobject.getString(VariablesModels.foodfive);
-                                }
-
-                                if (dietobject.has(VariablesModels.foodsix)) {
-                                    dinner_str = dietobject.getString(VariablesModels.foodsix);
-                                }
-                                if (dietobject.has(VariablesModels.foodseven)) {
-                                    post_dinner_str = dietobject.getString(VariablesModels.foodseven);
-                                }
-                                if (dietobject.has(VariablesModels.foodeight)) {
-                                    supplements_str = dietobject.getString(VariablesModels.foodeight);
-                                }
-                            }
 
                             }
-
-                            wakeupTime.setText(wakeupTime_str);
-                            sleepTime.setText(sleepTime_str);
-                            waterIntake.setText(waterIntake_str);
-                            pooped.setText(pooped_str);
-                            greenTea.setText(greenTea_str);
-                            todaysweight.setText(weight_str);
-                            early_morning.setText(early_morning_str);
-                            breakfast.setText(breakfast_str);
-                            mid_morning.setText(mid_morning_str);
-                            lunch.setText(lunch_str);
-                            evening.setText(evening_str);
-                            dinner.setText(dinner_str);
-                            post_dinner.setText(post_dinner_str);
-
-
-progressDialog.dismiss();
-
-
-
-
-                        } catch (JSONException e) {
+                            else
+                            {
+                                //data no available image
+                            }
+                        }
+                        catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 },
                 new Response.ErrorListener() {

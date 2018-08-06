@@ -159,6 +159,10 @@ public class ChatSelectionFragment extends Fragment {
         }
     }
 
+    public void getData(){
+
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

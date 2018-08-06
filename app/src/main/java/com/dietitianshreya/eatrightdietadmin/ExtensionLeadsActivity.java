@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -42,6 +43,7 @@ public class ExtensionLeadsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extension_leads);
 
+        getSupportActionBar().setTitle("Extension Leads");
         SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
         recyclerView = (RecyclerView) findViewById(R.id.re);
@@ -89,8 +91,10 @@ public class ExtensionLeadsActivity extends AppCompatActivity {
                                         leadList.add(new ExtensionLeadsModel(username,userid,startdate,dayspassed,plan,phone,daysleft+" days left",clinicId,programId,endDate));
                                     }
                                     leadsAdaper.notifyDataSetChanged();
+                                    findViewById(R.id.noDietView).setVisibility(View.GONE);
                                 }else{
                                     //show that there are no appointments
+                                    findViewById(R.id.noDietView).setVisibility(View.VISIBLE);
                                 }
                             }else{
                                 //error

@@ -1,4 +1,5 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,12 +16,35 @@
         android:id="@+id/re">
 
     </android.support.v7.widget.RecyclerView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/textColorLight"
+        android:id="@+id/noDietView">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nofeed"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/layout_big_margin"
+            app:srcCompat="@drawable/ic_no_result"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nofeed"
+            android:layout_centerHorizontal="true"
+            android:text="No Appointments"
+            android:textColor="@color/grey_500"
+            android:textSize="24dp" />
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/fab"
-        android:src="@drawable/ic_add"
+        app:srcCompat="@drawable/ic_add"
         android:layout_margin="@dimen/fab_margin"
         android:layout_gravity="bottom|right"/>
 

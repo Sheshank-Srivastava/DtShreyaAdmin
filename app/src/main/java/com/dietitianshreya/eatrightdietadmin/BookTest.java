@@ -64,7 +64,7 @@ public class BookTest extends AppCompatActivity {
     String notes,test_text;
     int searchFlag = 0;
     Button bookTest,add;
-    String userid;
+    String userid,clinicId;
     ArrayList<DiseaseModel> testList;
     DiseaseAdapter testAdapter;
     private ChipsInput mChipsInput;
@@ -77,6 +77,7 @@ public class BookTest extends AppCompatActivity {
         setContentView(R.layout.activity_book_test);
         SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
+        clinicId = sharedpreferences1.getString("clientId","0");
         test_client = (EditText) findViewById(R.id.TestClientName);
         mChipsInput = (ChipsInput) findViewById(R.id.chips_input);
         add = (Button) findViewById(R.id.addTest);
@@ -120,7 +121,11 @@ public class BookTest extends AppCompatActivity {
                         testname += " + "+items_added.get(i).getLabel();
                     }
                 }
-                PostTestData(testname);
+                if(items_added.size()==0){
+                    Toast.makeText(BookTest.this,"Please select a test",Toast.LENGTH_SHORT).show();
+                }else {
+                    PostTestData(testname);
+                }
                 Log.d("notes",notes);
             }
         });
@@ -214,7 +219,7 @@ public class BookTest extends AppCompatActivity {
 
     public void PostTestData(final String testname) {
         final ProgressDialog progressDialog = new ProgressDialog(BookTest.this);
-        progressDialog.setMessage("Fetching data...");
+        progressDialog.setMessage("Booking Test...");
         progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/booktest/";
@@ -224,7 +229,7 @@ public class BookTest extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         try {
-
+                            progressDialog.dismiss();
                             JSONObject object = new JSONObject(response);
                             String message= object.getString("msg");
                             int res= object.getInt("res");
@@ -264,7 +269,7 @@ public class BookTest extends AppCompatActivity {
                 params.put("date",test_date.getText().toString());
                 params.put("notes",notes);
                 params.put("testname",testname);
-                params.put("clinicid","3");
+                params.put("clinicid",clinicId);
 
                 return params;
             }

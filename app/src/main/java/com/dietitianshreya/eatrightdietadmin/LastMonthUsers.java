@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -41,6 +42,7 @@ public class LastMonthUsers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_last_month_users);
+        getSupportActionBar().setTitle("Final Month Users");
         recyclerView = (RecyclerView) findViewById(R.id.re);
         clientList = new ArrayList<>();
         SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -83,11 +85,14 @@ public class LastMonthUsers extends AppCompatActivity {
                                         clientId = ob.getString(VariablesModels.userId);
                                         email=ob.getString("email");
 
-                                        clientList.add(new LastMonthUsersModel(name,clientId,startdate,kgslost,plan,"null",daysleft));
+                                        clientList.add(new LastMonthUsersModel(name,clientId,startdate,kgslost,plan,email,daysleft+" days left"));
+
                                     }
                                     clientAdapter.notifyDataSetChanged();
+                                    findViewById(R.id.noDietView).setVisibility(View.GONE);
                                 }else{
                                     //show that there are no appointments
+                                    findViewById(R.id.noDietView).setVisibility(View.VISIBLE);
                                 }
                             }else{
                                 //error

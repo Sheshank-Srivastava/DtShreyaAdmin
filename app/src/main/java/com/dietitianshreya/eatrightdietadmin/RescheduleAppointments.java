@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -41,6 +43,7 @@ public class RescheduleAppointments extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reschedule_appointments);
+        getSupportActionBar().setTitle("Reschedule Requests");
         recyclerView = (RecyclerView) findViewById(R.id.re);
         appointmentList = new ArrayList<>();
         SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -84,8 +87,10 @@ public class RescheduleAppointments extends AppCompatActivity {
                                         appointmentList.add(new RescheduleAppointmentModel(name,clientId,date,requested,id,daysleft));
                                     }
                                     appointmentAdaper.notifyDataSetChanged();
+                                    findViewById(R.id.noDietView).setVisibility(View.GONE);
                                 }else{
                                     //show that there are no appointments
+                                    findViewById(R.id.noDietView).setVisibility(View.VISIBLE);
                                 }
                             }else{
                                 //error

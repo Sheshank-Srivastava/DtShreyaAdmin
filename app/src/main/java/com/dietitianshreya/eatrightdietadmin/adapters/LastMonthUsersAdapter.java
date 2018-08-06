@@ -3,6 +3,7 @@ package com.dietitianshreya.eatrightdietadmin.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,8 +76,15 @@ public class LastMonthUsersAdapter extends RecyclerView.Adapter<LastMonthUsersAd
         holder.sendMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mCtx,"Send mail!",Toast.LENGTH_SHORT).show();
-                //Handle mail handling
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[] { client.getEmail() });
+                //intent.putExtra(Intent.EXTRA_EMAIL,"hello@medicians.in");
+                intent.putExtra(Intent.EXTRA_SUBJECT,"");
+                intent.putExtra(Intent.EXTRA_TEXT,"Hello "+client.getClientName()+",\n");
+
+                //startActivity(Intent.createChooser(intent, "Send Email"));
+                mCtx.startActivity(intent);
             }
         });
         holder.chat.setOnClickListener(new View.OnClickListener() {

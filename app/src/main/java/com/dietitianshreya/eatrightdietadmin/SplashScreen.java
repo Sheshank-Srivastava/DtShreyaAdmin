@@ -65,7 +65,7 @@ public class SplashScreen extends AppCompatActivity {
                 }
 
                 // close this activity
-                finish();
+//                finish();
             }
         }, SPLASH_TIME_OUT);
 

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -48,6 +49,7 @@ public class AppointmentFragment extends Fragment {
     ArrayList<AppointmentDetailsModel> appointmentDetailsList;
     AppointmentHistoryAdapter appointmentHistoryAdapter;
     FloatingActionButton fab;
+    RelativeLayout noDietView;
     String userid;
 CoordinatorLayout coordinatorLayout;
     public AppointmentFragment() {
@@ -74,7 +76,7 @@ CoordinatorLayout coordinatorLayout;
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_appointment,null);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
-
+        noDietView = rootView.findViewById(R.id.noDietView);
         SharedPreferences sharedpreferences1 = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
@@ -164,8 +166,10 @@ CoordinatorLayout coordinatorLayout;
                                         appointmentList.add(new AppointmentHistoryModel(Date,appointmentDetailsList1));
                                     }
                                     appointmentHistoryAdapter.notifyDataSetChanged();
+                                    noDietView.setVisibility(View.GONE);
                                 }else{
                                     //show that there are no appointments
+                                    noDietView.setVisibility(View.VISIBLE);
                                 }
                             }else{
                                 //error

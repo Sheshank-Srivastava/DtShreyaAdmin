@@ -37,8 +37,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/wakeupTime"
+                    android:layout_gravity="center"
                     android:textColor="@color/colorPrimary"
-                    android:text="Wake Up Time : 7AM  "/>
+                    android:text="Wake Up Time :  "/>
 
             </LinearLayout>
 
@@ -61,8 +62,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/sleepTime"
+                    android:layout_gravity="center"
                     android:textColor="@color/colorPrimary"
-                    android:text="Sleep Time : 10PM  "/>
+                    android:text="Sleep Time :  "/>
 
             </LinearLayout>
         </LinearLayout>
@@ -91,8 +93,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/todaysweight"
+                    android:layout_gravity="center"
                     android:textColor="@color/colorPrimary"
-                    android:text="Todays's Weight : 70kg  "/>
+                    android:text="Todays's Weight :  "/>
 
             </LinearLayout>
 
@@ -113,9 +116,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
                     android:id="@+id/waterIntake"
                     android:textColor="@color/colorPrimary"
-                    android:text="Water Intake : 7 Glasses "/>
+                    android:text="Water Intake : "/>
 
             </LinearLayout>
         </LinearLayout>
@@ -145,9 +149,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
+                    android:layout_gravity="center"
                     android:id="@+id/greenTea"
                     android:textColor="@color/colorPrimary"
-                    android:text="Green tea : 2 Cup  "/>
+                    android:text="Green tea : "/>
 
             </LinearLayout>
 
@@ -169,8 +174,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/pooped"
+                    android:layout_gravity="center"
                     android:textColor="@color/colorPrimary"
-                    android:text="Pooped: 2 times "/>
+                    android:text="Pooped: "/>
             </LinearLayout>
         </LinearLayout>
         <android.support.v7.widget.CardView
@@ -204,7 +210,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_small"
-                    android:text="Corn Flakes + Milk"
                     android:id="@+id/early_id"
                     android:background="@android:color/transparent"
                     />
@@ -247,7 +252,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_small"
-                    android:text="Corn Flakes + Milk"
                     android:id="@+id/break_id"
                     android:background="@android:color/transparent"
                     />
@@ -290,7 +294,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_small"
-                    android:text="Corn Flakes + Milk"
                     android:id="@+id/mid_id"
                     android:background="@android:color/transparent"
                     />
@@ -334,7 +337,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_small"
-                    android:text="Corn Flakes + Milk"
                     android:id="@+id/lunch_id"
                     android:background="@android:color/transparent"
                     />
@@ -376,7 +378,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_small"
-                    android:text="Corn Flakes + Milk"
                     android:id="@+id/eve_id"
                     android:background="@android:color/transparent"
                     />
@@ -386,6 +387,46 @@
 
         </android.support.v7.widget.CardView>
 
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/spacing_medium"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/spacing_medium"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text_medium"
+                    android:text="Late Evening"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="@dimen/spacing_small"
+                    android:background="@color/overlay_dark_20"
+                    />
+
+
+                <TextView
+                    android:layout_marginTop="@dimen/spacing_medium"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:id="@+id/late_eve_id"
+                    android:background="@android:color/transparent"
+                    />
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -418,7 +459,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_small"
-                    android:text="Corn Flakes + Milk"
                     android:background="@android:color/transparent"
                     />
 
@@ -455,7 +495,6 @@
                 <TextView
                     android:layout_marginTop="@dimen/spacing_medium"
                     android:textSize="@dimen/text_small"
-                    android:text="Corn Flakes + Milk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/post_id"
@@ -470,6 +509,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/spacing_medium">
 
             <LinearLayout
@@ -500,7 +540,6 @@
                     android:id="@+id/supplements_id"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_small"
-                    android:text="Corn Flakes + Milk"
                     android:background="@android:color/transparent"
                     />
 

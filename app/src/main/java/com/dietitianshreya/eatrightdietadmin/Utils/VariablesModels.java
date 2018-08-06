@@ -31,6 +31,7 @@ public class VariablesModels {
     public static String foodsix="foodsix";
     public static String foodseven="foodseven";
     public static String foodeight="foodeight";
+    public static String foodnine="foodnine";
     public  static String appointmentId= "appointmentId";
     public static  String foodspecification="foodspecification";
     public static  String allergies= "allergies";

@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:weightSum="2.5"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -18,10 +17,9 @@
         />
 
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="22dp"
+        android:layout_width="22dp"
+        android:layout_height="match_parent"
         android:id="@+id/delete_note"
-        android:layout_weight="0.5"
 
         android:layout_gravity="center"
         android:padding="@dimen/small_padding"

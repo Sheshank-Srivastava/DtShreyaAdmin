@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,4 +12,27 @@
         android:id="@+id/re"
         android:layout_margin="@dimen/layout_very_small_margin"
         />
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/textColorLight"
+        android:id="@+id/noDietView">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nofeed"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/layout_big_margin"
+            app:srcCompat="@drawable/ic_no_result"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nofeed"
+            android:layout_centerHorizontal="true"
+            android:text="No Final Moth Users"
+            android:textColor="@color/grey_500"
+            android:textSize="24dp" />
+    </RelativeLayout>
+</RelativeLayout>

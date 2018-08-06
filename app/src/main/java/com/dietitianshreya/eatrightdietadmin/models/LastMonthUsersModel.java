@@ -6,15 +6,15 @@ package com.dietitianshreya.eatrightdietadmin.models;
 
 public class LastMonthUsersModel {
 
-    private String clientName,clientId,startedOn,kgLost,plan,status,daysLeft;
+    private String clientName,clientId,startedOn,kgLost,plan,email,daysLeft;
 
-    public LastMonthUsersModel(String clientName, String clientId, String startedOn, String kgLost, String plan, String status,String daysLeft) {
+    public LastMonthUsersModel(String clientName, String clientId, String startedOn, String kgLost, String plan, String email,String daysLeft) {
         this.clientName = clientName;
         this.clientId = clientId;
         this.startedOn = startedOn;
         this.kgLost = kgLost;
         this.plan = plan;
-        this.status = status;
+        this.email = email;
         this.daysLeft = daysLeft;
     }
 
@@ -58,12 +58,12 @@ public class LastMonthUsersModel {
         this.plan = plan;
     }
 
-    public String getStatus() {
-        return status;
+    public String getEmail() {
+        return email;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDaysLeft() {

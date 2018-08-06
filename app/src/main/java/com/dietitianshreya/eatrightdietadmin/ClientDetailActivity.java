@@ -175,7 +175,7 @@ public class ClientDetailActivity extends AppCompatActivity implements DietHisto
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
                             // set day of month , month and year value in the edit text
-                            month = monthOfYear;
+                            month = monthOfYear+1;
                             date = dayOfMonth;
                             ClientDetailActivity.this.year = year;
                             intent.putExtra(VariablesModels.userId,clientID);
