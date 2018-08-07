@@ -39,6 +39,7 @@ public class TemplateSelection extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AdapterGridSingleLine mAdapter;
     ArrayList<TemplateModel> list = new ArrayList<>();
+    String clientId;
 
 
     @Override
@@ -58,7 +59,9 @@ public class TemplateSelection extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.addItemDecoration(new SpacingItemDecoration(2, Tools.dpToPx(this, 3), true));
         recyclerView.setHasFixedSize(true);
+        Bundle extras = getIntent().getExtras();
 
+        clientId = extras.getString(VariablesModels.userId);
         mAdapter = new AdapterGridSingleLine(this, list);
         recyclerView.setAdapter(mAdapter);
         fetchData();
@@ -227,14 +230,21 @@ public class TemplateSelection extends AppCompatActivity {
                                 if (result.has(VariablesModels.foodsix)) {
                                     JSONArray array = result.getJSONArray(VariablesModels.foodsix);
                                     for (int i = 0; i < array.length(); i++) {
-                                        meallist6.add(new MealModel(array.getString(i), " Dinner", true));
+                                        meallist6.add(new MealModel(array.getString(i), " Late Evening", true));
                                     }
                                 }
 
                                 if (result.has(VariablesModels.foodseven)) {
                                     JSONArray array = result.getJSONArray(VariablesModels.foodseven);
                                     for (int i = 0; i < array.length(); i++) {
-                                        meallist7.add(new MealModel(array.getString(i), " Post dinner", true));
+                                        meallist7.add(new MealModel(array.getString(i), " Dinner", true));
+                                    }
+                                }
+
+                                if (result.has(VariablesModels.foodeight)) {
+                                    JSONArray array = result.getJSONArray(VariablesModels.foodseven);
+                                    for (int i = 0; i < array.length(); i++) {
+                                        meallist8.add(new MealModel(array.getString(i), " Post dinner", true));
                                     }
                                 }
 
@@ -247,6 +257,7 @@ public class TemplateSelection extends AppCompatActivity {
                                 returnIntent.putParcelableArrayListExtra("meal5", meallist5);
                                 returnIntent.putParcelableArrayListExtra("meal6", meallist6);
                                 returnIntent.putParcelableArrayListExtra("meal7", meallist7);
+                                returnIntent.putParcelableArrayListExtra("meal8", meallist8);
 
 
                                 setResult(RESULT_OK, returnIntent);
@@ -272,6 +283,7 @@ public class TemplateSelection extends AppCompatActivity {
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
                 params.put("templateId",name);
+                params.put(VariablesModels.userId,clientId);
                 return params;
             }
 

@@ -157,6 +157,7 @@ JSONArray supplementArray = new JSONArray();
                 final int REQUEST_CODE = 9;
 
                 Intent i = new Intent(getActivity(), TemplateSelection.class);
+                i.putExtra(VariablesModels.userId,clientId);
                 startActivityForResult(i, REQUEST_CODE);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -191,7 +192,6 @@ JSONArray supplementArray = new JSONArray();
             {
 
 
-/*
                 mealListem = data.getParcelableArrayListExtra("meal1");
                 mealList = data.getParcelableArrayListExtra("meal2");
                 mealListmm = data.getParcelableArrayListExtra("meal3");
@@ -201,7 +201,7 @@ JSONArray supplementArray = new JSONArray();
 
                 mealList3 = data.getParcelableArrayListExtra("meal7");
                 mealListpd = data.getParcelableArrayListExtra("meal8");
-                mealListsup = data.getParcelableArrayListExtra("meal9");
+               // mealListsup = data.getParcelableArrayListExtra("meal9");
 
                 DietPlanModel model = dietList.get(1);
                 model.setMealList(mealList);
@@ -219,22 +219,15 @@ JSONArray supplementArray = new JSONArray();
                 model3.setMealList(mealList3);
                 DietPlanModel model4= dietList.get(7);
                 model4.setMealList(mealListpd);
-                DietPlanModel modelsup= dietList.get(8);
-                modelsup.setMealList(mealListsup);
 
-                for( int i=0;i<mealListsup.size();i++)
-                {
 
-                    supplementArray.put(mealListsup.get(i).getMealDesc());
 
-                    Log.d("manya",supplementArray+"");
-                }
 
 
 
                 dietPlanAdapter.notifyDataSetChanged();
 
-                */
+
 
             }
         }

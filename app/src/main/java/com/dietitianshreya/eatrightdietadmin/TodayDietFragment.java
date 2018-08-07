@@ -116,7 +116,7 @@ public class TodayDietFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(),CreateDiet.class);
-                i.putExtra("clientId",clientId);
+                i.putExtra(VariablesModels.userId,clientId);
                 startActivity(i);
             }
         });
