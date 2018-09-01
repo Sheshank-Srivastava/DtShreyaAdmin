@@ -38,6 +38,16 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
+//        String r0 = "()zyx$n5me-^1nB*a%";
+//        Boolean[] r1 = new Boolean[]{false,true,true,false,false,true,true,false,true,true,false,false,true,true,true,false,true,false};
+//        String r2="d";
+//        for(int i0 =0;i0<r1.length;i0++){
+//            if(r1[i0]){
+//                r2 = r2+r0.substring(i0,i0+1);
+//            }
+//        }
+//        Log.d("Key",(r2+"R")+"a");
+
         clientId = sharedpreferences.getInt("clientId",0);
 
         new Handler().postDelayed(new Runnable() {

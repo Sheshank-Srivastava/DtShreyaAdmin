@@ -144,7 +144,7 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<UpcomingApp
         // Get the layout inflater
         LayoutInflater linf = LayoutInflater.from(mCtx);
 
-        final View inflator = linf.inflate(R.layout.reschedule_appointment_request, null);
+        final View inflator = linf.inflate(R.layout.reschedule_appointment_dialog, null);
         // Setting Dialog Message
         alertDialog.setMessage("Request Reschedule");
         alertDialog.setView(inflator);

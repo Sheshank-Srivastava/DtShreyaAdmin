@@ -87,9 +87,15 @@ public class NotesSelection extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent returnIntent = new Intent();
+        returnIntent.putStringArrayListExtra("notes",dietNotesAdapter.getNotes());
+        setResult(RESULT_OK,returnIntent);
+        super.onBackPressed();
+    }
 
-
-public  void setAddNotes()
+    public  void setAddNotes()
 {
     AlertDialog.Builder alertDialog = new AlertDialog.Builder(NotesSelection.this);
     // Get the layout inflater

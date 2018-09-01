@@ -4,21 +4,17 @@ import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -29,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dietitianshreya.eatrightdietadmin.Utils.VariablesModels;
+import com.dietitianshreya.eatrightdietadmin.adapters.AllClientListOthersAdapter;
 import com.dietitianshreya.eatrightdietadmin.adapters.AllClientsCompoundAdapter;
 import com.dietitianshreya.eatrightdietadmin.models.AllClientListOthersModel;
 import com.dietitianshreya.eatrightdietadmin.models.AllClientsCompoundModel;
@@ -43,86 +40,52 @@ import java.util.Map;
 
 import static com.dietitianshreya.eatrightdietadmin.Login.MyPREFERENCES;
 
+public class PendingDietCreationActivity extends AppCompatActivity {
 
-public class AllClientsDetails extends Fragment {
-
-    private OnFragmentInteractionListener mListener;
     RecyclerView recyclerView;
     ArrayList<AllClientsCompoundModel> clientList,filterclientList;
 
     ArrayList<AllClientListOthersModel> pendingdiet,otherclients,pendingfilterlist,otherclientfilterlist;
-    AllClientsCompoundAdapter clientListAdapter;
+    AllClientListOthersAdapter detailsAdapter;
     String userid;
-
-    public AllClientsDetails() {
-        // Required empty public constructor
-    }
-
-    public static AllClientsDetails newInstance() {
-        AllClientsDetails fragment = new AllClientsDetails();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_all_clients_details, container, false);
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
-        setHasOptionsMenu(true);
+        setContentView(R.layout.activity_pending_diet_creation);
+        getSupportActionBar().setTitle("Pending Diet Creation");
+        recyclerView = (RecyclerView) findViewById(R.id.re);
         clientList=new ArrayList<>();
         filterclientList = new ArrayList<>();
-        SharedPreferences sharedpreferences1 = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
-        clientListAdapter = new AllClientsCompoundAdapter(clientList,getActivity());
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(clientListAdapter);
+//        clientListAdapter = new AllClientsCompoundAdapter(clientList,this);
+//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setAdapter(clientListAdapter);
         pendingdiet = new ArrayList<>();
         otherclients = new ArrayList<>();
         pendingfilterlist = new ArrayList<>();
         otherclientfilterlist = new ArrayList<>();
+
+
+
+        detailsAdapter= new AllClientListOthersAdapter(pendingdiet,this);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(detailsAdapter);
+        detailsAdapter.notifyDataSetChanged();
+
+
         sendR();
-//
-//        pendingdiet.add(new AllClientListOthersModel("Akshit Tyagi","Id : 345rde3","0","4 days left"));
-//        pendingdiet.add(new AllClientListOthersModel("Paras Garg","Id : 345rde3","0","4 days left"));
-//        pendingdiet.add(new AllClientListOthersModel("Balkeerat","Id : 345rde3","0","4 days left"));
-//        pendingdiet.add(new AllClientListOthersModel("Manya ","Id : 345rde3","0","4 days left"));
-//        clientList.add(new AllClientsCompoundModel("Pending Diet Creation",pendingdiet));
-//
-//        ArrayList<AllClientListOthersModel> clientDetailsList1 = new ArrayList<>();
-//        otherclients.add(new AllClientListOthersModel("wer ","Id : 345rde3","4","4 days left"));
-//        otherclients.add(new AllClientListOthersModel("tfh ","Id : 345rde3","4","4 days left"));
-//        otherclients.add(new AllClientListOthersModel("fdfdf ","Id : 345rde3","4","4 days left"));
-//        otherclients.add(new AllClientListOthersModel("ffdfsd ","Id : 345rde3","4","4 days left"));
-//        otherclients.add(new AllClientListOthersModel("sdsdsdadasd ","Id : 345rde3","4","4 days left"));
-//        clientList.add(new AllClientsCompoundModel("Other Clients",otherclients));
-        clientListAdapter.notifyDataSetChanged();
-
-
-        return rootView;
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     public void sendR() {
-        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Fetching All Clients...");
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Fetching Clients...");
         progressDialog.setCancelable(false);
         progressDialog.show();
         String url = "https://shreyaapi.herokuapp.com/getclients/";
@@ -148,19 +111,13 @@ public class AllClientsDetails extends Fragment {
                                         creatinInt = ob.getInt("createIn");
                                         if(creatinInt<=3){
                                             pendingdiet.add(new AllClientListOthersModel(name,id,String.valueOf(creatinInt),daysleft));
-                                        }else{
-                                            otherclients.add(new AllClientListOthersModel(name,id,String.valueOf(creatinInt),daysleft));
                                         }
                                     }
-                                    if(pendingdiet.size()>0) {
-                                        clientList.add(new AllClientsCompoundModel("Pending Diet Creation", pendingdiet));
-                                    }
-                                    if(otherclients.size()>0) {
-                                        clientList.add(new AllClientsCompoundModel("Other Clients", otherclients));
-                                    }
-                                    clientListAdapter.notifyDataSetChanged();
+                                    detailsAdapter.notifyDataSetChanged();
+                                    findViewById(R.id.noDietView).setVisibility(View.GONE);
                                 }else{
                                     //show that there are no appointments
+                                    findViewById(R.id.noDietView).setVisibility(View.VISIBLE);
                                 }
                             }else{
                                 //error
@@ -177,7 +134,7 @@ public class AllClientsDetails extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
-                        Toast.makeText(getActivity().getApplicationContext(),"Something went wrong!\nCheck your Internet connection and try again..", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Something went wrong!\nCheck your Internet connection and try again..", Toast.LENGTH_LONG).show();
                         //Toast.makeText(MedicineData.this,error.toString(),Toast.LENGTH_LONG).show();
                     }
                 }){
@@ -196,40 +153,19 @@ public class AllClientsDetails extends Fragment {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
     }
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.search_menu,menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu,menu);
         MenuItem searchViewItem = menu.findItem(R.id.actionsearch);
 
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) searchViewItem.getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false);// Do not iconify the widget; expand it by defaul
 
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
@@ -247,6 +183,7 @@ public class AllClientsDetails extends Fragment {
             }
         };
         searchView.setOnQueryTextListener(queryTextListener);
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void filter(String charSequence)
@@ -262,7 +199,7 @@ public class AllClientsDetails extends Fragment {
             if(otherclientfilterlist!=null){
                 otherclientfilterlist.clear();
             }
-            AllClientsCompoundAdapter filteredAdapter = new AllClientsCompoundAdapter(filterclientList,getActivity());
+            AllClientsCompoundAdapter filteredAdapter = new AllClientsCompoundAdapter(filterclientList,this);
             for (AllClientListOthersModel row : pendingdiet) {
 
                 // name match condition. this might differ depending on your requirement
@@ -279,16 +216,16 @@ public class AllClientsDetails extends Fragment {
             }
 
             if(pendingfilterlist.size()>0)
-            filterclientList.add(new AllClientsCompoundModel("Pending Diet Creation", pendingfilterlist));
+                filterclientList.add(new AllClientsCompoundModel("Pending Diet Creation", pendingfilterlist));
             if(otherclientfilterlist.size()>0)
-            filterclientList.add(new AllClientsCompoundModel("Other Clients",otherclientfilterlist));
+                filterclientList.add(new AllClientsCompoundModel("Other Clients",otherclientfilterlist));
             recyclerView.setAdapter(filteredAdapter);
             filteredAdapter.notifyDataSetChanged();
         }else
 
         {
-            recyclerView.setAdapter(clientListAdapter);
-            clientListAdapter.notifyDataSetChanged();
+            recyclerView.setAdapter(detailsAdapter);
+            detailsAdapter.notifyDataSetChanged();
         }
     }
 }

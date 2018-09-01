@@ -45,8 +45,8 @@ public class DashboardFragment extends Fragment {
     RecyclerView recyclerView;
     AppointmentsAdapter appointmentsAdapter;
     ArrayList<AppointmentsModel> appointmentsList;
-    TextView viewAllAppointments,viewAllMealChangeRequest,viewAllRescheduleRequest,viewAllExtensionLeads,viewAllFinalMonthUsers;
-    TextView noOfRequest,noOfExtension,noOfFinalMonth,noOfMealChange;
+    TextView viewAllAppointments,viewAllMealChangeRequest,viewAllRescheduleRequest,viewAllExtensionLeads,viewAllFinalMonthUsers,viewAllPendingDietCreation;
+    TextView noOfRequest,noOfExtension,noOfFinalMonth,noOfMealChange,noOfPendingDiet;
     String userid;
     public DashboardFragment() {
         // Required empty public constructor
@@ -74,11 +74,13 @@ public class DashboardFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity)getActivity();
         activity.getSupportActionBar().setTitle("Dashboard");
         viewAllAppointments = (TextView) rootView.findViewById(R.id.viewAllAppointments);
+        viewAllPendingDietCreation = (TextView) rootView.findViewById(R.id.viewAllPendingDietCreation);
         viewAllMealChangeRequest = (TextView) rootView.findViewById(R.id.viewAllMealChangeRequest);
         viewAllRescheduleRequest = (TextView) rootView.findViewById(R.id.viewAllRescheduleRequest);
         viewAllExtensionLeads = (TextView) rootView.findViewById(R.id.viewAllExtensionLeads);
         viewAllFinalMonthUsers = (TextView) rootView.findViewById(R.id.viewAllFinalMonthUsers);
         noOfRequest = rootView.findViewById(R.id.noOfSignupRequest);
+        noOfPendingDiet = rootView.findViewById(R.id.noOfPendingDiet);
         noOfExtension = rootView.findViewById(R.id.noOfExtensionLeads);
         noOfFinalMonth=rootView.findViewById(R.id.noOfFinalMonthUsers);
         noOfMealChange=rootView.findViewById(R.id.noOfMealChangeRequests);
@@ -124,6 +126,12 @@ public class DashboardFragment extends Fragment {
                 startActivity(new Intent(getActivity(),LastMonthUsers.class));
             }
         });
+        viewAllPendingDietCreation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),PendingDietCreationActivity.class));
+            }
+        });
         return rootView;
     }
 
@@ -155,6 +163,7 @@ public class DashboardFragment extends Fragment {
                                 noOfExtension.setText(statusArray.get(3)+"");
                                 noOfFinalMonth.setText(finalmonth+"");
                                 noOfMealChange.setText(statusArray.get(1)+"");
+                                noOfPendingDiet.setText(statusArray.get(1)+"");
 
                                 int count = result.getInt("count");
                                 if(count >3){

@@ -61,13 +61,13 @@ public class CreateDiet extends AppCompatActivity implements DietCreateFragment.
 
         TextView text = (TextView) tabLayout.getTabAt(0).getCustomView().findViewById(R.id.text2);
         text.setBackgroundResource(R.drawable.customer_image_placeholder_light);
-        text.setTextColor(Color.parseColor("#E91E63"));
+        text.setTextColor(Color.parseColor("#4CAF50"));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 TextView text = (TextView) tab.getCustomView().findViewById(R.id.text2);
                 text.setBackgroundResource(R.drawable.customer_image_placeholder_light);
-                text.setTextColor(Color.parseColor("#E91E63"));
+                text.setTextColor(Color.parseColor("#4CAF50"));
                 position = tab.getPosition();
 //                Log.d("My tag","Selected"+pos);
 //                View rootview = adapter.getTabView(pos);
@@ -169,7 +169,10 @@ public class CreateDiet extends AppCompatActivity implements DietCreateFragment.
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-         if(id == R.id.save){
+         if(id == R.id.template){
+             Intent i = new Intent(CreateDiet.this,TemplateSelection.class);
+             i.putExtra("dates",dates1);
+             startActivity(i);
            // Toast.makeText(getApplicationContext(),"Diet Saved",Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);

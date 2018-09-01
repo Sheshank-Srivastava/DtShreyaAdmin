@@ -38,7 +38,8 @@ import static com.dietitianshreya.eatrightdietadmin.Login.MyPREFERENCES;
 public class ProgressFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private ProgressFragment.OnFragmentInteractionListener mListener;
-int level,badge,bells,kgs;
+int level,badge,bells;
+String kgs;
 ImageView badge1,badge2,badge3,badge4,badge5,level1,level2,level3,level4,level5;
 TextView numberOfBells,rank,badgesEarn,kgslost;
     TextView badgeText1,badgeText2,badgeText3,badgeText4,badgeText5;
@@ -96,7 +97,7 @@ TextView numberOfBells,rank,badgesEarn,kgslost;
         bells=getArguments().getInt("bells");
         badge = getArguments().getInt("badge");
         level = getArguments().getInt("level");
-        kgs = getArguments().getInt("kgs");
+        kgs = String.valueOf(getArguments().getInt("kgs"));
         clientId = getArguments().getString(VariablesModels.userId);
         fetchProgressData();
         numberOfBells.setText(bells+" bells rung");
@@ -198,6 +199,7 @@ TextView numberOfBells,rank,badgesEarn,kgslost;
             badgesEarn.setText("5");
             rank.setText("  SUPER PRO   ");
         }
+
 
 
         badge2.setOnClickListener(new View.OnClickListener() {
@@ -361,7 +363,7 @@ TextView numberOfBells,rank,badgesEarn,kgslost;
                             bells= innerobject.getInt("bells");
                             badge= innerobject.getInt("badge");
                             level = innerobject.getInt("level");
-                            kgs=innerobject.getInt("kgslost");
+                            kgs=innerobject.getString("kgslost");
 
 
 
@@ -377,6 +379,11 @@ TextView numberOfBells,rank,badgesEarn,kgslost;
                                 badge3.setAlpha(0.3f);
                                 badge4.setAlpha(0.3f);
                                 badge5.setAlpha(0.3f);
+                                badgeText1.setAlpha(1.0f);
+                                badgeText2.setAlpha(0.3f);
+                                badgeText3.setAlpha(0.3f);
+                                badgeText4.setAlpha(0.3f);
+                                badgeText5.setAlpha(0.3f);
                                 badgesEarn.setText("1");
                                 rank.setText("  NEWBIE ");
 
@@ -393,6 +400,11 @@ TextView numberOfBells,rank,badgesEarn,kgslost;
                                 badge3.setAlpha(0.3f);
                                 badge4.setAlpha(0.3f);
                                 badge5.setAlpha(0.3f);
+                                badgeText1.setAlpha(1.0f);
+                                badgeText2.setAlpha(1.0f);
+                                badgeText3.setAlpha(0.3f);
+                                badgeText4.setAlpha(0.3f);
+                                badgeText5.setAlpha(0.3f);
                                 badgesEarn.setText("2");
                                 rank.setText("  SENIOR ");
                             }
@@ -409,6 +421,11 @@ TextView numberOfBells,rank,badgesEarn,kgslost;
                                 badge3.setAlpha(1.0f);
                                 badge4.setAlpha(0.3f);
                                 badge5.setAlpha(0.3f);
+                                badgeText1.setAlpha(1.0f);
+                                badgeText2.setAlpha(1.0f);
+                                badgeText3.setAlpha(1.0f);
+                                badgeText4.setAlpha(0.3f);
+                                badgeText5.setAlpha(0.3f);
                                 badgesEarn.setText("3");
                                 rank.setText("  PRO ");
                             }
@@ -423,7 +440,11 @@ TextView numberOfBells,rank,badgesEarn,kgslost;
                                 badge3.setAlpha(1.0f);
                                 badge4.setAlpha(1.0f);
                                 badge5.setAlpha(0.3f);
-
+                                badgeText1.setAlpha(1.0f);
+                                badgeText2.setAlpha(1.0f);
+                                badgeText3.setAlpha(1.0f);
+                                badgeText4.setAlpha(1.0f);
+                                badgeText5.setAlpha(0.3f);
                                 badgesEarn.setText("4");
                                 rank.setText("  PRO ");
                             }
@@ -438,7 +459,11 @@ TextView numberOfBells,rank,badgesEarn,kgslost;
                                 badge3.setAlpha(1.0f);
                                 badge4.setAlpha(1.0f);
                                 badge5.setAlpha(1.0f);
-
+                                badgeText1.setAlpha(1.0f);
+                                badgeText2.setAlpha(1.0f);
+                                badgeText3.setAlpha(1.0f);
+                                badgeText4.setAlpha(1.0f);
+                                badgeText5.setAlpha(1.0f);
                                 badgesEarn.setText("5");
                                 rank.setText("  SUPER PRO   ");
                             }

@@ -43,7 +43,7 @@
         android:layout_gravity="center"
         android:progressTint="@color/yellow_700"
         android:progressBackgroundTint="@color/yellow_200"
-        android:rating="2.5"
+        android:rating="0"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/small_padding"
             android:layout_marginTop="@dimen/layout_very_small_margin"
-            android:text="2.5"
+            android:text="0"
             android:id="@+id/avgRating"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/text_small"/>

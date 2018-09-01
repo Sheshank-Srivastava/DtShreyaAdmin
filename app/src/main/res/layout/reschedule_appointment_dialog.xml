@@ -13,6 +13,7 @@
             android:id="@+id/date"
             android:textSize="@dimen/text_small"
             android:padding="@dimen/medium_padding"
+            android:focusable="false"
             android:inputType="number"
             android:layout_margin="@dimen/layout_very_small_margin"
             android:layout_height="wrap_content" />
@@ -24,6 +25,7 @@
         <EditText
             android:layout_width="match_parent"
             android:hint="Time"
+            android:focusable="false"
             android:id="@+id/time"
             android:inputType="numberDecimal"
             android:textSize="@dimen/text_small"

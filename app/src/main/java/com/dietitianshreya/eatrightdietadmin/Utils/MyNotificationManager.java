@@ -45,6 +45,7 @@ public class MyNotificationManager {
             mBuilder =
                     new NotificationCompat.Builder(mCtx, Constants.CHANNEL_ID)
                             .setSmallIcon(R.mipmap.ic_launcher)
+                            .setPriority(NotificationCompat.PRIORITY_HIGH)
                             .setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.mipmap.ic_launcher))
                             .setContentTitle(title)
                             .setContentText(body);

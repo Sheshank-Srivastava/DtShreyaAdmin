@@ -77,8 +77,9 @@ public class BookTest extends AppCompatActivity {
         setContentView(R.layout.activity_book_test);
         SharedPreferences sharedpreferences1 = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
-        clinicId = sharedpreferences1.getString("clientId","0");
+        clinicId = String.valueOf(sharedpreferences1.getInt("clientId",0));
         test_client = (EditText) findViewById(R.id.TestClientName);
+        test_client.setFocusable(false);
         mChipsInput = (ChipsInput) findViewById(R.id.chips_input);
         add = (Button) findViewById(R.id.addTest);
         test_time= (EditText) findViewById(R.id.testTime);

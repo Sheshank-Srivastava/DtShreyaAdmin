@@ -151,18 +151,19 @@ JSONArray supplementArray = new JSONArray();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }else if(id == R.id.template){
-            // Toast.makeText(getActivity(),"Diet Saved",Toast.LENGTH_SHORT).show();
-            try {
-                final int REQUEST_CODE = 9;
-
-                Intent i = new Intent(getActivity(), TemplateSelection.class);
-                i.putExtra(VariablesModels.userId,clientId);
-                startActivityForResult(i, REQUEST_CODE);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
+//        else if(id == R.id.template){
+//            // Toast.makeText(getActivity(),"Diet Saved",Toast.LENGTH_SHORT).show();
+//            try {
+//                final int REQUEST_CODE = 9;
+//
+//                Intent i = new Intent(getActivity(), TemplateSelection.class);
+//                i.putExtra(VariablesModels.userId,clientId);
+//                startActivityForResult(i, 200);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         return super.onOptionsItemSelected(item);
 
@@ -192,6 +193,7 @@ JSONArray supplementArray = new JSONArray();
             {
 
 
+                if(requestCode==200) {
                 mealListem = data.getParcelableArrayListExtra("meal1");
                 mealList = data.getParcelableArrayListExtra("meal2");
                 mealListmm = data.getParcelableArrayListExtra("meal3");
@@ -227,8 +229,9 @@ JSONArray supplementArray = new JSONArray();
 
                 dietPlanAdapter.notifyDataSetChanged();
 
+                    Log.d("my tag",requestCode+"");
 
-
+                }
             }
         }
     }

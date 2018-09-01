@@ -42,6 +42,7 @@ public class MyNotificationManager2 {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(mCtx,Constants.CHANNEL_ID)
                         .setSmallIcon(R.drawable.dietitian)
+                        .setPriority(NotificationCompat.PRIORITY_HIGH)
                         .setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.drawable.dietitian))
                         .setContentTitle(title)
                         .setContentText(body);

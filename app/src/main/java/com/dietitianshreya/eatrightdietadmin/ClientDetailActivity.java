@@ -156,7 +156,7 @@ public class ClientDetailActivity extends AppCompatActivity implements DietHisto
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.profile){
-            Intent i = new Intent(ClientDetailActivity.this,ClientProfileActivity.class);
+            Intent i = new Intent(ClientDetailActivity.this,ClientProfileViewPager.class);
             i.putExtra(VariablesModels.userId,clientID);
             startActivity(i);
         }

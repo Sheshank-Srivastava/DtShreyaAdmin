@@ -12,8 +12,8 @@ android {
         applicationId "com.dietitianshreya.eatrightdietadmin"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 8
-        versionName "1.0.7"
+        versionCode 15
+        versionName "1.2.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -51,18 +51,16 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     // circle image view
-    
 
     //CHAT UI
-    
 
     // AUTH
     //noinspection GradleCompatible
-    
+
     //DATABASE FIREBASE,UI
-    
+
     //STORAGE FIREBASE
-    
+
     compile 'com.github.bumptech.glide:glide:4.6.1'
     compile 'com.github.bumptech.glide:glide:4.6.1'
     compile 'com.android.support:appcompat-v7:26.+'

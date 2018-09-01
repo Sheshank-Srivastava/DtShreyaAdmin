@@ -111,6 +111,7 @@ public class Login extends AppCompatActivity {
 
                             } else {
                                 progressDialog.dismiss();
+                                Log.d("Res",response);
                                 Toast.makeText(getApplicationContext(), result1.getString("msg"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -158,6 +159,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("lol", "createUserWithEmail:success");
                             Util.initToast(getApplicationContext(),"done");

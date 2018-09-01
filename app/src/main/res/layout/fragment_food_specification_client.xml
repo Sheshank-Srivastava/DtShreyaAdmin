@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FoodSpecificationClient">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/foodSpecificationLayout">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_padding"
+            android:layout_margin="@dimen/layout_very_small_margin"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:text="Veg/Non-Veg/Egg"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:text=":"
+                android:gravity="center"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:id="@+id/vegNonVeg"
+                android:layout_marginRight="@dimen/layout_very_small_margin"
+                android:layout_marginLeft="@dimen/layout_very_small_margin"
+                android:hint=""
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_padding"
+            android:layout_margin="@dimen/layout_very_small_margin"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:text="Food Allergies/ Sensitivity"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:text=":"
+                android:gravity="center"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:id="@+id/allergy"
+                android:layout_marginRight="@dimen/layout_very_small_margin"
+                android:layout_marginLeft="@dimen/layout_very_small_margin"
+                android:hint=""
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_padding"
+            android:layout_margin="@dimen/layout_very_small_margin"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:text="Likes"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:text=":"
+                android:gravity="center"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:id="@+id/likes"
+                android:layout_marginRight="@dimen/layout_very_small_margin"
+                android:layout_marginLeft="@dimen/layout_very_small_margin"
+                android:hint=""
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_padding"
+            android:layout_margin="@dimen/layout_very_small_margin"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:text="Dislikes"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:text=":"
+                android:gravity="center"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:id="@+id/dislikes"
+                android:layout_marginRight="@dimen/layout_very_small_margin"
+                android:layout_marginLeft="@dimen/layout_very_small_margin"
+                android:hint=""
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/text_very_small"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttons_background"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/medium_padding"
+            android:id="@+id/save"
+            android:layout_margin="@dimen/layout_medium_margin"
+            android:textColor="@color/textColorLight"
+            android:text="Save"/>
+    </LinearLayout>
+
+</ScrollView>

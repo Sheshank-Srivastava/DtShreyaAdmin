@@ -67,7 +67,8 @@ public class AllClientListOthersAdapter extends RecyclerView.Adapter<AllClientLi
         holder.clientId.setText(client.getClientId());
         char placeholdertext = client.getClientName().charAt(0);
         holder.placeholder.setText(placeholdertext+"");
-        if(client.getDays().equals("0")){
+        try{
+        if(Integer.parseInt(client.getDays())<=3){
             holder.textLayout.setVisibility(View.GONE);
             holder.createDiet.setVisibility(View.VISIBLE);
             holder.createDiet.setOnClickListener(new View.OnClickListener() {
@@ -79,13 +80,18 @@ public class AllClientListOthersAdapter extends RecyclerView.Adapter<AllClientLi
                     mCtx.startActivity(i);
                 }
             });
-        } else if (client.getDays().equals("na")) {
-            holder.textLayout.setVisibility(View.GONE);
-            holder.createDiet.setVisibility(View.GONE);
-        } else {
+
+        }
+        else {
             holder.textLayout.setVisibility(View.VISIBLE);
             holder.daysRemaining.setText(client.getDays() + " Days");
             holder.createDiet.setVisibility(View.GONE);
+        }
+        }catch(NumberFormatException e) {
+            if (client.getDays().equals("na")) {
+                holder.textLayout.setVisibility(View.GONE);
+                holder.createDiet.setVisibility(View.GONE);
+            }
         }
         holder.body.setOnClickListener(new View.OnClickListener() {
             @Override

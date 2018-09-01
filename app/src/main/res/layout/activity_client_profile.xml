@@ -230,6 +230,7 @@
             android:layout_weight="2"
             android:background="@color/textColorLight"
             android:id="@+id/clientHeight"
+            android:inputType="numberDecimal"
             android:textColor="@color/textColorDark"
             android:textSize="@dimen/text_very_small"
             android:layout_height="wrap_content" />
@@ -261,6 +262,7 @@
             android:layout_weight="2"
             android:background="@color/textColorLight"
             android:id="@+id/clientWeight"
+            android:inputType="numberDecimal"
             android:textColor="@color/textColorDark"
             android:textSize="@dimen/text_very_small"
             android:layout_height="wrap_content" />
@@ -434,7 +436,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_very_small"
                 android:textColor="@color/textColorDark"
-                android:text="Weight Manage"/>
+                android:text="Target Weight"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="0.2"
@@ -448,6 +450,7 @@
                 android:layout_weight="2"
                 android:id="@+id/clientweightmanage"
                 android:background="@color/textColorLight"
+                android:inputType="numberDecimal"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/text_very_small"
                 android:layout_height="wrap_content" />

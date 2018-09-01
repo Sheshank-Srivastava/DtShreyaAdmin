@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/medium_padding"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/medium_padding"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Select Dates"
+            android:textColor="@color/textColorDark"
+            android:textSize="@dimen/text_medium" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorDark"
+            android:textSize="@dimen/text_small"
+            android:text="Select All"
+            android:id="@+id/selectAll"
+            android:layout_marginRight="@dimen/layout_very_small_margin"/>
+    </LinearLayout>
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_small"
+        android:text="Date 1"
+        android:padding="@dimen/medium_padding"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:id="@+id/date1"
+        android:textColor="@color/textColorDark"/>
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_small"
+        android:text="Date 2"
+        android:padding="@dimen/medium_padding"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:id="@+id/date2"
+        android:textColor="@color/textColorDark"/>
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_small"
+        android:text="Date 3"
+        android:padding="@dimen/medium_padding"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:id="@+id/date3"
+        android:textColor="@color/textColorDark"/>
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_small"
+        android:text="Date 4"
+        android:padding="@dimen/medium_padding"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:id="@+id/date4"
+        android:textColor="@color/textColorDark"/>
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_small"
+        android:text="Date 5"
+        android:padding="@dimen/medium_padding"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:id="@+id/date5"
+        android:textColor="@color/textColorDark"/>
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_small"
+        android:text="Date 6"
+        android:padding="@dimen/medium_padding"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:id="@+id/date6"
+        android:textColor="@color/textColorDark"/>
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_small"
+        android:text="Date 7"
+        android:padding="@dimen/medium_padding"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:id="@+id/date7"
+        android:textColor="@color/textColorDark"/>
+</LinearLayout>
+</ScrollView>
