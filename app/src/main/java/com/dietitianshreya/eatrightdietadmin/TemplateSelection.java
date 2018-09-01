@@ -475,7 +475,6 @@ public class TemplateSelection extends AppCompatActivity implements View.OnClick
     }
 
 
-
     public void sendTemplateaddrequest(final String ar,final int pos) {
         final ProgressDialog progressDialog = new ProgressDialog(TemplateSelection.this);
         progressDialog.setMessage("Fetching data...");
