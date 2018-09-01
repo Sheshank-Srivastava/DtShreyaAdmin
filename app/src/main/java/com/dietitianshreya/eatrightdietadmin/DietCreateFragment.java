@@ -109,11 +109,18 @@ JSONArray supplementArray = new JSONArray();
 
         SharedPreferences sharedpreferences1 = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
-        fetchDietData();
+
 
 
 
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("On resume","Im here");
+        fetchDietData();
     }
 
     public void onButtonPressed(Uri uri) {
@@ -628,6 +635,7 @@ Log.d("lol",object+"");
                         progressDialog.dismiss();
                         try {
                             Log.d("res",response);
+                            dietList.clear();
                             JSONObject outerobject = new JSONObject(response);
                             if(outerobject.has("response")) {
                                 JSONObject innerobject = outerobject.getJSONObject("response");

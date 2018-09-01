@@ -159,13 +159,22 @@ public class TemplateSelection extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 JSONArray array = new JSONArray();
+                String datesString = "";
                 for(int it=0;it<7;it++){
                     if(dates[it].isChecked()){
                         array.put(dates[it].getText());
+                        if(it==0){
+                            datesString+=dates[it].getText();
+                        }else{
+                            datesString+=","+dates[it].getText();
+                        }
                     }
                 }
-                sendR(array,pos);
-                Log.d("Array date",array+"");
+                Log.d("Array date",datesString+"");
+                Log.d("Template id",pos+"");
+                Log.d("Client id",clientId);
+                sendTemplateaddrequest(datesString,pos);
+
             }
         });
         alertDialog.show();
@@ -448,6 +457,65 @@ public class TemplateSelection extends AppCompatActivity implements View.OnClick
             protected Map<String,String> getParams(){
                 Map<String, String> params = new HashMap<>();
                 params.put("templateId",name);
+                params.put(VariablesModels.userId,clientId);
+                return params;
+            }
+
+        };
+
+        int MY_SOCKET_TIMEOUT_MS = 50000;
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+
+    }
+
+
+
+    public void sendTemplateaddrequest(final String ar,final int pos) {
+        final ProgressDialog progressDialog = new ProgressDialog(TemplateSelection.this);
+        progressDialog.setMessage("Fetching data...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        String url = "https://shreyaapi.herokuapp.com/savediettemplate/";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("teamplate",response);
+                        try{
+                            progressDialog.dismiss();
+                            JSONObject ob = new JSONObject(response);
+                            if(ob.getInt("res")==1)
+                                finish();
+                            else
+                                Toast.makeText(TemplateSelection.this,"Some error occured! Try again later.",Toast.LENGTH_SHORT).show();
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"Something went wrong!\nCheck your Internet connection and try again..", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(MedicineData.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("templateId",pos+"");
+                params.put("dietdate",ar);
                 params.put(VariablesModels.userId,clientId);
                 return params;
             }

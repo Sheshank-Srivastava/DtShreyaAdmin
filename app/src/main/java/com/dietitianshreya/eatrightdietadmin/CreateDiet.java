@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.dietitianshreya.eatrightdietadmin.Utils.VariablesModels;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -172,6 +174,7 @@ public class CreateDiet extends AppCompatActivity implements DietCreateFragment.
          if(id == R.id.template){
              Intent i = new Intent(CreateDiet.this,TemplateSelection.class);
              i.putExtra("dates",dates1);
+             i.putExtra(VariablesModels.userId,clientId);
              startActivity(i);
            // Toast.makeText(getApplicationContext(),"Diet Saved",Toast.LENGTH_SHORT).show();
         }
