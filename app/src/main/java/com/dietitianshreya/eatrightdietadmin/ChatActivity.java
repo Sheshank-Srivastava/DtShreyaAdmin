@@ -43,6 +43,7 @@ import com.dietitianshreya.eatrightdietadmin.Utils.VariablesModels;
 import com.dietitianshreya.eatrightdietadmin.adapters.ChatFirebaseAdapter;
 import com.dietitianshreya.eatrightdietadmin.adapters.ClickListenerChatFirebase;
 import com.dietitianshreya.eatrightdietadmin.models.ChatModelNew;
+import com.dietitianshreya.eatrightdietadmin.models.ClientListModel2;
 import com.dietitianshreya.eatrightdietadmin.models.FileModel;
 import com.dietitianshreya.eatrightdietadmin.models.UserModel;
 import com.dietitianshreya.eatrightdietadmin.view.FullScreenImageActivity;
@@ -89,7 +90,7 @@ public class ChatActivity extends AppCompatActivity implements  View.OnClickList
     private FirebaseAuth mFirebaseAuth;
     Menu menu;
     private FirebaseUser mFirebaseUser;
-    private DatabaseReference mFirebaseDatabaseReference;
+    private DatabaseReference mFirebaseDatabaseReference,mFirebaseDatabaseReferenceOverview;
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
     //CLass Model
@@ -104,6 +105,7 @@ public class ChatActivity extends AppCompatActivity implements  View.OnClickList
     private View contentRoot;
     private EmojIconActions emojIcon;
 String clientID,dietitianId;
+long timestamp;
     ArrayList<String> nameList = new ArrayList<>();
     ArrayList<String> idList = new ArrayList<>();
     ArrayList<String> urlList = new ArrayList<>();
@@ -128,6 +130,7 @@ String clientID,dietitianId;
 
         Bundle extras = getIntent().getExtras();
         clientID = extras.getString(VariablesModels.userId);
+        timestamp = extras.getLong("timeStamp");
         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         dietitianId = sharedpreferences.getInt("clientId",0)+"";
 
@@ -701,5 +704,14 @@ public void clinicalnotes()
         MenuItem dietitian2menu= menu.findItem(R.id.superviser);
         dietitian2menu.setTitle(dietitian2);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mFirebaseDatabaseReferenceOverview = FirebaseDatabase.getInstance().getReference().child("overview").child(dietitianId).child(clientID);
+        ClientListModel2 mod = new ClientListModel2(mFirebaseDatabaseReferenceOverview.getKey()+"", clientID,0+"", true,timestamp);
+//        Toast.makeText(this, "dekh liya", Toast.LENGTH_SHORT).show();
+        mFirebaseDatabaseReferenceOverview.setValue(mod);
     }
 }

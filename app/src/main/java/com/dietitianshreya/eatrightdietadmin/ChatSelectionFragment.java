@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,13 +31,23 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dietitianshreya.eatrightdietadmin.Utils.VariablesModels;
 import com.dietitianshreya.eatrightdietadmin.adapters.ClientListAdapter;
+import com.dietitianshreya.eatrightdietadmin.adapters.ClientListAdapter2;
 import com.dietitianshreya.eatrightdietadmin.models.ClientListModel;
+import com.dietitianshreya.eatrightdietadmin.models.ClientListModel2;
+import com.firebase.client.annotations.Nullable;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,12 +58,16 @@ public class ChatSelectionFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     RecyclerView recyclerView;
-    ArrayList<ClientListModel> clientList;
-    ArrayList<ClientListModel> filteredData;
-    ClientListAdapter clientListAdapter;
+    ArrayList<ClientListModel2> clientList;
+    ArrayList<ClientListModel2> filteredData;
+    ClientListAdapter2 clientListAdapter;
     String userid;
+    private ArrayList<Integer> new1;
     int searchFlag=0;
 
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+    private ChildEventListener mChildEventListener;
     public ChatSelectionFragment() {
         // Required empty public constructor
     }
@@ -80,14 +96,18 @@ public class ChatSelectionFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.re);
         clientList=new ArrayList<>();
         filteredData = new ArrayList<>();
-        clientListAdapter = new ClientListAdapter(clientList,getActivity());
+        clientList.clear();
+        filteredData.clear();
+        SharedPreferences sharedpreferences1 = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference().child("overview").child(userid+"");
+        clientListAdapter = new ClientListAdapter2(clientList,getActivity());
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(clientListAdapter);
-        SharedPreferences sharedpreferences1 = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        userid= String.valueOf(sharedpreferences1.getInt("clientId",0));
         sendR();
 
 
@@ -130,9 +150,9 @@ public class ChatSelectionFragment extends Fragment {
             searchFlag = 1;
             if (filteredData!= null)
                 filteredData.clear();
-            ClientListAdapter filteredAdapter = new ClientListAdapter(filteredData,getActivity());
+            ClientListAdapter2 filteredAdapter = new ClientListAdapter2(filteredData,getActivity());
 
-            for (ClientListModel row : clientList) {
+            for (ClientListModel2 row : clientList) {
 
                 // name match condition. this might differ depending on your requirement
                 // here we are looking for name or phone number match
@@ -185,6 +205,7 @@ public class ChatSelectionFragment extends Fragment {
     }
 
     public void sendR() {
+        new1 = new ArrayList<>();
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Fetching Clients...");
         progressDialog.setCancelable(false);
@@ -198,6 +219,7 @@ public class ChatSelectionFragment extends Fragment {
                         try {
                             progressDialog.dismiss();
                             JSONObject result = new JSONObject(response);
+                            Log.d("JsonResponse",response.toString());
                             if(result.getInt("res")==1) {
                                 JSONArray ar = result.getJSONArray("response");
                                 if (ar.length() != 0){
@@ -209,11 +231,12 @@ public class ChatSelectionFragment extends Fragment {
                                         id = String.valueOf(ob.getInt(VariablesModels.userId));
                                         daysleft = ob.getInt("daysleft")+" days left";
 
-
-                                        clientList.add(new ClientListModel(name,id,daysleft));
+                                        new1.add(Integer.parseInt(id));
+                                        clientList.add(new ClientListModel2(name,id,daysleft,true,0));
 
                                     }
                                     clientListAdapter.notifyDataSetChanged();
+                                    getListdata();
 
                                 }else{
                                     //show that there are no appointments
@@ -256,6 +279,83 @@ public class ChatSelectionFragment extends Fragment {
         requestQueue.add(stringRequest);
 
     }
+    public void getListdata() {
+        if (mChildEventListener == null) {
+//            Toast.makeText(getContext(), "Hello Snapshot", Toast.LENGTH_SHORT).show();
+            mChildEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    ClientListModel2 model = dataSnapshot.getValue(ClientListModel2.class);
+                    Integer no =new Integer(model.getClientId());
+                    int n = new1.indexOf(no);
+                    if(n==-1){
+                        Log.d("PositionOfDataFound",no+"data Not Found"+"");
+                    }
+                    else{
+//                        clientList.remove(n);
+                        clientList.get(n).setRead(model.isRead());
+                        clientList.get(n).setTimeStamp(model.getTimeStamp());
+//                        clientList.add(n,model);
+                    }
+                    Comparator<ClientListModel2> cmp = Collections.reverseOrder(new TimeStamp());
+                    Collections.sort(clientList, cmp);
+                    new1.clear();
+                    for(int i=0;i<clientList.size();i++){
+                        new1.add(Integer.parseInt(clientList.get(i).getClientId()));
+                    }
+//                    Toast.makeText(getContext(), "Hello Snapshot", Toast.LENGTH_SHORT).show();
+                    Log.d("DataSnapShot", model.getClientName() + ".........." + model.isRead() + ".........." + model.getClientId() + "\n" + dataSnapshot.toString());
+                    clientListAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    Log.d("ChildChange", dataSnapshot.toString());
+                    ClientListModel2 model = dataSnapshot.getValue(ClientListModel2.class);
+                    Integer no =new Integer(model.getClientId());
+                    int n = new1.indexOf(no);
+                    clientList.get(n).setRead(model.isRead());
+                    clientList.get(n).setTimeStamp(model.getTimeStamp());
+                    Comparator<ClientListModel2> cmp = Collections.reverseOrder(new TimeStamp());
+                    Collections.sort(clientList, cmp);
+                    new1.clear();
+                    for(int i=0;i<clientList.size();i++){
+                        new1.add(Integer.parseInt(clientList.get(i).getClientId()));
+                    }
+                    clientListAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            };
+            databaseReference.addChildEventListener(mChildEventListener);
+        }
+    }
+    public class TimeStamp implements Comparator<ClientListModel2> {
+
+        @Override
+        public int compare(ClientListModel2 userListModel, ClientListModel2 t1) {
+            return (userListModel.getTimeStamp()<t1.getTimeStamp()) ? -1 : (userListModel.getTimeStamp()>t1.getTimeStamp()) ? 1 : 0;
+        }
+    }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        clientList.clear();
+//        filteredData.clear();
+//        sendR();
+//        getListdata();
+//    }
 }
 
 

@@ -62,5 +62,6 @@
         android:layout_height="10dp"
         android:id="@+id/indicator"
         android:layout_gravity="center"
+        android:visibility="gone"
         android:background="@drawable/customer_image_placeholder"/>
 </LinearLayout>
